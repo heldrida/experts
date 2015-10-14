@@ -14,13 +14,7 @@
 	<body>
 
 		<!-- start: sh experts topbox module -->
-		<div class="sh-experts-topbox">
-
-			<!-- start: canvas -->
-			<canvas></canvas>
-			<!-- end: canvas -->
-
-		</div>
+		<div class="sh-experts-topbox"></div>
 		<!-- end: sh experts topbox module -->
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
@@ -28,7 +22,9 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenLite.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/easing/EasePack.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.7/pixi.min.js"></script>
 		<script src="js/app.js"></script>
+
 	</body>
 
 </html>
