@@ -47,6 +47,24 @@
 			// create stage
 			this.stage = new PIXI.Container();
 
+			this.expertsContainer = new PIXI.Container();
+
+			// set experts container width
+			this.expertsContainer.width = this.container.width * 0.9;
+			this.expertsContainer.height = this.container.height * 0.6;
+			this.expertsContainer.x = (this.container.width * 0.1) / 2;
+			this.expertsContainer.y = (this.container.height * 0.25);
+
+			var graphics = new PIXI.Graphics();
+			graphics.beginFill(0x00CCFF);
+			graphics.drawRect(0, 0, this.container.width * 0.9,  this.container.height * 0.6);
+			graphics.alpha = 0.2;
+			this.expertsContainer.addChild(graphics);
+
+			this.stage.addChild(this.expertsContainer);
+
+			console.log(this.expertsContainer);
+
 		},
 
 		startTicker: function () {
@@ -67,14 +85,12 @@
 		generateExpert: function () {
 
 			var total = 10;
-			var size = window.innerWidth / total;
+			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
 
 			console.log('size', size);
 
-			graphics.beginFill(0xFFFF00);
-
-			graphics.lineStyle(5, 0xFF0000);
+			graphics.beginFill(0xFFFFFF);
 
 			graphics.drawRect(0, 0, size, size);
 
@@ -84,16 +100,43 @@
 
 		placeExpertsOnStage: function () {
 
-			for (var i = 0; i <= 10; i++) {
+			var total = 10;
+			var size = (this.container.width * 0.9) / total;
+			var max = 5;
+			var offsetY = (((this.container.height * 0.6) / 2) / total);
+			var offsetX = (size * max) / (max - 1);
+			var posX = 0;
+			var posY = ((this.container.height * 0.6) / 2) - size;
+
+			console.log('start, offsetY: ', offsetY);
+
+			for (var i = 1; i <= total; i++) {
+
+			console.log('offsetY: ', offsetY);
 
 				var expert = this.generateExpert();
 
-				expert.position.x = 100;
-				expert.position.y = 100;
+				console.log('i', i);
+				console.log('max', max);
+				console.log('posY', posY);
 
-				this.stage.addChild(expert);
+				// each row has a max of X elements,
+				// reset the posX and move to second row
+				if (i === max + 1) {
 
-				console.log(i);
+					posX = 0;
+					posY = ((this.container.height * 0.6) / 2);
+
+				}
+
+				expert.position.x = posX;
+				expert.position.y = posY;
+
+				this.expertsContainer.addChild(expert);
+
+				posX += (size + offsetX);
+				posY -= (i < max) ? offsetY : -offsetY;
+
 			}
 
 		}
