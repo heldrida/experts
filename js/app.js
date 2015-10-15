@@ -82,7 +82,7 @@
 
 		},
 
-		generateExpert: function () {
+		generateExpert: function (index) {
 
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
@@ -90,7 +90,7 @@
 
 			console.log('size', size);
 
-			graphics.beginFill(0xFFFFFF);
+			graphics.beginFill(index <= 5 ? 0xFFFFFF : 0xFFCC00);
 
 			graphics.drawRect(0, 0, size, size);
 
@@ -105,8 +105,9 @@
 			var max = 5;
 			var offsetY = (((this.container.height * 0.6) / 2) / total);
 			var offsetX = (size * max) / (max - 1);
+			var rnd = offsetY * Math.floor(Math.random() * 6) + 1;
 			var posX = 0;
-			var posY = ((this.container.height * 0.6) / 2) - size;
+			var posY = rnd;
 
 			console.log('start, offsetY: ', offsetY);
 
@@ -114,7 +115,7 @@
 
 			console.log('offsetY: ', offsetY);
 
-				var expert = this.generateExpert();
+				var expert = this.generateExpert(i);
 
 				console.log('i', i);
 				console.log('max', max);
@@ -134,8 +135,20 @@
 
 				this.expertsContainer.addChild(expert);
 
+				if (i <= max) {
+
+					rnd = offsetY * Math.floor(Math.random() * 6) + 1;
+
+				} else {
+
+					//rnd = offsetY * Math.floor(Math.random() * 6) + 1;
+					rnd = posY + offsetY;
+				}
+
+				console.log('rnd', rnd);
+
 				posX += (size + offsetX);
-				posY -= (i < max) ? offsetY : -offsetY;
+				posY = rnd;
 
 			}
 
