@@ -173,7 +173,8 @@
 					rnd = offsetY * Math.floor(Math.random() * 5) + 1;
 
 					posX += (size + offsetX);
-					posY += offsetY;
+					//posY += offsetY;
+					posY = rnd;
 
 				}
 
