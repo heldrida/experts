@@ -116,15 +116,13 @@ var Debugger = {
 
 			var total, size, max, offsetY, offsetX, rnd, posX, posY, center;
 
-			max = 5;
 			total  = 10;
+			max = 5;
 
 			if (total > max) {
 
-				total = 10;
-				size = (this.container.width * 0.9) / total;
-				max = 5;
-				offsetY = (((this.container.height * 0.6) / 2) / total);
+				size = (this.container.width * 0.9) / (max * 2);
+				offsetY = (((this.container.height * 0.6) / 2) / (max * 2));
 				offsetX = (size * max) / (max - 1);
 				rnd = offsetY * Math.floor(Math.random() * max) + 1;
 				posX = 0;
@@ -166,21 +164,20 @@ var Debugger = {
 
 			} else {
 
-				total = 5;
 				size = (this.container.width * 0.9) / 10;
-				max = 5;
-				offsetY = ((this.container.height * 0.6) - size) / (max - 1); // calculated by subtracting the last element, remaining height and the number of elements to even
- 				offsetX = (size * max) / (max - 1);
-				rnd = offsetY * Math.floor(Math.random() * max) + 1;
+				offsetY = (((this.container.height * 0.6) - size) / (max - 1)); // calculated by subtracting the last element, remaining height and the number of elements to even
+ 				offsetX = (((this.container.width * 0.9) - size) / (total - 1)) - size;//225;
+				rnd = offsetY * Math.floor(Math.random() * total) + 1;
 				posX = 0;
 				posY = 0;
 
-				Debugger.log('this.container.height', this.container.height);
-				Debugger.log('this.container.height * 0.6', this.container.height * 0.6);
-				Debugger.log('total', total);
-				Debugger.log('size', size);
-				Debugger.log('max', max);
-				Debugger.log('offsetY', offsetY);
+				Debugger.log('this.container.height: ' + this.container.height);
+				Debugger.log('this.container.height * 0.6: ' + this.container.height * 0.6);
+				Debugger.log('this.container.width * 0.9: ' + this.container.width * 0.9);
+				Debugger.log('total: ' + total);
+				Debugger.log('size: ' + size);
+				Debugger.log('max: ' + max);
+				Debugger.log('offsetY: ' + offsetY);
 
 				for (var i = 1; i <= total; i++) {
 
