@@ -57,7 +57,7 @@ var Debugger = {
 			};
 
 			// create renderer
-			this.renderer = new PIXI.WebGLRenderer(this.container.width, this.container.height);
+			this.renderer = new PIXI.CanvasRenderer(this.container.width, this.container.height);
 
 			// inserts canva element into main container
 			this.container.el.appendChild(this.renderer.view);
@@ -133,6 +133,8 @@ var Debugger = {
 
 					var expert = this.generateExpert(i);
 
+					this.insertCircle(expert, size);
+
 					// each row has a max of X elements,
 					// reset the posX and move to second row
 					if (i === max + 1) {
@@ -197,6 +199,24 @@ var Debugger = {
 				}
 
 			}
+
+		},
+
+		insertCircle: function (el, size) {
+
+			Debugger.log('inserCircle call()');
+
+			var center = {
+				x: size / 2,
+				y: size / 2
+			};
+
+			var graphics = new PIXI.Graphics();
+			graphics.lineStyle(1, 0x000000, 1);
+			graphics.alpha = 1;
+			graphics.drawCircle(center.x, center.y, center.x);
+
+			el.addChild(graphics);
 
 		}
 
