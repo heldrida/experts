@@ -1,3 +1,21 @@
+// debug messages
+var Debugger = {
+	log: function(message) {
+
+		try {
+
+			console.log(message);
+
+		} catch (exception) {
+
+			return;
+
+		}
+
+	}
+};
+
+
 (function () {
 
 	/**
@@ -16,7 +34,7 @@
 
 		init: function () {
 
-			console.log('init!');
+			Debugger.log('init!');
 
 			this.setProperties();
 
@@ -98,6 +116,9 @@
 
 			var total, size, max, offsetY, offsetX, rnd, posX, posY, center;
 
+			max = 5;
+			total  = 10;
+
 			if (total > max) {
 
 				total = 10;
@@ -154,12 +175,12 @@
 				posX = 0;
 				posY = 0;
 
-				console.log('this.container.height', this.container.height);
-				console.log('this.container.height * 0.6', this.container.height * 0.6);
-				console.log('total', total);
-				console.log('size', size);
-				console.log('max', max);
-				console.log('offsetY', offsetY);
+				Debugger.log('this.container.height', this.container.height);
+				Debugger.log('this.container.height * 0.6', this.container.height * 0.6);
+				Debugger.log('total', total);
+				Debugger.log('size', size);
+				Debugger.log('max', max);
+				Debugger.log('offsetY', offsetY);
 
 				for (var i = 1; i <= total; i++) {
 
