@@ -63,8 +63,6 @@
 
 			this.stage.addChild(this.expertsContainer);
 
-			console.log(this.expertsContainer);
-
 		},
 
 		startTicker: function () {
@@ -88,8 +86,6 @@
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
 
-			console.log('size', size);
-
 			graphics.beginFill(index <= 5 ? 0xFFFFFF : 0xFFCC00);
 
 			graphics.drawRect(0, 0, size, size);
@@ -100,55 +96,86 @@
 
 		placeExpertsOnStage: function () {
 
-			var total = 10;
-			var size = (this.container.width * 0.9) / total;
-			var max = 5;
-			var offsetY = (((this.container.height * 0.6) / 2) / total);
-			var offsetX = (size * max) / (max - 1);
-			var rnd = offsetY * Math.floor(Math.random() * 6) + 1;
-			var posX = 0;
-			var posY = rnd;
+			var total, size, max, offsetY, offsetX, rnd, posX, posY, center;
 
-			console.log('start, offsetY: ', offsetY);
+			if (total > max) {
 
-			for (var i = 1; i <= total; i++) {
-
-			console.log('offsetY: ', offsetY);
-
-				var expert = this.generateExpert(i);
-
-				console.log('i', i);
-				console.log('max', max);
-				console.log('posY', posY);
-
-				// each row has a max of X elements,
-				// reset the posX and move to second row
-				if (i === max + 1) {
-
-					posX = 0;
-					posY = ((this.container.height * 0.6) / 2);
-
-				}
-
-				expert.position.x = posX;
-				expert.position.y = posY;
-
-				this.expertsContainer.addChild(expert);
-
-				if (i <= max) {
-
-					rnd = offsetY * Math.floor(Math.random() * 6) + 1;
-
-				} else {
-
-					//rnd = offsetY * Math.floor(Math.random() * 6) + 1;
-					rnd = posY + offsetY;
-				}
-
-				console.log('rnd', rnd);
-
-				posX += (size + offsetX);
+				total = 10;
+				size = (this.container.width * 0.9) / total;
+				max = 5;
+				offsetY = (((this.container.height * 0.6) / 2) / total);
+				offsetX = (size * max) / (max - 1);
+				rnd = offsetY * Math.floor(Math.random() * max) + 1;
+				posX = 0;
 				posY = rnd;
+				center = ((this.container.height * 0.6) / 2);
+
+				for (var i = 1; i <= total; i++) {
+
+					var expert = this.generateExpert(i);
+
+					// each row has a max of X elements,
+					// reset the posX and move to second row
+					if (i === max + 1) {
+
+						posX = 0;
+						posY = center;
+
+					}
+
+					expert.position.x = posX;
+					expert.position.y = posY;
+
+					this.expertsContainer.addChild(expert);
+
+					if (i <= max) {
+
+						rnd = offsetY * Math.floor(Math.random() * 5) + 1;
+
+					} else {
+
+						rnd = center + (offsetY * Math.floor(Math.random() * 5) + 1);
+
+					}
+
+					posX += (size + offsetX);
+					posY = rnd;
+
+				}
+
+			} else {
+
+				total = 5;
+				size = (this.container.width * 0.9) / 10;
+				max = 5;
+				offsetY = ((this.container.height * 0.6) - size) / (max - 1); // calculated by subtracting the last element, remaining height and the number of elements to even
+ 				offsetX = (size * max) / (max - 1);
+				rnd = offsetY * Math.floor(Math.random() * max) + 1;
+				posX = 0;
+				posY = 0;
+
+				console.log('this.container.height', this.container.height);
+				console.log('this.container.height * 0.6', this.container.height * 0.6);
+				console.log('total', total);
+				console.log('size', size);
+				console.log('max', max);
+				console.log('offsetY', offsetY);
+
+				for (var i = 1; i <= total; i++) {
+
+					var expert = this.generateExpert(i);
+
+					expert.position.x = posX;
+					expert.position.y = posY;
+
+					this.expertsContainer.addChild(expert);
+
+					rnd = offsetY * Math.floor(Math.random() * 5) + 1;
+
+					posX += (size + offsetX);
+					posY += offsetY;
+
+				}
 
 			}
 
