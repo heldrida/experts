@@ -100,15 +100,24 @@ var Debugger = {
 
 		generateExpert: function (index) {
 
+			/*
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
 
-			graphics.beginFill(index <= 5 ? 0xFFFFFF : 0xFFCC00);
+			graphics.beginFill(index <= 5 ? 0x00CCFF : 0xFFCC00);
 
 			graphics.drawRect(0, 0, size, size);
 
 			return graphics;
+			*/
+
+			var size = (this.container.width * 0.9) / 10;
+			var container = new PIXI.Container();
+			container.width = size;
+			container.height = size;
+
+			return container;
 
 		},
 
@@ -229,7 +238,7 @@ var Debugger = {
 
 			var ctx = canvas.getContext('2d');
 
-			ctx.arc(size, size, size / 2, 0, Math.PI * 2);
+			ctx.arc(size / 2, size / 2, size / 2, 0 * Math.PI, 2 * Math.PI);
 
 			ctx.clip();
 
@@ -237,18 +246,22 @@ var Debugger = {
 
 			img.addEventListener('load', function(e) {
 
-			    ctx.drawImage(this, 0, 0, size * 2, size * 2);
+			    ctx.drawImage(this, 0, 0, size, size);
 
 			}, true);
 
 			img.src = "img/darth-vader.jpg";
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
-			sprite.anchor.x = sprite.anchor.y = 0.5;
-			sprite.position.x = center.x * 2.85;
-			sprite.position.y = center.y;
 
 			el.addChild(sprite);
+
+			var graphics = new PIXI.Graphics();
+			graphics.lineStyle ( 2 , 0xFFCC00);
+			graphics.drawCircle(size, size, size / 2);
+			graphics.x = -size/2;
+			graphics.y = -size/2;
+			el.addChild(graphics);
 
 		}
 
