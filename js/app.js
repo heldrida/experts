@@ -206,17 +206,49 @@ var Debugger = {
 
 			Debugger.log('inserCircle call()');
 
+			var total = 10;
+			var size = (this.container.width * 0.9) / total;
+
+			Debugger.log('size: ' + size);
+
 			var center = {
 				x: size / 2,
 				y: size / 2
 			};
 
+			/*
 			var graphics = new PIXI.Graphics();
 			graphics.lineStyle(1, 0x000000, 1);
 			graphics.alpha = 1;
 			graphics.drawCircle(center.x, center.y, center.x);
 
 			el.addChild(graphics);
+			*/
+
+			var canvas = document.createElement("canvas");
+
+			var ctx = canvas.getContext('2d');
+
+			ctx.arc(size, size, size / 2, 0, Math.PI * 2);
+
+			ctx.clip();
+
+			var img = new Image();
+
+			img.addEventListener('load', function(e) {
+
+			    ctx.drawImage(this, 0, 0, size * 2, size * 2);
+
+			}, true);
+
+			img.src = "img/darth-vader.jpg";
+
+			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
+			sprite.anchor.x = sprite.anchor.y = 0.5;
+			sprite.position.x = center.x * 2.85;
+			sprite.position.y = center.y;
+
+			el.addChild(sprite);
 
 		}
 
