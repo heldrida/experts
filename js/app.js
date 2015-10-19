@@ -21,6 +21,7 @@ var Debugger = {
 	/**
 	 *  Experts Top Box
 	 *
+	 *  blue: #3b81ff
 	 */
     var ExpertsTopbox = function () {
 
@@ -257,7 +258,7 @@ var Debugger = {
 			el.addChild(sprite);
 
 			var graphics = new PIXI.Graphics();
-			graphics.lineStyle ( 2 , 0xFFCC00);
+			graphics.lineStyle ( 2 , 0x3b81ff);
 			graphics.drawCircle(size, size, size / 2);
 			graphics.x = -size/2;
 			graphics.y = -size/2;
