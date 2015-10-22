@@ -82,6 +82,8 @@ var Debugger = {
 
 			this.stage.addChild(this.expertsContainer);
 
+			this.defaultLineWidth = 1;
+
 		},
 
 		startTicker: function () {
@@ -226,15 +228,6 @@ var Debugger = {
 				y: size / 2
 			};
 
-			/*
-			var graphics = new PIXI.Graphics();
-			graphics.lineStyle(1, 0x000000, 1);
-			graphics.alpha = 1;
-			graphics.drawCircle(center.x, center.y, center.x);
-
-			el.addChild(graphics);
-			*/
-
 			var canvas = document.createElement("canvas");
 
 			var ctx = canvas.getContext('2d');
@@ -255,13 +248,92 @@ var Debugger = {
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
+			this.insertLine(el, size);
+
 			el.addChild(sprite);
 
+
+			this.insertCircleLine(el, size);
+			this.insertInfoCircle(el, size);
+
+
+		},
+
+		insertCircleLine: function (el, size) {
+
 			var graphics = new PIXI.Graphics();
-			graphics.lineStyle ( 2 , 0x3b81ff);
+			graphics.lineStyle (this.defaultLineWidth, 0x3b81ff);
 			graphics.drawCircle(size, size, size / 2);
 			graphics.x = -size/2;
 			graphics.y = -size/2;
+			el.addChild(graphics);
+
+		},
+
+		insertInfoCircle: function (el, size) {
+
+			var sprite = PIXI.Sprite.fromImage("img/icon-info.png?201510221531");
+
+			sprite.width = size * 0.25;
+			sprite.height = size * 0.25;
+
+			/*
+			 * top left
+			 *
+			sprite.position.x = size * 0.15;
+			sprite.position.y = size * 0.15;
+			 */
+
+			/*
+			 * top right
+			 *
+			sprite.position.x = size * 0.85;
+			sprite.position.y = size * 0.15;
+			 */
+
+			/*
+			 * center left
+			 *
+			sprite.position.x = 0;
+			sprite.position.y = size * 0.5;
+			 */
+
+			/*
+			 * center right
+			 *
+			sprite.position.x = size;
+			sprite.position.y = size * 0.5;
+			 */
+
+			/*
+			 * bottom left
+			 *
+			sprite.position.x = size * 0.15;
+			sprite.position.y = size * 0.85;
+			 */
+
+			/*
+			 * bottom right
+			 */
+			sprite.position.x = size * 0.85;
+			sprite.position.y = size * 0.85;
+
+			sprite.anchor.x = 0.5;
+			sprite.anchor.y = 0.5;
+
+			el.addChild(sprite);
+
+		},
+
+		insertLine: function (el, size) {
+
+			var graphics = new PIXI.Graphics();
+			graphics.lineStyle (this.defaultLineWidth, 0x3b81ff);
+			graphics.moveTo(0,0);
+			graphics.lineTo(size * 0.8, 0);
+			graphics.x = size / 2;
+			graphics.y = size / 2;
+			graphics.rotation = 3.725; // 0 ~ 4.725
 			el.addChild(graphics);
 
 		}
