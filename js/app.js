@@ -248,14 +248,12 @@ var Debugger = {
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
-			this.insertLine(el, size);
-
 			el.addChild(sprite);
 
 
 			this.insertCircleLine(el, size);
 			this.insertInfoCircle(el, size);
-
+			this.insertLine(el, size);
 
 		},
 
@@ -314,8 +312,12 @@ var Debugger = {
 
 			/*
 			 * bottom right
-			 */
+			 *
 			sprite.position.x = size * 0.85;
+			sprite.position.y = size * 0.85;
+			 */
+
+			sprite.position.x = size * 0.15;
 			sprite.position.y = size * 0.85;
 
 			sprite.anchor.x = 0.5;
@@ -327,14 +329,44 @@ var Debugger = {
 
 		insertLine: function (el, size) {
 
-			var graphics = new PIXI.Graphics();
-			graphics.lineStyle (this.defaultLineWidth, 0x3b81ff);
-			graphics.moveTo(0,0);
-			graphics.lineTo(size * 0.8, 0);
-			graphics.x = size / 2;
-			graphics.y = size / 2;
-			graphics.rotation = 3.725; // 0 ~ 4.725
-			el.addChild(graphics);
+			// draw line
+			var gfxLn = new PIXI.Graphics();
+			gfxLn.lineStyle(this.defaultLineWidth, 0x3b81ff);
+			gfxLn.moveTo(0,0);
+			gfxLn.lineTo(size * 0.8, 0);
+			gfxLn.x = size / 2;
+			gfxLn.y = size / 2;
+			gfxLn.rotation = 0.5; // 0 ~ 4.725
+			el.addChild(gfxLn);
+
+			// draw circle
+			this.attachLineIcon(gfxLn, size);
+
+		},
+
+		attachLineIcon: function (gfxLn, size) {
+
+			// draw circle
+			var gfxCircle = new PIXI.Graphics();
+			gfxCircle.beginFill(0x3b81ff);
+			gfxCircle.lineStyle (this.defaultLineWidth, 0x3b81ff);
+			gfxCircle.drawCircle(size * 0.15, size * 0.15, (size * 0.15) / 2);
+			gfxCircle.x = size * 0.6;
+			gfxCircle.y = -16;
+
+			// attach as line child
+			gfxLn.addChild(gfxCircle);
+
+			var gfxIconSprite = PIXI.Sprite.fromImage("img/icon-ball.png?201510221531");
+
+			gfxIconSprite.width = size * 0.10;
+			gfxIconSprite.height = size * 0.10;
+			gfxIconSprite.position.x = (size * 0.12) * 1.25;
+			gfxIconSprite.position.y = (size * 0.12) * 1.25;
+			gfxIconSprite.anchor.x = 0.5;
+			gfxIconSprite.anchor.y = 0.5;
+
+			gfxCircle.addChild(gfxIconSprite);
 
 		}
 
