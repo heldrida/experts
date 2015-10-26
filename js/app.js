@@ -93,6 +93,7 @@ var Debugger = {
 			graphics.alpha = 0;
 			this.expertsContainer.addChild(graphics);
 
+			this.particles = [];
 			this.generateParticles();
 
 			this.stage.addChild(this.expertsContainer);
@@ -100,6 +101,10 @@ var Debugger = {
 			this.defaultLineWidth = 1;
 
 			this.attachTitle();
+
+			this.attachArrow();
+
+			this.particlesScale = 0;
 
 		},
 
@@ -111,6 +116,7 @@ var Debugger = {
 
 				requestAnimationFrame(animate);
 				context.renderer.render(context.stage);
+				!context.particlesScaleLock ? context.particlesAnimateHandler() : null;
 
 			}
 
@@ -389,6 +395,15 @@ var Debugger = {
 
 		},
 
+		attachArrow: function () {
+
+			this.arrow = document.createElement("div");
+			this.arrow.setAttribute('class', 'experts-down-arrow');
+
+			this.container.el.appendChild(this.arrow);
+
+		},
+
 		attachTitle: function () {
 
 			// create a new div element
@@ -413,6 +428,8 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
+
+			this.container.el.addEventListener('mousemove', this.mouseMoveHandler.bind(this));
 
 		},
 
@@ -447,7 +464,12 @@ var Debugger = {
 			gfxCircle.y = ((this.container.el.offsetHeight / 2) * Math.random()) + this.stage.height * 0.5;
 			gfxCircle.alpha = Math.max(0.2, Math.random());
 
-			console.log('gfxCircle.x: ' + gfxCircle.x + ', y: ' + gfxCircle.y);
+			gfxCircle.pivot.x = 0.5;
+			gfxCircle.pivot.y = 0.5;
+
+			gfxCircle.scale.x = gfxCircle.scale.y = 0;
+
+			this.particles.push(gfxCircle);
 
 			this.stage.addChild(gfxCircle);
 
@@ -464,6 +486,33 @@ var Debugger = {
 					this.particle(col);
 
 				}
+
+			}
+
+		},
+
+		particlesAnimateHandler: function () {
+
+			for (var i = 0; i < this.particles.length; i++) {
+
+				this.particlesScale += 0.0001;
+				this.particles[i].scale.x = this.particlesScale;
+				this.particles[i].scale.y = this.particlesScale;
+
+				this.particlesScaleLock = this.particlesScale > 1 ? true : false;
+
+			}
+
+		},
+
+		mouseMoveHandler: function (e) {
+
+			console.log(e);
+
+			for (var i = 0; i < this.particles.length; i++) {
+
+				this.particles[i].x = this.particles[i].x + (e.clientX / 1000);
+				this.particles[i].y = this.particles[i].y + (e.clientY / 1000);
 
 			}
 
