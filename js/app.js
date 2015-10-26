@@ -35,11 +35,13 @@ var Debugger = {
 
 		init: function () {
 
-			Debugger.log('init!');
+			//Debugger.log('init!');
 
 			this.setProperties();
 
 			this.placeExpertsOnStage();
+
+			this.attachListeners();
 
 			this.startTicker.call(this);
 
@@ -75,9 +77,9 @@ var Debugger = {
 			this.expertsContainer.y = (this.container.height * 0.25);
 
 			var graphics = new PIXI.Graphics();
-			graphics.beginFill(0x00CCFF);
+			graphics.beginFill(0xFFFFFF);
 			graphics.drawRect(0, 0, this.container.width * 0.9,  this.container.height * 0.6);
-			graphics.alpha = 0.2;
+			graphics.alpha = 0;
 			this.expertsContainer.addChild(graphics);
 
 			this.stage.addChild(this.expertsContainer);
@@ -187,6 +189,7 @@ var Debugger = {
 				posX = 0;
 				posY = 0;
 
+				/*
 				Debugger.log('this.container.height: ' + this.container.height);
 				Debugger.log('this.container.height * 0.6: ' + this.container.height * 0.6);
 				Debugger.log('this.container.width * 0.9: ' + this.container.width * 0.9);
@@ -194,6 +197,7 @@ var Debugger = {
 				Debugger.log('size: ' + size);
 				Debugger.log('max: ' + max);
 				Debugger.log('offsetY: ' + offsetY);
+				*/
 
 				for (var i = 1; i <= total; i++) {
 
@@ -218,12 +222,12 @@ var Debugger = {
 
 		insertCircle: function (el, size) {
 
-			Debugger.log('inserCircle call()');
+			//Debugger.log('inserCircle call()');
 
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
 
-			Debugger.log('size: ' + size);
+			//Debugger.log('size: ' + size);
 
 			var center = {
 				x: size / 2,
@@ -374,7 +378,46 @@ var Debugger = {
 
 		attachTitle: function () {
 
-			var bitmapText = new PIXI.extras.BitmapText("THE EXPERTS", { align: "center"});
+			// create a new div element
+			this.titleDiv = document.createElement("div");
+			var h1 = document.createElement("h1");
+			var p = document.createElement("p");
+
+			h1.innerHTML = "THE EXPERTS";
+			p.innerHTML = "OUR NETWORK OF EXPERTS ARE SOME OF THE MOST SORT AFTER PEOPLE IN THE INDUSTRY.<br>GIVING ADVICE OF A MULTITUDE OF SPORTS AND ACTIVITIES";
+
+			this.titleDiv.appendChild(h1);
+			this.titleDiv.appendChild(p);
+
+			this.titleDiv.setAttribute('id', 'title-container');
+
+			this.container.el.appendChild(this.titleDiv);
+
+		},
+
+		attachListeners: function () {
+
+			window.addEventListener('resize', this.titleHandler.bind(this));
+
+		},
+
+		titleHandler: function () {
+
+			var rm = 67 / 1440;
+			var rh1 = 30 / 1440;
+			var rh1_ls = 1.5 / 1440;
+			var rp = 10 / 1440;
+			var rp_ls = 1.22 / 1440;
+			var rp_p = 10 / 1440;
+			var rp_ln = 16 / 1440;
+
+			this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
+			this.titleDiv.querySelector('h1').style.fontSize = (window.innerWidth * rh1) + 'px';
+			this.titleDiv.querySelector('h1').style.letterSpacing = (window.innerWidth * rh1_ls) + 'px';
+			this.titleDiv.querySelector('p').style.fontSize = (window.innerWidth * rp) + 'px';
+			this.titleDiv.querySelector('p').style.letterSpacing = (window.innerWidth * rp_ls) + 'px';
+			this.titleDiv.querySelector('p').style.padding = (window.innerWidth * rp_p) + 'px 0';
+			this.titleDiv.querySelector('p').style.lineHeight = (window.innerWidth * rp_ln) + 'px';
 
 		}
 

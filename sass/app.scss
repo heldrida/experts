@@ -1,8 +1,41 @@
 .sh-experts-topbox {
 	background-color: #000;
+	color: #FFF;
+	font-family: 'OpenSans-Extrabold', arial, sans-serif;
+	text-align: center;
+
+	p {
+		font-family: 'OpenSans-Light', arial, sans-serif;
+	}
+
+	h1 {
+		font-size: 30px;
+	}
+
+	p {
+		font-size: 10px;
+	}
 
 	canvas {
 		width: 100%;
 		height: auto;
+	}
+
+	#title-container {
+		position: absolute;
+		top: 30px;
+		left: 50%;
+		transform: translateX(-50%);
+
+		h1 {
+			letter-spacing: 1.5px;
+			line-height: normal;
+		}
+
+		p {
+			padding: 10px 0;
+			line-height: 16px;
+			letter-spacing: 1.2px;
+		}
 	}
 }

@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'OpenSans-Extrabold';
+  src: url("../fonts/OpenSans-Extrabold_gdi.eot");
+  src: url("../fonts/OpenSans-Extrabold_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Extrabold_gdi.woff") format("woff"), url("../fonts/OpenSans-Extrabold_gdi.ttf") format("truetype"), url("../fonts/OpenSans-Extrabold_gdi.svg#OpenSans-Extrabold") format("svg");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U20-25CA; }
+
+@font-face {
+  font-family: 'OpenSans-Light';
+  src: url("../fonts/OpenSans-Light_gdi.eot");
+  src: url("../fonts/OpenSans-Light_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Light_gdi.woff") format("woff"), url("../fonts/OpenSans-Light_gdi.ttf") format("truetype"), url("../fonts/OpenSans-Light_gdi.svg#OpenSans-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U20-25CA; }
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url("../fonts/OpenSans_gdi.eot");
+  src: url("../fonts/OpenSans_gdi.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans_gdi.woff") format("woff"), url("../fonts/OpenSans_gdi.ttf") format("truetype"), url("../fonts/OpenSans_gdi.svg#OpenSans-Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U20-25CA; }

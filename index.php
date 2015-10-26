@@ -8,6 +8,7 @@
 		<title>The Experts</title>
 
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+		<link rel="stylesheet" href="css/fonts.css">
 		<link rel="stylesheet" href="css/app.css">
 	</head>
 
