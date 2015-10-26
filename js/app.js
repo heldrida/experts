@@ -84,6 +84,8 @@ var Debugger = {
 
 			this.defaultLineWidth = 1;
 
+			this.attachTitle();
+
 		},
 
 		startTicker: function () {
@@ -367,6 +369,12 @@ var Debugger = {
 			gfxIconSprite.anchor.y = 0.5;
 
 			gfxCircle.addChild(gfxIconSprite);
+
+		},
+
+		attachTitle: function () {
+
+			var bitmapText = new PIXI.extras.BitmapText("THE EXPERTS", { align: "center"});
 
 		}
 

@@ -1,8 +1,8 @@
 
-	Louboutin: Electric logo
+	Experts
 	========================
 
-	Isolated the Electric logo from the Louboutin website
 
-	https://www.npmjs.com/package/pixi-svg-graphics
-	https://github.com/saschagehlich/pixi-svg-graphics
+	Bitmap Font Generator:
+
+		http://www.angelcode.com/products/bmfont/
