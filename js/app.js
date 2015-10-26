@@ -60,7 +60,11 @@ var Debugger = {
 			};
 
 			// create renderer
-			this.renderer = new PIXI.CanvasRenderer(this.container.width, this.container.height);
+			this.renderer = new PIXI.CanvasRenderer(this.container.width, this.container.height, {
+				antialias: true,
+				resolution: 2,
+				roundPixels: true
+			});
 
 			// inserts canva element into main container
 			this.container.el.appendChild(this.renderer.view);
