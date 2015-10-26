@@ -80,11 +80,20 @@ var Debugger = {
 			this.expertsContainer.x = (this.container.width * 0.1) / 2;
 			this.expertsContainer.y = (this.container.height * 0.25);
 
+			// colours
+			this.colours = {
+				hex: {
+					grey: '0xAAAAAA'
+				}
+			};
+
 			var graphics = new PIXI.Graphics();
 			graphics.beginFill(0xFFFFFF);
 			graphics.drawRect(0, 0, this.container.width * 0.9,  this.container.height * 0.6);
 			graphics.alpha = 0;
 			this.expertsContainer.addChild(graphics);
+
+			this.generateParticles();
 
 			this.stage.addChild(this.expertsContainer);
 
@@ -397,6 +406,8 @@ var Debugger = {
 
 			this.container.el.appendChild(this.titleDiv);
 
+			this.titleHandler();
+
 		},
 
 		attachListeners: function () {
@@ -422,6 +433,39 @@ var Debugger = {
 			this.titleDiv.querySelector('p').style.letterSpacing = (window.innerWidth * rp_ls) + 'px';
 			this.titleDiv.querySelector('p').style.padding = (window.innerWidth * rp_p) + 'px 0';
 			this.titleDiv.querySelector('p').style.lineHeight = (window.innerWidth * rp_ln) + 'px';
+
+		},
+
+		particle: function (col) {
+
+			var size = 10 * Math.random() % 10;
+			var gfxCircle = new PIXI.Graphics();
+			gfxCircle.beginFill(this.colours.hex.grey);
+			gfxCircle.lineStyle (this.defaultLineWidth, this.colours.hex.grey);
+			gfxCircle.drawCircle(size, size, size);
+			gfxCircle.x = ((this.container.el.offsetWidth / 2) * col) * Math.random();
+			gfxCircle.y = ((this.container.el.offsetHeight / 2) * Math.random()) + this.stage.height * 0.5;
+			gfxCircle.alpha = Math.max(0.2, Math.random());
+
+			console.log('gfxCircle.x: ' + gfxCircle.x + ', y: ' + gfxCircle.y);
+
+			this.stage.addChild(gfxCircle);
+
+		},
+
+		generateParticles: function () {
+
+			console.log(this.stage.width);
+
+			for (var col = 1; col <= 3; col++) {
+
+				for (var i = 1; i <= 20; i++) {
+
+					this.particle(col);
+
+				}
+
+			}
 
 		}
 
