@@ -39,11 +39,13 @@ var Debugger = {
 
 			this.setProperties();
 
-			this.placeExpertsOnStage();
+			this.placeExpertsOnStage.call(this);
 
 			this.attachListeners();
 
 			this.startTicker.call(this);
+
+			this.expertsAnimShow.call(this);
 
 		},
 
@@ -148,6 +150,11 @@ var Debugger = {
 			var container = new PIXI.Container();
 			container.width = size;
 			container.height = size;
+			container.pivot.x = container.pivot.y = 0.5;
+			container.scale = {
+				x: 0,
+				y: 0
+			};
 
 			return container;
 
@@ -156,6 +163,8 @@ var Debugger = {
 		placeExpertsOnStage: function () {
 
 			var total, size, max, offsetY, offsetX, rnd, posX, posY, center;
+
+			this.experts = [];
 
 			total  = 10;
 			max = 5;
@@ -203,6 +212,10 @@ var Debugger = {
 					posX += (size + offsetX);
 					posY = rnd;
 
+					this.experts.push({
+						el: expert
+					});
+
 				}
 
 			} else {
@@ -238,6 +251,10 @@ var Debugger = {
 					posX += (size + offsetX);
 					//posY += offsetY;
 					posY = rnd;
+
+					this.experts.push({
+						el: expert
+					});
 
 				}
 
@@ -279,12 +296,13 @@ var Debugger = {
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
+			this.insertLine(el, size);
 			el.addChild(sprite);
 
 
 			this.insertCircleLine(el, size);
 			this.insertInfoCircle(el, size);
-			this.insertLine(el, size);
+
 
 		},
 
@@ -549,6 +567,29 @@ var Debugger = {
 			for (var i = 0; i < this.particles.length; i++) {
 
 				anim.call(this, i);
+
+			}
+
+		},
+
+		expertsAnimShow: function () {
+
+			var context = this;
+			var delay = 0;
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				(function (expert, delay) {
+
+					setTimeout(function () {
+
+						TweenLite.fromTo(expert.scale, 1, { x: 0, y: 0 }, { x: 1, y: 1 });
+
+					}.bind(this), delay);
+
+				}(this.experts[i].el, delay));
+
+				delay += 80;
 
 			}
 
