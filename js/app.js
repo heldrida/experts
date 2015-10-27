@@ -106,6 +106,11 @@ var Debugger = {
 
 			this.particlesScale = 0;
 
+			this.mouseMoveEvent = {
+				clientX: null,
+				clientY: null
+			};
+
 		},
 
 		startTicker: function () {
@@ -117,6 +122,7 @@ var Debugger = {
 				requestAnimationFrame(animate);
 				context.renderer.render(context.stage);
 				!context.particlesScaleLock ? context.particlesAnimateHandler() : null;
+				context.mouseMoveHandler.call(context);
 
 			}
 
@@ -377,7 +383,7 @@ var Debugger = {
 			gfxCircle.lineStyle (this.defaultLineWidth, 0x3b81ff);
 			gfxCircle.drawCircle(size * 0.15, size * 0.15, (size * 0.15) / 2);
 			gfxCircle.x = size * 0.6;
-			gfxCircle.y = -16;
+			gfxCircle.y = - (size * 0.15);
 
 			// attach as line child
 			gfxLn.addChild(gfxCircle);
@@ -429,7 +435,12 @@ var Debugger = {
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
 
-			this.container.el.addEventListener('mousemove', this.mouseMoveHandler.bind(this));
+			this.container.el.addEventListener('mousemove', function (e) {
+
+				this.mouseMoveEvent.clientX = e.clientX;
+				this.mouseMoveEvent.clientY = e.clientY;
+
+			}.bind(this));
 
 		},
 
@@ -455,13 +466,13 @@ var Debugger = {
 
 		particle: function (col) {
 
-			var size = 10 * Math.random() % 10;
+			var size = (this.stage.height * 0.01) * Math.random() % (this.stage.height * 0.01);
 			var gfxCircle = new PIXI.Graphics();
 			gfxCircle.beginFill(this.colours.hex.grey);
 			gfxCircle.lineStyle (this.defaultLineWidth, this.colours.hex.grey);
 			gfxCircle.drawCircle(size, size, size);
 			gfxCircle.x = ((this.container.el.offsetWidth / 2) * col) * Math.random();
-			gfxCircle.y = ((this.container.el.offsetHeight / 2) * Math.random()) + this.stage.height * 0.5;
+			gfxCircle.y = ((this.container.el.offsetHeight / 2) * Math.random()) + this.container.el.offsetHeight * 0.3;
 			gfxCircle.alpha = Math.max(0.2, Math.random());
 
 			gfxCircle.pivot.x = 0.5;
@@ -469,7 +480,14 @@ var Debugger = {
 
 			gfxCircle.scale.x = gfxCircle.scale.y = 0;
 
-			this.particles.push(gfxCircle);
+			this.particles.push({
+				root: {
+					x: gfxCircle.x,
+					y: gfxCircle.y,
+					size: size
+				},
+				circle: gfxCircle
+			});
 
 			this.stage.addChild(gfxCircle);
 
@@ -481,7 +499,7 @@ var Debugger = {
 
 			for (var col = 1; col <= 3; col++) {
 
-				for (var i = 1; i <= 20; i++) {
+				for (var i = 1; i <= 75; i++) {
 
 					this.particle(col);
 
@@ -496,8 +514,8 @@ var Debugger = {
 			for (var i = 0; i < this.particles.length; i++) {
 
 				this.particlesScale += 0.0001;
-				this.particles[i].scale.x = this.particlesScale;
-				this.particles[i].scale.y = this.particlesScale;
+				this.particles[i].circle.scale.x = this.particlesScale;
+				this.particles[i].circle.scale.y = this.particlesScale;
 
 				this.particlesScaleLock = this.particlesScale > 1 ? true : false;
 
@@ -505,14 +523,32 @@ var Debugger = {
 
 		},
 
-		mouseMoveHandler: function (e) {
+		mouseMoveHandler: function () {
 
-			console.log(e);
+			var anim = function (i) {
+
+				if (this.particles[i].root.size < 1) {
+
+					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.015);
+					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.015);
+
+				} else if (this.particles[i].root.size < 2) {
+
+					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.050);
+					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.050);
+
+				} else {
+
+					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.080);
+					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.080);
+
+				}
+
+			};
 
 			for (var i = 0; i < this.particles.length; i++) {
 
-				this.particles[i].x = this.particles[i].x + (e.clientX / 1000);
-				this.particles[i].y = this.particles[i].y + (e.clientY / 1000);
+				anim.call(this, i);
 
 			}
 
