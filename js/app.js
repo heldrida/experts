@@ -614,34 +614,38 @@ var Debugger = {
 				return;
 			}
 
-			var anim = function (i) {
-
-				var delay = 0;
+			var anim = function (i, offsetX, offsetY) {
 
 				if (this.experts[i].el.scale.x === 0.5 && this.experts[i].el.scale.y === 0.5) {
 
-					var expert = this.experts[i];
-					var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * 0.1);
-					var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * 0.1);
+					(function (expert) {
 
-					(function (expert, delay, offsetX, offsetY) {
+						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
 
-							setTimeout(function () {
+					}.call(this, this.experts[i]));
 
-								TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
-
-							}.bind(this), delay);
-
-					}.call(this, this.experts[i], delay, offsetX, offsetY));
-
-					delay += 800;
 				}
 
 			};
 
+			var delay = 0;
+
 			for (var i = 0; i < this.experts.length; i++) {
 
-				anim.call(this, i);
+
+				var expert = this.experts[i];
+				var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * 0.05);
+				var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * 0.05);
+
+				(function (i, delay, offsetX, offsetY) {
+
+					setTimeout(function() {
+						anim.call(this, i, offsetX, offsetY);
+					}.bind(this), delay);
+
+				}.call(this, i, delay, offsetX, offsetY));
+
+				delay += 30;
 
 			}
 
