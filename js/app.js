@@ -43,10 +43,10 @@ var Debugger = {
 
 			this.attachListeners();
 
-			this.startTicker.call(this);
-
 			this.expertsAnimShow.call(this);
 
+
+			this.startTicker.call(this);
 		},
 
 		setProperties: function () {
@@ -192,6 +192,15 @@ var Debugger = {
 					expert.position.x = posX;
 					expert.position.y = posY;
 
+					this.experts.push({
+						active: false,
+						el: expert,
+						root: {
+							x: posX,
+							y: posY
+						}
+					});
+
 					this.expertsContainer.addChild(expert);
 
 					if (i <= max) {
@@ -207,11 +216,6 @@ var Debugger = {
 					posX += (size + offsetX);
 					posY = rnd;
 
-					this.experts.push({
-						active: false,
-						el: expert
-					});
-
 				}
 
 			} else {
@@ -222,16 +226,6 @@ var Debugger = {
 				rnd = offsetY * Math.floor(Math.random() * total) + 1;
 				posX = 0;
 				posY = 0;
-
-				/*
-				Debugger.log('this.container.height: ' + this.container.height);
-				Debugger.log('this.container.height * 0.6: ' + this.container.height * 0.6);
-				Debugger.log('this.container.width * 0.9: ' + this.container.width * 0.9);
-				Debugger.log('total: ' + total);
-				Debugger.log('size: ' + size);
-				Debugger.log('max: ' + max);
-				Debugger.log('offsetY: ' + offsetY);
-				*/
 
 				for (var i = 1; i <= total; i++) {
 
@@ -250,7 +244,11 @@ var Debugger = {
 
 					this.experts.push({
 						active: false,
-						el: expert
+						el: expert,
+						root: {
+							x: posX,
+							y: posY
+						}
 					});
 
 				}
@@ -579,7 +577,7 @@ var Debugger = {
 
 		},
 
-		mouseMoveHandler: function () {
+		particleMouseMoveHandler: function () {
 
 			var anim = function (i) {
 
@@ -595,8 +593,8 @@ var Debugger = {
 
 				} else {
 
-					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.080);
-					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.080);
+					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.1);
+					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.1);
 
 				}
 
@@ -607,6 +605,52 @@ var Debugger = {
 				anim.call(this, i);
 
 			}
+
+		},
+
+		expertMouseMoveHandler: function () {
+
+			if (this.expertsPlacerLock) {
+				return;
+			}
+
+			var anim = function (i) {
+
+				var delay = 0;
+
+				if (this.experts[i].el.scale.x === 0.5 && this.experts[i].el.scale.y === 0.5) {
+
+					var expert = this.experts[i];
+					var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * 0.1);
+					var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * 0.1);
+
+					(function (expert, delay, offsetX, offsetY) {
+
+							setTimeout(function () {
+
+								TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
+
+							}.bind(this), delay);
+
+					}.call(this, this.experts[i], delay, offsetX, offsetY));
+
+					delay += 800;
+				}
+
+			};
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				anim.call(this, i);
+
+			}
+
+		},
+
+		mouseMoveHandler: function () {
+
+			this.particleMouseMoveHandler.call(this);
+			this.expertMouseMoveHandler.call(this);
 
 		},
 
