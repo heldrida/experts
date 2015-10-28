@@ -134,18 +134,26 @@ var Debugger = {
 
 		generateExpert: function (index) {
 
-			/*
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
 
-			graphics.beginFill(index <= 5 ? 0x00CCFF : 0xFFCC00);
+			graphics.beginFill(index <= 5 ? 0x000000 : 0x000000);
 
-			graphics.drawRect(0, 0, size, size);
+			graphics.drawCircle(size / 2, size / 2, size / 1.9);
+
+			graphics.pivot.x = graphics.pivot.y = 0.5;
+
+			graphics.interactive = true;
+
+			graphics.scale = {
+				x: 0,
+				y: 0
+			};
 
 			return graphics;
-			*/
 
+			/*
 			var size = (this.container.width * 0.9) / 10;
 			var container = new PIXI.Container();
 			container.width = size;
@@ -157,6 +165,7 @@ var Debugger = {
 			};
 
 			return container;
+			*/
 
 		},
 
@@ -213,6 +222,7 @@ var Debugger = {
 					posY = rnd;
 
 					this.experts.push({
+						active: false,
 						el: expert
 					});
 
@@ -253,6 +263,7 @@ var Debugger = {
 					posY = rnd;
 
 					this.experts.push({
+						active: false,
 						el: expert
 					});
 
@@ -460,6 +471,15 @@ var Debugger = {
 
 			}.bind(this));
 
+			// attach click event to `experts`
+			for (var i = 0; i < this.experts.length; i++) {
+
+				this.experts[i].el.click = function (e) {
+					console.log('click');
+				};
+
+			}
+
 		},
 
 		titleHandler: function () {
@@ -583,7 +603,7 @@ var Debugger = {
 
 					setTimeout(function () {
 
-						TweenLite.fromTo(expert.scale, 1, { x: 0, y: 0 }, { x: 1, y: 1 });
+						TweenLite.fromTo(expert.scale, 1, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
 
 					}.bind(this), delay);
 
