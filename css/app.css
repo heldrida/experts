@@ -52,6 +52,8 @@
   font-family: 'OpenSans-Extrabold', arial, sans-serif;
   text-align: center;
   position: relative; }
+  .sh-experts-topbox.mouseover {
+    cursor: pointer !important; }
   .sh-experts-topbox p {
     font-family: 'OpenSans-Light', arial, sans-serif; }
   .sh-experts-topbox h1 {

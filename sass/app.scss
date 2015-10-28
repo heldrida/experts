@@ -7,6 +7,10 @@
 	text-align: center;
 	position: relative;
 
+	&.mouseover {
+		cursor: pointer !important;
+	}
+
 	p {
 		font-family: 'OpenSans-Light', arial, sans-serif;
 	}

@@ -153,20 +153,6 @@ var Debugger = {
 
 			return graphics;
 
-			/*
-			var size = (this.container.width * 0.9) / 10;
-			var container = new PIXI.Container();
-			container.width = size;
-			container.height = size;
-			container.pivot.x = container.pivot.y = 0.5;
-			container.scale = {
-				x: 0,
-				y: 0
-			};
-
-			return container;
-			*/
-
 		},
 
 		placeExpertsOnStage: function () {
@@ -462,6 +448,8 @@ var Debugger = {
 
 		attachListeners: function () {
 
+			var context = this;
+
 			window.addEventListener('resize', this.titleHandler.bind(this));
 
 			this.container.el.addEventListener('mousemove', function (e) {
@@ -474,9 +462,39 @@ var Debugger = {
 			// attach click event to `experts`
 			for (var i = 0; i < this.experts.length; i++) {
 
-				this.experts[i].el.click = function (e) {
-					console.log('click');
-				};
+				(function (expert, i) {
+
+					expert[i].el.click = function (e) {
+
+						context.showExpertInfo(i);
+
+					};
+
+					expert[i].el.mouseover = function (e) {
+
+						context.container.el.classList.add('mouseover');
+
+						(function (i) {
+
+							TweenLite.to(expert[i].el, 0.3, { alpha: 0.75, ease: Power1.easeOut });
+
+						}(i));
+
+					}.bind(this);
+
+					expert[i].el.mouseout = function (e) {
+
+						context.container.el.classList.remove('mouseover');
+
+						(function (i) {
+
+							TweenLite.to(expert[i].el, 0.3, { alpha: 1, ease: Power1.easeOut });
+
+						}(i));
+
+					}.bind(this);
+
+				}(this.experts, i));
 
 			}
 
@@ -610,6 +628,90 @@ var Debugger = {
 				}(this.experts[i].el, delay));
 
 				delay += 80;
+
+			}
+
+		},
+
+		showExpertInfo: function (index) {
+
+			// exception handler
+			if (!this.expertActiveExceptionHandler.call(this, index)) {
+
+				this.closeNonIndexed.call(this, index);
+
+			}
+
+		},
+
+		closeNonIndexed: function (index) {
+
+			var expert = this.experts[index];
+
+			var delay = 0;
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				if (i !== index) {
+
+					this.experts[i].active = false;
+
+					(function (expert, delay) {
+
+						setTimeout(function () {
+
+							TweenLite.to(expert.scale, 1, { x: 0.5, y: 0.5, ease: Power1.easeOut });
+							TweenLite.to(expert, 1, { alpha: 0.65, ease: Power1.easeOut });
+
+						}.bind(this), delay);
+
+					}(this.experts[i].el, delay));
+
+					delay += 30;
+
+				} else {
+
+					this.experts[index].active = true;
+
+					(function (expert, delay) {
+
+						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut });
+						TweenLite.to(expert, 1, { alpha: 1 });
+
+					}(this.experts[i].el));
+
+				}
+
+			}
+
+		},
+
+		expertActiveExceptionHandler: function (index) {
+
+			var resetAll = function () {
+
+				for (var i = 0; i < this.experts.length; i++) {
+
+					TweenLite.to(this.experts[i].el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
+					TweenLite.to(this.experts[i].el, 1, { alpha: 1, ease: Power1.easeOut });
+
+					this.experts[i].active = false;
+
+				}
+
+			};
+
+			// check if current active element matches the clicked index
+			for (var i = 0; i < this.experts.length; i++) {
+
+				console.log("this.experts[i].active", this.experts[i].active);
+
+				if (this.experts[i].active && i === index) {
+
+					resetAll.call(this);
+
+					return true;
+				}
 
 			}
 
