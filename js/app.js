@@ -113,6 +113,8 @@ var Debugger = {
 				clientY: null
 			};
 
+			this.expertsMoveLock = false;
+
 		},
 
 		startTicker: function () {
@@ -234,14 +236,6 @@ var Debugger = {
 					expert.position.x = posX;
 					expert.position.y = posY;
 
-					this.expertsContainer.addChild(expert);
-
-					rnd = offsetY * Math.floor(Math.random() * 5) + 1;
-
-					posX += (size + offsetX);
-					//posY += offsetY;
-					posY = rnd;
-
 					this.experts.push({
 						active: false,
 						el: expert,
@@ -250,6 +244,14 @@ var Debugger = {
 							y: posY
 						}
 					});
+
+					this.expertsContainer.addChild(expert);
+
+					rnd = offsetY * Math.floor(Math.random() * 5) + 1;
+
+					posX += (size + offsetX);
+					//posY += offsetY;
+					posY = rnd;
 
 				}
 
@@ -486,7 +488,11 @@ var Debugger = {
 
 						(function (i) {
 
-							TweenLite.to(expert[i].el, 0.3, { alpha: 1, ease: Power1.easeOut });
+							if (expert[i].el.scale.x === 1) {
+
+								TweenLite.to(expert[i].el, 0.3, { alpha: 1, ease: Power1.easeOut });
+
+							}
 
 						}(i));
 
@@ -610,7 +616,7 @@ var Debugger = {
 
 		expertMouseMoveHandler: function () {
 
-			if (this.expertsPlacerLock) {
+			if (this.expertsMoveLock) {
 				return;
 			}
 
@@ -740,19 +746,26 @@ var Debugger = {
 
 				for (var i = 0; i < this.experts.length; i++) {
 
-					TweenLite.to(this.experts[i].el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
-					TweenLite.to(this.experts[i].el, 1, { alpha: 1, ease: Power1.easeOut });
+					(function (experts) {
 
-					this.experts[i].active = false;
+						TweenLite.to(experts.el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
+						TweenLite.to(experts.el, 1, { alpha: 1, ease: Power1.easeOut });
+						TweenLite.to(experts.el, 1, { x: experts.root.x, y: experts.root.y, ease: Power1.easeOut });
+
+						experts.active = false;
+
+					}(this.experts[i]));
 
 				}
 
+				this.expertsMoveLock = false;
+
 			};
+
+			this.expertsMoveLock = true;
 
 			// check if current active element matches the clicked index
 			for (var i = 0; i < this.experts.length; i++) {
-
-				console.log("this.experts[i].active", this.experts[i].active);
 
 				if (this.experts[i].active && i === index) {
 
@@ -760,6 +773,24 @@ var Debugger = {
 
 					return true;
 				}
+
+			}
+
+			this.expertsMoveLock = false;
+
+		},
+
+		expertsResetAll: function () {
+
+			this.expertsMoveLock = true;
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				var experts = this.experts[i];
+
+				TweenLite.to(experts.el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
+				TweenLite.to(experts.el, 1, { alpha: 1, ease: Power1.easeOut });
+				TweenLite.to(experts.el, 1, { x: experts.root.x, y: experts.root.y, ease: Power1.easeOut });
 
 			}
 
