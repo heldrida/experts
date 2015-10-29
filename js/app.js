@@ -115,6 +115,8 @@ var Debugger = {
 				clientY: null
 			};
 
+			this.expertScaleSmallRatio = 0.5;
+
 		},
 
 		startTicker: function () {
@@ -144,7 +146,7 @@ var Debugger = {
 
 			graphics.drawCircle(size / 2, size / 2, size / 1.9);
 
-			graphics.pivot.x = graphics.pivot.y = 0.5;
+			graphics.pivot.x = graphics.pivot.y = this.expertScaleSmallRatio;
 
 			graphics.interactive = true;
 
@@ -366,8 +368,8 @@ var Debugger = {
 			sprite.position.x = size * 0.15;
 			sprite.position.y = size * 0.85;
 
-			sprite.anchor.x = 0.5;
-			sprite.anchor.y = 0.5;
+			sprite.anchor.x = this.expertScaleSmallRatio;
+			sprite.anchor.y = this.expertScaleSmallRatio;
 
 			el.addChild(sprite);
 
@@ -382,7 +384,7 @@ var Debugger = {
 			gfxLn.lineTo(size * 0.8, 0);
 			gfxLn.x = size / 2;
 			gfxLn.y = size / 2;
-			gfxLn.rotation = 0.5; // 0 ~ 4.725
+			gfxLn.rotation = this.expertScaleSmallRatio; // 0 ~ 4.725
 			el.addChild(gfxLn);
 
 			// draw circle
@@ -409,8 +411,8 @@ var Debugger = {
 			gfxIconSprite.height = size * 0.10;
 			gfxIconSprite.position.x = (size * 0.12) * 1.25;
 			gfxIconSprite.position.y = (size * 0.12) * 1.25;
-			gfxIconSprite.anchor.x = 0.5;
-			gfxIconSprite.anchor.y = 0.5;
+			gfxIconSprite.anchor.x = this.expertScaleSmallRatio;
+			gfxIconSprite.anchor.y = this.expertScaleSmallRatio;
 
 			gfxCircle.addChild(gfxIconSprite);
 
@@ -575,7 +577,7 @@ var Debugger = {
 
 				for (var i = 1; i <= 75; i++) {
 
-					this.particle(col);
+					this.particle.call(this, col);
 
 				}
 
@@ -642,7 +644,7 @@ var Debugger = {
 			for (var i = 0; i < this.experts.length; i++) {
 
 				var expert = this.experts[i];
-				var quantity = expert.el.scale.x === 0.5 && expert.el.scale.y === 0.5 ? 0.05 : 0.01;
+				var quantity = expert.el.scale.x === this.expertScaleSmallRatio && expert.el.scale.y === this.expertScaleSmallRatio ? 0.05 : 0.01;
 
 				var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * quantity);
 				var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * quantity);
@@ -726,7 +728,7 @@ var Debugger = {
 
 						setTimeout(function () {
 
-							TweenLite.to(expert.scale, 1, { x: 0.5, y: 0.5, ease: Power1.easeOut });
+							TweenLite.to(expert.scale, 1, { x: this.expertScaleSmallRatio, y: this.expertScaleSmallRatio, ease: Power1.easeOut });
 							TweenLite.to(expert, 1, { alpha: 0.65, ease: Power1.easeOut, onComplete: unlock.bind(this) });
 
 						}.bind(this), delay);
