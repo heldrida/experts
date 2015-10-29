@@ -587,24 +587,12 @@ var Debugger = {
 
 			var anim = function (i) {
 
-				var posX, posY;
+				var posX, posY, friction;
 
-				if (this.particles[i].root.size < 1) {
+				friction = this.particles[i].root.size / 20;
 
-					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.015);
-					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.015);
-
-				} else if (this.particles[i].root.size < 2) {
-
-					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.05);
-					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.05);
-
-				} else {
-
-					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.1);
-					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.1);
-
-				}
+				posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * friction);
+				posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * friction);
 
 				this.particles[i].circle.x = posX;
 				this.particles[i].circle.y = posY;
@@ -622,7 +610,6 @@ var Debugger = {
 		expertMouseMoveHandler: function () {
 
 			if (this.expertsMoveLock) {
-				console.log('expertMouseMoveHandler : ')
 				return;
 			}
 
