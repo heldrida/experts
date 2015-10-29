@@ -587,22 +587,27 @@ var Debugger = {
 
 			var anim = function (i) {
 
+				var posX, posY;
+
 				if (this.particles[i].root.size < 1) {
 
-					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.015);
-					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.015);
+					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.015);
+					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.015);
 
 				} else if (this.particles[i].root.size < 2) {
 
-					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.050);
-					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.050);
+					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.05);
+					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.05);
 
 				} else {
 
-					this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.1);
-					this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.1);
+					posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * 0.1);
+					posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * 0.1);
 
 				}
+
+				this.particles[i].circle.x = posX;
+				this.particles[i].circle.y = posY;
 
 			};
 
