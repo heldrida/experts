@@ -419,6 +419,7 @@ var Debugger = {
 		attachArrow: function () {
 
 			this.arrow = document.createElement("div");
+			this.arrow.style.position = 'relative';
 			this.arrow.setAttribute('class', 'experts-down-arrow');
 
 			this.container.el.appendChild(this.arrow);
@@ -529,13 +530,11 @@ var Debugger = {
 			h1.style.fontSize = (window.innerWidth * rh1) + 'px';
 			h1.style.letterSpacing = (window.innerWidth * rh1_ls) + 'px';
 			h1.style.position = "relative";
-			h1.style.opacity = 0;
 			p.style.fontSize = (window.innerWidth * rp) + 'px';
 			p.style.letterSpacing = (window.innerWidth * rp_ls) + 'px';
 			p.style.padding = (window.innerWidth * rp_p) + 'px 0';
 			p.style.lineHeight = (window.innerWidth * rp_ln) + 'px';
 			p.style.position = "relative";
-			p.style.opacity = 0;
 
 		},
 

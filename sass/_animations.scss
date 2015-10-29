@@ -1,0 +1,9 @@
+@include keyframes("arrow_animation") {
+	0% {
+		@include transform(translateX(-50%) translateY(0%));
+	}
+
+	80% {
+		@include transform(translateX(-50%) translateY(-20%));
+	}
+}

@@ -46,6 +46,86 @@
                                              (http://www.w3schools.com/cssref/css3_pr_animation.asp)
 
 ------------------------------------------------------------- */
+@-webkit-keyframes arrow_animation {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(0%);
+    -khtml-transform: translateX(-50%) translateY(0%);
+    -moz-transform: translateX(-50%) translateY(0%);
+    -ms-transform: translateX(-50%) translateY(0%);
+    -o-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%); }
+  80% {
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    -khtml-transform: translateX(-50%) translateY(-20%);
+    -moz-transform: translateX(-50%) translateY(-20%);
+    -ms-transform: translateX(-50%) translateY(-20%);
+    -o-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%); } }
+
+@-moz-keyframes arrow_animation {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(0%);
+    -khtml-transform: translateX(-50%) translateY(0%);
+    -moz-transform: translateX(-50%) translateY(0%);
+    -ms-transform: translateX(-50%) translateY(0%);
+    -o-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%); }
+  80% {
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    -khtml-transform: translateX(-50%) translateY(-20%);
+    -moz-transform: translateX(-50%) translateY(-20%);
+    -ms-transform: translateX(-50%) translateY(-20%);
+    -o-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%); } }
+
+@-ms-keyframes arrow_animation {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(0%);
+    -khtml-transform: translateX(-50%) translateY(0%);
+    -moz-transform: translateX(-50%) translateY(0%);
+    -ms-transform: translateX(-50%) translateY(0%);
+    -o-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%); }
+  80% {
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    -khtml-transform: translateX(-50%) translateY(-20%);
+    -moz-transform: translateX(-50%) translateY(-20%);
+    -ms-transform: translateX(-50%) translateY(-20%);
+    -o-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%); } }
+
+@-o-keyframes arrow_animation {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(0%);
+    -khtml-transform: translateX(-50%) translateY(0%);
+    -moz-transform: translateX(-50%) translateY(0%);
+    -ms-transform: translateX(-50%) translateY(0%);
+    -o-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%); }
+  80% {
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    -khtml-transform: translateX(-50%) translateY(-20%);
+    -moz-transform: translateX(-50%) translateY(-20%);
+    -ms-transform: translateX(-50%) translateY(-20%);
+    -o-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%); } }
+
+@keyframes arrow_animation {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(0%);
+    -khtml-transform: translateX(-50%) translateY(0%);
+    -moz-transform: translateX(-50%) translateY(0%);
+    -ms-transform: translateX(-50%) translateY(0%);
+    -o-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%); }
+  80% {
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    -khtml-transform: translateX(-50%) translateY(-20%);
+    -moz-transform: translateX(-50%) translateY(-20%);
+    -ms-transform: translateX(-50%) translateY(-20%);
+    -o-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%); } }
+
 .sh-experts-topbox {
   background-color: #000;
   color: #FFF;
@@ -69,9 +149,11 @@
     left: 50%;
     transform: translateX(-50%); }
     .sh-experts-topbox #title-container h1 {
+      opacity: 0;
       letter-spacing: 1.5px;
       line-height: normal; }
     .sh-experts-topbox #title-container p {
+      opacity: 0;
       padding: 10px 0;
       line-height: 16px;
       letter-spacing: 1.2px; }
@@ -83,7 +165,7 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     cursor: pointer;
     -webkit-transform: translateX(-50%);
@@ -91,4 +173,10 @@
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
-    transform: translateX(-50%); }
+    transform: translateX(-50%);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation-name: 'arrow_animation';
+    animation-name: 'arrow_animation';
+    animation-duration: 1s;
+    animation-iteration-count: infinite; }
