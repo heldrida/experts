@@ -51,6 +51,8 @@ var Debugger = {
 
 		setProperties: function () {
 
+			this.expertsMoveLock = false;
+
 			// calculate project container ratio
 			var containerRatio = 1440 / 760;
 
@@ -112,8 +114,6 @@ var Debugger = {
 				clientX: null,
 				clientY: null
 			};
-
-			this.expertsMoveLock = false;
 
 		},
 
@@ -622,20 +622,17 @@ var Debugger = {
 		expertMouseMoveHandler: function () {
 
 			if (this.expertsMoveLock) {
+				console.log('expertMouseMoveHandler : ')
 				return;
 			}
 
 			var anim = function (i, offsetX, offsetY) {
 
-				if (this.experts[i].el.scale.x === 0.5 && this.experts[i].el.scale.y === 0.5) {
+				(function (expert) {
 
-					(function (expert) {
+					TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
 
-						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
-
-					}.call(this, this.experts[i]));
-
-				}
+				}.call(this, this.experts[i]));
 
 			};
 
@@ -643,10 +640,11 @@ var Debugger = {
 
 			for (var i = 0; i < this.experts.length; i++) {
 
-
 				var expert = this.experts[i];
-				var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * 0.05);
-				var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * 0.05);
+				var quantity = expert.el.scale.x === 0.5 && expert.el.scale.y === 0.5 ? 0.05 : 0.01;
+
+				var offsetX = expert.root.x + (this.mouseMoveEvent.clientX * quantity);
+				var offsetY = expert.root.y + (this.mouseMoveEvent.clientY * quantity);
 
 				(function (i, delay, offsetX, offsetY) {
 
@@ -656,7 +654,7 @@ var Debugger = {
 
 				}.call(this, i, delay, offsetX, offsetY));
 
-				delay += 30;
+				delay += 60;
 
 			}
 
@@ -694,6 +692,8 @@ var Debugger = {
 
 		showExpertInfo: function (index) {
 
+			this.expertsMoveLock = true;
+
 			// exception handler
 			if (!this.expertActiveExceptionHandler.call(this, index)) {
 
@@ -705,9 +705,15 @@ var Debugger = {
 
 		closeNonIndexed: function (index) {
 
+			var context = this;
 			var expert = this.experts[index];
 
 			var delay = 0;
+
+			var unlock = function () {
+				this.expertsMoveLock = false;
+				console.log('closeNonIndexed > unlock expertsMoveLock:', this.expertsMoveLock);
+			};
 
 			for (var i = 0; i < this.experts.length; i++) {
 
@@ -720,11 +726,11 @@ var Debugger = {
 						setTimeout(function () {
 
 							TweenLite.to(expert.scale, 1, { x: 0.5, y: 0.5, ease: Power1.easeOut });
-							TweenLite.to(expert, 1, { alpha: 0.65, ease: Power1.easeOut });
+							TweenLite.to(expert, 1, { alpha: 0.65, ease: Power1.easeOut, onComplete: unlock.bind(this) });
 
 						}.bind(this), delay);
 
-					}(this.experts[i].el, delay));
+					}.call(this, this.experts[i].el, delay));
 
 					delay += 30;
 
@@ -734,7 +740,7 @@ var Debugger = {
 
 					(function (expert, delay) {
 
-						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut });
+						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(expert, 1, { alpha: 1 });
 
 					}(this.experts[i].el));
@@ -747,27 +753,28 @@ var Debugger = {
 
 		expertActiveExceptionHandler: function (index) {
 
+			var unlock = function () {
+				this.expertsMoveLock = false;
+				console.log('expertActiveExceptionHandler > unlock expertsMoveLock:', this.expertsMoveLock);
+			};
+
 			var resetAll = function () {
 
 				for (var i = 0; i < this.experts.length; i++) {
 
 					(function (experts) {
 
-						TweenLite.to(experts.el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
+						TweenLite.to(experts.el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(experts.el, 1, { alpha: 1, ease: Power1.easeOut });
 						TweenLite.to(experts.el, 1, { x: experts.root.x, y: experts.root.y, ease: Power1.easeOut });
 
 						experts.active = false;
 
-					}(this.experts[i]));
+					}.call(this, this.experts[i]));
 
 				}
 
-				this.expertsMoveLock = false;
-
 			};
-
-			this.expertsMoveLock = true;
 
 			// check if current active element matches the clicked index
 			for (var i = 0; i < this.experts.length; i++) {
@@ -781,13 +788,9 @@ var Debugger = {
 
 			}
 
-			this.expertsMoveLock = false;
-
 		},
 
 		expertsResetAll: function () {
-
-			this.expertsMoveLock = true;
 
 			for (var i = 0; i < this.experts.length; i++) {
 
