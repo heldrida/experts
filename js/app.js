@@ -571,8 +571,6 @@ var Debugger = {
 
 		generateParticles: function () {
 
-			console.log(this.stage.width);
-
 			for (var col = 1; col <= 3; col++) {
 
 				for (var i = 1; i <= 75; i++) {
@@ -715,7 +713,6 @@ var Debugger = {
 
 			var unlock = function () {
 				this.expertsMoveLock = false;
-				console.log('closeNonIndexed > unlock expertsMoveLock:', this.expertsMoveLock);
 			};
 
 			for (var i = 0; i < this.experts.length; i++) {
@@ -758,7 +755,6 @@ var Debugger = {
 
 			var unlock = function () {
 				this.expertsMoveLock = false;
-				console.log('expertActiveExceptionHandler > unlock expertsMoveLock:', this.expertsMoveLock);
 			};
 
 			var resetAll = function () {
