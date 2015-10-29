@@ -431,6 +431,9 @@ var Debugger = {
 			this.titleDiv = document.createElement("div");
 			var h1 = document.createElement("h1");
 			var p = document.createElement("p");
+			var elements = [];
+			elements.push(h1);
+			elements.push(p);
 
 			h1.innerHTML = "THE EXPERTS";
 			p.innerHTML = "OUR NETWORK OF EXPERTS ARE SOME OF THE MOST SORT AFTER PEOPLE IN THE INDUSTRY.<br>GIVING ADVICE OF A MULTITUDE OF SPORTS AND ACTIVITIES";
@@ -443,6 +446,12 @@ var Debugger = {
 			this.container.el.appendChild(this.titleDiv);
 
 			this.titleHandler();
+
+			setTimeout(function () {
+
+				this.titleAnimationsHandler.call(this, elements);
+
+			}.bind(this), 400);
 
 		},
 
@@ -513,14 +522,20 @@ var Debugger = {
 			var rp_ls = 1.22 / 1440;
 			var rp_p = 10 / 1440;
 			var rp_ln = 16 / 1440;
+			var h1 = this.titleDiv.querySelector('h1');
+			var p = this.titleDiv.querySelector('p');
 
 			this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
-			this.titleDiv.querySelector('h1').style.fontSize = (window.innerWidth * rh1) + 'px';
-			this.titleDiv.querySelector('h1').style.letterSpacing = (window.innerWidth * rh1_ls) + 'px';
-			this.titleDiv.querySelector('p').style.fontSize = (window.innerWidth * rp) + 'px';
-			this.titleDiv.querySelector('p').style.letterSpacing = (window.innerWidth * rp_ls) + 'px';
-			this.titleDiv.querySelector('p').style.padding = (window.innerWidth * rp_p) + 'px 0';
-			this.titleDiv.querySelector('p').style.lineHeight = (window.innerWidth * rp_ln) + 'px';
+			h1.style.fontSize = (window.innerWidth * rh1) + 'px';
+			h1.style.letterSpacing = (window.innerWidth * rh1_ls) + 'px';
+			h1.style.position = "relative";
+			h1.style.opacity = 0;
+			p.style.fontSize = (window.innerWidth * rp) + 'px';
+			p.style.letterSpacing = (window.innerWidth * rp_ls) + 'px';
+			p.style.padding = (window.innerWidth * rp_p) + 'px 0';
+			p.style.lineHeight = (window.innerWidth * rp_ln) + 'px';
+			p.style.position = "relative";
+			p.style.opacity = 0;
 
 		},
 
@@ -786,6 +801,32 @@ var Debugger = {
 				TweenLite.to(experts.el.scale, 1, { x: 1, y: 1, ease: Power1.easeOut });
 				TweenLite.to(experts.el, 1, { alpha: 1, ease: Power1.easeOut });
 				TweenLite.to(experts.el, 1, { x: experts.root.x, y: experts.root.y, ease: Power1.easeOut });
+
+			}
+
+		},
+
+		titleAnimationsHandler: function (els) {
+
+			for (var i = 0, delay = 0; i < els.length; i++) {
+
+				(function (context, el, delay) {
+
+					setTimeout(function () {
+
+						TweenLite.fromTo(el, 1.2, {
+							left: '-50px',
+							opacity: 0
+						}, {
+							left: '0px',
+							opacity: 1
+						});
+
+					}.bind(context), delay);
+
+				}(this, els[i], delay));
+
+				delay += 300;
 
 			}
 
