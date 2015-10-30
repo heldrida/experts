@@ -234,7 +234,7 @@ var Debugger = {
 				for (var i = 1; i <= total; i++) {
 
 					var expert = this.generateExpert(i);
-
+					this.insertCircle(expert, size);
 					expert.position.x = posX;
 					expert.position.y = posY;
 
