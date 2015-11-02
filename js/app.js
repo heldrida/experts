@@ -644,7 +644,8 @@ var Debugger = {
 						if (!expert.centered) {
 							expert.centered = true;
 							//this.expertsMoveLock = true;
-							this.expertMoveToCenter(expert.el);
+							//this.expertMoveToCenter(expert.el);
+							this.expertMoveToCenter(expert.el, this.expertShowTextQuote.bind(this, expert.el));
 						}
 					}
 
@@ -848,7 +849,7 @@ var Debugger = {
 
 		},
 
-		expertMoveToCenter: function (expert) {
+		expertMoveToCenter: function (expert, callback) {
 
 			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
 			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
@@ -861,6 +862,11 @@ var Debugger = {
 			});
 
 			this.orderExpertsByActiveElement(expert);
+
+
+			if (typeof callback === 'function') {
+				callback.call(this);
+			}
 
 		},
 
@@ -890,9 +896,14 @@ var Debugger = {
 
 		},
 
-		expertShowTextQuote: function () {
+		expertShowTextQuote: function (expert) {
 
+			var text = new PIXI.Text("Lorem ipsum dolloriam abus aquadoria, tu amos deana.\n Bouris musca vitti osa tals, oalese.".toUpperCase(), { font:"12px Arial", fill: "white" });
 
+			text.position.x = -this.defaultExpertSize * 2;
+			text.position.y = -this.defaultExpertSize * 0.5;
+
+			expert.addChild(text);
 
 		}
 
