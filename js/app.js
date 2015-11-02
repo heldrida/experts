@@ -115,7 +115,7 @@ var Debugger = {
 				clientY: null
 			};
 
-			this.expertScaleSmallRatio = 0.5;
+			this.expertScaleSmallRatio = 0.1;
 
 		},
 
@@ -146,7 +146,7 @@ var Debugger = {
 
 			graphics.drawCircle(size / 2, size / 2, size / 1.9);
 
-			graphics.pivot.x = graphics.pivot.y = this.expertScaleSmallRatio;
+			graphics.pivot.x = graphics.pivot.y = 0.5;
 
 			graphics.interactive = true;
 
@@ -368,8 +368,8 @@ var Debugger = {
 			sprite.position.x = size * 0.15;
 			sprite.position.y = size * 0.85;
 
-			sprite.anchor.x = this.expertScaleSmallRatio;
-			sprite.anchor.y = this.expertScaleSmallRatio;
+			sprite.anchor.x = 0.5;
+			sprite.anchor.y = 0.5;
 
 			el.addChild(sprite);
 
@@ -384,7 +384,7 @@ var Debugger = {
 			gfxLn.lineTo(size * 0.8, 0);
 			gfxLn.x = size / 2;
 			gfxLn.y = size / 2;
-			gfxLn.rotation = this.expertScaleSmallRatio; // 0 ~ 4.725
+			gfxLn.rotation = 0.5; // 0 ~ 4.725
 			el.addChild(gfxLn);
 
 			// draw circle
@@ -411,8 +411,8 @@ var Debugger = {
 			gfxIconSprite.height = size * 0.10;
 			gfxIconSprite.position.x = (size * 0.12) * 1.25;
 			gfxIconSprite.position.y = (size * 0.12) * 1.25;
-			gfxIconSprite.anchor.x = this.expertScaleSmallRatio;
-			gfxIconSprite.anchor.y = this.expertScaleSmallRatio;
+			gfxIconSprite.anchor.x = 0.5;
+			gfxIconSprite.anchor.y = 0.5;
 
 			gfxCircle.addChild(gfxIconSprite);
 
@@ -866,6 +866,7 @@ var Debugger = {
 
 			if (this.experts[activeIndex]) {
 				this.expertsContainer.setChildIndex(this.experts[activeIndex].el, this.experts.length);
+				TweenLite.to(this.experts[activeIndex].el, 0.3, { alpha: 1, ease: Power1.easeOut });
 			}
 
 		}
