@@ -197,6 +197,7 @@ var Debugger = {
 					expert.position.y = posY;
 
 					this.experts.push({
+						centered: false,
 						active: false,
 						el: expert,
 						root: {
@@ -632,9 +633,13 @@ var Debugger = {
 				(function (expert) {
 
 					if (!expert.active) {
+						expert.centered = false;
 						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
 					} else {
-						this.expertMoveToCenter(expert.el);
+						if (!expert.centered) {
+							expert.centered = true;
+							this.expertMoveToCenter(expert.el);
+						}
 					}
 
 				}.call(this, this.experts[i]));
@@ -868,6 +873,12 @@ var Debugger = {
 				this.expertsContainer.setChildIndex(this.experts[activeIndex].el, this.experts.length);
 				TweenLite.to(this.experts[activeIndex].el, 0.3, { alpha: 1, ease: Power1.easeOut });
 			}
+
+		},
+
+		expertShowTextQuote: function () {
+
+
 
 		}
 
