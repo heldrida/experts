@@ -117,6 +117,8 @@ var Debugger = {
 
 			this.expertScaleSmallRatio = 0.1;
 
+			this.defaultExpertSize = null;
+
 		},
 
 		startTicker: function () {
@@ -171,6 +173,7 @@ var Debugger = {
 			if (total > max) {
 
 				size = (this.container.width * 0.9) / (max * 2);
+				this.defaultExpertSize = size;
 				offsetY = (((this.container.height * 0.6) / 2) / (max * 2));
 				offsetX = (size * max) / (max - 1);
 				rnd = offsetY * Math.floor(Math.random() * max) + 1;
@@ -226,6 +229,7 @@ var Debugger = {
 			} else {
 
 				size = (this.container.width * 0.9) / 10;
+				this.defaultExpertSize = size;
 				offsetY = (((this.container.height * 0.6) - size) / (max - 1)); // calculated by subtracting the last element, remaining height and the number of elements to even
  				offsetX = (((this.container.width * 0.9) - size) / (total - 1)) - size;//225;
 				rnd = offsetY * Math.floor(Math.random() * total) + 1;
@@ -728,6 +732,9 @@ var Debugger = {
 
 			for (var i = 0; i < this.experts.length; i++) {
 
+				// reset
+				this.experts[i].active = this.experts[i].centered = false;
+
 				if (i !== index) {
 
 					this.experts[i].active = false;
@@ -843,8 +850,8 @@ var Debugger = {
 
 		expertMoveToCenter: function (expert) {
 
-			var x = this.expertsContainer.width / 2 - (expert.width / 2);
-			var y = this.expertsContainer.height / 2 - (expert.height / 2);
+			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
+			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
 
 			//TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut });
 
@@ -858,6 +865,8 @@ var Debugger = {
 		},
 
 		orderExpertsByActiveElement: function () {
+
+			console.log('orderExpertsByActiveElement ()');
 
 			var activeIndex = 0;
 
