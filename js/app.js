@@ -631,7 +631,11 @@ var Debugger = {
 
 				(function (expert) {
 
-					TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
+					if (!expert.active) {
+						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
+					} else {
+						this.expertMoveToCenter(expert.el);
+					}
 
 				}.call(this, this.experts[i]));
 
@@ -742,6 +746,7 @@ var Debugger = {
 
 						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(expert, 1, { alpha: 1 });
+						context.expertMoveToCenter.call(context, expert);
 
 					}(this.experts[i].el));
 
@@ -825,6 +830,42 @@ var Debugger = {
 
 				delay += 300;
 
+			}
+
+		},
+
+		expertMoveToCenter: function (expert) {
+
+			var x = this.expertsContainer.width / 2 - (expert.width / 2);
+			var y = this.expertsContainer.height / 2 - (expert.height / 2);
+
+			//TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut });
+
+			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut });
+
+			this.orderExpertsByActiveElement(expert);
+
+		},
+
+		orderExpertsByActiveElement: function () {
+
+			var activeIndex = 0;
+
+			for (var i = 0; i < this.experts.length - 1; i++) {
+				if (this.experts[i].active) {
+					activeIndex = this.expertsContainer.getChildIndex(this.experts[i].el);
+				}
+			}
+
+			for (var i = 0; i < this.experts.length; i++) {
+				if (!this.experts[i].active) {
+					this.expertsContainer.setChildIndex(this.experts[i].el, i);
+				}
+
+			}
+
+			if (this.experts[activeIndex]) {
+				this.expertsContainer.setChildIndex(this.experts[activeIndex].el, this.experts.length);
 			}
 
 		}
