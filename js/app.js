@@ -636,8 +636,10 @@ var Debugger = {
 						expert.centered = false;
 						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
 					} else {
+						console.log('expert.centered: ', expert.centered);
 						if (!expert.centered) {
 							expert.centered = true;
+							//this.expertsMoveLock = true;
 							this.expertMoveToCenter(expert.el);
 						}
 					}
@@ -846,7 +848,10 @@ var Debugger = {
 
 			//TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut });
 
-			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut });
+			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
+					this.expertsMoveLock = false;
+				}.bind(this)
+			});
 
 			this.orderExpertsByActiveElement(expert);
 
