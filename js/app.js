@@ -45,7 +45,6 @@ var Debugger = {
 
 			this.expertsAnimShow.call(this);
 
-
 			this.startTicker.call(this);
 		},
 
@@ -317,7 +316,7 @@ var Debugger = {
 		insertCircleLine: function (el, size) {
 
 			var graphics = new PIXI.Graphics();
-			graphics.lineStyle (this.defaultLineWidth, 0x3b81ff);
+			graphics.lineStyle(this.defaultLineWidth, 0x3b81ff);
 			graphics.drawCircle(size, size, size / 2);
 			graphics.x = -size/2;
 			graphics.y = -size/2;
@@ -925,6 +924,36 @@ var Debugger = {
 
 			this.expertQuoteDiv.style.top = y + 'px';
 			this.expertQuoteDiv.style.left = x + 'px';
+
+			this.drawLine.call(this, index, x, y);
+
+		},
+
+		drawLine: function (index, x, y) {
+
+			var line = new PIXI.Graphics();
+
+			line.lineStyle(1, 0xFFFFFF, 1);
+
+			line.moveTo(this.defaultExpertSize / 2, this.defaultExpertSize / 2);
+
+			line.lineTo(-40, -20);
+
+ 			line.endFill();
+
+ 			// circle tip
+			// draw circle
+			var gfxCircle = new PIXI.Graphics();
+			gfxCircle.beginFill(0xffffff);
+			gfxCircle.lineStyle(this.defaultLineWidth, 0xffffff);
+			gfxCircle.drawCircle(this.defaultExpertSize * 0.05, this.defaultExpertSize * 0.05, (this.defaultExpertSize * 0.05) / 2);
+			gfxCircle.x = -(40 + this.defaultExpertSize * 0.05);
+			gfxCircle.y = -(20 + this.defaultExpertSize * 0.05);
+
+			// attach as line child
+			line.addChild(gfxCircle);
+
+			this.experts[index].el.addChild(line);
 
 		}
 
