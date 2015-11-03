@@ -25,7 +25,6 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.7/pixi.min.js"></script>
-		<script src="js/vendor/pixi-multistyle-text/pixi-multistyle-text.min.js"></script>
 		<script src="js/app.js"></script>
 
 	</body>

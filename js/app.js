@@ -908,7 +908,7 @@ var Debugger = {
 			this.expertQuoteDiv = document.createElement('div');
 			this.expertQuoteDiv.setAttribute('id', 'quoteWrp');
 			var p = document.createElement('p');
-			p.innerHTML = "Lorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori, saquisi oranmbuan twango.";
+			p.innerHTML = "Leorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori, saquisi oranmbuan twango.";
 			this.expertQuoteDiv.appendChild(p);
 
 			var span = document.createElement('span');
@@ -919,13 +919,20 @@ var Debugger = {
 			this.container.el.appendChild(this.expertQuoteDiv);
 
 			// center element
-			var x = ((this.container.width / 2) - this.defaultExpertSize) - this.expertQuoteDiv.offsetWidth,
-				y = ((this.container.height / 2) - this.defaultExpertSize);
+			var positionQuote = function () {
+				var size = (window.innerWidth * 0.9) / 10;
+				x = ((window.innerWidth / 2) - size) - this.expertQuoteDiv.offsetWidth;
+				y = ((window.innerWidth * 0.53) / 2) - this.expertQuoteDiv.offsetHeight;
 
-			this.expertQuoteDiv.style.top = y + 'px';
-			this.expertQuoteDiv.style.left = x + 'px';
+				this.expertQuoteDiv.style.left = x + 'px';
+				this.expertQuoteDiv.style.top = y + 'px';
+			};
+
+			positionQuote.call(this);
 
 			this.drawLine.call(this, index, x, y);
+
+			window.addEventListener('resize', positionQuote.bind(this));
 
 		},
 
@@ -933,7 +940,7 @@ var Debugger = {
 
 			var line = new PIXI.Graphics();
 
-			line.lineStyle(1, 0xFFFFFF, 1);
+			line.lineStyle(1, 0x3b81ff, 1);
 
 			line.moveTo(this.defaultExpertSize / 2, this.defaultExpertSize / 2);
 
@@ -944,8 +951,8 @@ var Debugger = {
  			// circle tip
 			// draw circle
 			var gfxCircle = new PIXI.Graphics();
-			gfxCircle.beginFill(0xffffff);
-			gfxCircle.lineStyle(this.defaultLineWidth, 0xffffff);
+			gfxCircle.beginFill(0x3b81ff);
+			gfxCircle.lineStyle(this.defaultLineWidth, 0x3b81ff);
 			gfxCircle.drawCircle(this.defaultExpertSize * 0.05, this.defaultExpertSize * 0.05, (this.defaultExpertSize * 0.05) / 2);
 			gfxCircle.x = -(40 + this.defaultExpertSize * 0.05);
 			gfxCircle.y = -(20 + this.defaultExpertSize * 0.05);

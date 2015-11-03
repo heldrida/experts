@@ -190,16 +190,18 @@
     width: 30vw;
     height: auto;
     text-align: right;
-    background-color: rgba(255, 55, 55, 0.2); }
+    font-size: 1vw;
+    line-height: 1.1vw; }
     .sh-experts-topbox #quoteWrp p {
-      font-size: 21px;
+      font-size: 1.5vw;
+      line-height: 1.8vw;
       color: #3b81ff;
       font-style: italic; }
       .sh-experts-topbox #quoteWrp p:before,
       .sh-experts-topbox #quoteWrp p:after {
         content: '"'; }
     .sh-experts-topbox #quoteWrp span {
-      margin-top: 5px;
+      margin-top: 0.75vw;
       display: block;
       font-style: normal;
       font-weight: 200; }
