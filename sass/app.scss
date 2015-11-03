@@ -12,7 +12,8 @@
 		cursor: pointer !important;
 	}
 
-	p {
+	p,
+	span {
 		font-family: 'OpenSans-Light', arial, sans-serif;
 	}
 
@@ -68,5 +69,34 @@
 		animation-duration: 1.1s;
 		animation-iteration-count: infinite;
 		animation-timing-function: ease-out;
+	}
+
+	#quoteWrp {
+		color: #fff;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 30vw;
+		height: auto;
+		text-align: right;
+		background-color: rgba(255, 55, 55, 0.2);
+
+		p {
+			font-size: 21px;
+			color: #3b81ff;
+			font-style: italic;
+
+			&:before,
+			&:after {
+				content: '"';
+			}
+		}
+
+		span {
+			margin-top: 5px;
+			display: block;
+			font-style: normal;
+			font-weight: 200;
+		}
 	}
 }

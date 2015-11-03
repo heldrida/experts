@@ -203,6 +203,10 @@ var Debugger = {
 						centered: false,
 						active: false,
 						el: expert,
+						hasText: {
+							data: false,
+							pos: { x: null, y: null }
+						},
 						root: {
 							x: posX,
 							y: posY
@@ -645,7 +649,9 @@ var Debugger = {
 							expert.centered = true;
 							//this.expertsMoveLock = true;
 							//this.expertMoveToCenter(expert.el);
-							this.expertMoveToCenter(expert.el, this.expertShowTextQuote.bind(this, expert.el));
+							if (!expert.hasText.data) {
+								this.expertMoveToCenter(expert.el, this.expertShowTextQuote.bind(this, i));
+							}
 						}
 					}
 
@@ -858,15 +864,14 @@ var Debugger = {
 
 			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
 					this.expertsMoveLock = false;
+
+					if (typeof callback === 'function') {
+						callback.call(this);
+					}
 				}.bind(this)
 			});
 
 			this.orderExpertsByActiveElement(expert);
-
-
-			if (typeof callback === 'function') {
-				callback.call(this);
-			}
 
 		},
 
@@ -896,14 +901,30 @@ var Debugger = {
 
 		},
 
-		expertShowTextQuote: function (expert) {
+		expertShowTextQuote: function (index) {
 
-			var text = new PIXI.Text("Lorem ipsum dolloriam abus aquadoria, tu amos deana.\n Bouris musca vitti osa tals, oalese.".toUpperCase(), { font:"12px Arial", fill: "white" });
+			console.log('expertShowTextQuote');
 
-			text.position.x = -this.defaultExpertSize * 2;
-			text.position.y = -this.defaultExpertSize * 0.5;
+			// create a new div element
+			this.expertQuoteDiv = document.createElement('div');
+			this.expertQuoteDiv.setAttribute('id', 'quoteWrp');
+			var p = document.createElement('p');
+			p.innerHTML = "Lorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori, saquisi oranmbuan twango.";
+			this.expertQuoteDiv.appendChild(p);
 
-			expert.addChild(text);
+			var span = document.createElement('span');
+			span.innerHTML = "Borum Scuba | Foriamblu";
+
+			this.expertQuoteDiv.appendChild(span);
+
+			this.container.el.appendChild(this.expertQuoteDiv);
+
+			// center element
+			var x = ((this.container.width / 2) - this.defaultExpertSize) - this.expertQuoteDiv.offsetWidth,
+				y = ((this.container.height / 2) - this.defaultExpertSize);
+
+			this.expertQuoteDiv.style.top = y + 'px';
+			this.expertQuoteDiv.style.left = x + 'px';
 
 		}
 
