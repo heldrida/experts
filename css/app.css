@@ -191,17 +191,17 @@
     height: auto;
     text-align: right;
     font-size: 1em;
-    line-height: 1.5em;
-    background-color: red; }
+    line-height: 1.5em; }
     .sh-experts-topbox #quoteWrp p {
-      font-size: 1.2em;
-      line-height: 1.5em;
+      font-size: 1.4em;
+      line-height: 1.2em;
       color: #3b81ff;
       font-style: italic; }
       .sh-experts-topbox #quoteWrp p:before,
       .sh-experts-topbox #quoteWrp p:after {
         content: '"'; }
     .sh-experts-topbox #quoteWrp span {
+      margin-top: 5px;
       font-size: 1em;
       line-height: 1.3em;
       display: block;

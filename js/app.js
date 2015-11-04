@@ -908,7 +908,7 @@ var Debugger = {
 			this.expertQuoteDiv = document.createElement('div');
 			this.expertQuoteDiv.setAttribute('id', 'quoteWrp');
 			var p = document.createElement('p');
-			p.innerHTML = "Leorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori, saquisi oranmbuan twango.";
+			p.innerHTML = "Leorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori.";
 			this.expertQuoteDiv.appendChild(p);
 
 			var span = document.createElement('span');
@@ -929,12 +929,13 @@ var Debugger = {
 
 				var size = (window.innerWidth * 0.9) / 10;
 				x = ((window.innerWidth / 2) - size) - this.expertQuoteDiv.offsetWidth;
-				y = (((window.innerWidth * 0.53)) - this.expertQuoteDiv.offsetHeight) / 2;
+				y = (window.innerWidth * 0.45) / 2;
 
-				//y = y - (this.expertQuoteDiv.offsetHeight / 2);
+				y = y - (this.expertQuoteDiv.offsetHeight * 0.5);
 
 				this.expertQuoteDiv.style.left = x + 'px';
 				this.expertQuoteDiv.style.top = y + 'px';
+
 			};
 
 			positionQuote.call(this);

@@ -81,11 +81,11 @@
 		text-align: right;
 		font-size: 1em;
 		line-height: 1.5em;
-		background-color: red;
+		//background-color: red;
 
 		p {
-			font-size: 1.2em;
-			line-height: 1.5em;
+			font-size: 1.4em;
+			line-height: 1.2em;
 			color: #3b81ff;
 			font-style: italic;
 
@@ -96,6 +96,7 @@
 		}
 
 		span {
+			margin-top: 5px;
 			font-size: 1em;
 			line-height: 1.3em;
 			display: block;
