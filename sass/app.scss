@@ -76,15 +76,16 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 30vw;
+		width: 30%;
 		height: auto;
 		text-align: right;
-		font-size: 1vw;
-		line-height: 1.1vw;
+		font-size: 1em;
+		line-height: 1.5em;
+		background-color: red;
 
 		p {
-			font-size: 1.5vw;
-			line-height: 1.8vw;
+			font-size: 1.2em;
+			line-height: 1.5em;
 			color: #3b81ff;
 			font-style: italic;
 
@@ -95,7 +96,8 @@
 		}
 
 		span {
-			margin-top: 0.75vw;
+			font-size: 1em;
+			line-height: 1.3em;
 			display: block;
 			font-style: normal;
 			font-weight: 200;

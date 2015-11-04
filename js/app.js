@@ -920,9 +920,18 @@ var Debugger = {
 
 			// center element
 			var positionQuote = function () {
+
+				//this.expertQuoteDiv.style.width = "auto"; //this.getExpertSize() * 4 + "px";
+				//this.expertQuoteDiv.style.height = "auto";
+
+				this.expertQuoteDiv.style.fontSize = this.getExpertSize() * 0.125 + "px";
+				this.expertQuoteDiv.style.lineHeight = this.getExpertSize() * 0.15 + "px";
+
 				var size = (window.innerWidth * 0.9) / 10;
 				x = ((window.innerWidth / 2) - size) - this.expertQuoteDiv.offsetWidth;
-				y = ((window.innerWidth * 0.53) / 2) - this.expertQuoteDiv.offsetHeight;
+				y = (((window.innerWidth * 0.53)) - this.expertQuoteDiv.offsetHeight) / 2;
+
+				//y = y - (this.expertQuoteDiv.offsetHeight / 2);
 
 				this.expertQuoteDiv.style.left = x + 'px';
 				this.expertQuoteDiv.style.top = y + 'px';
@@ -938,13 +947,14 @@ var Debugger = {
 
 		drawLine: function (index, x, y) {
 
+			var size = this.getExpertSize();
 			var line = new PIXI.Graphics();
 
 			line.lineStyle(1, 0x3b81ff, 1);
 
-			line.moveTo(this.defaultExpertSize / 2, this.defaultExpertSize / 2);
+			line.moveTo(size  / 2, size / 2);
 
-			line.lineTo(-40, -20);
+			line.lineTo(-(size * 0.4), -(size * 0.2));
 
  			line.endFill();
 
@@ -953,15 +963,19 @@ var Debugger = {
 			var gfxCircle = new PIXI.Graphics();
 			gfxCircle.beginFill(0x3b81ff);
 			gfxCircle.lineStyle(this.defaultLineWidth, 0x3b81ff);
-			gfxCircle.drawCircle(this.defaultExpertSize * 0.05, this.defaultExpertSize * 0.05, (this.defaultExpertSize * 0.05) / 2);
-			gfxCircle.x = -(40 + this.defaultExpertSize * 0.05);
-			gfxCircle.y = -(20 + this.defaultExpertSize * 0.05);
+			gfxCircle.drawCircle(size * 0.05, size * 0.05, (size * 0.05) / 2);
+			gfxCircle.x = -((size * 0.4) + size * 0.05);
+			gfxCircle.y = -((size * 0.2) + size * 0.05);
 
 			// attach as line child
 			line.addChild(gfxCircle);
 
 			this.experts[index].el.addChild(line);
 
+		},
+
+		getExpertSize: function () {
+			return (window.innerWidth * 0.9) / 10;
 		}
 
 	};
