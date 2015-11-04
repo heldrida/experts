@@ -743,6 +743,8 @@ var Debugger = {
 
 				if (i !== index) {
 
+					console.log('case A');
+
 					this.experts[i].active = false;
 
 					(function (expert, delay) {
@@ -760,7 +762,13 @@ var Debugger = {
 
 				} else {
 
+					console.log('case B');
+
 					this.experts[index].active = true;
+
+					if (this.expertQuoteDiv) {
+						this.closeQuoteFirst.call(this);
+					}
 
 					(function (expert, delay) {
 
@@ -805,7 +813,7 @@ var Debugger = {
 
 				if (this.experts[i].active && i === index) {
 
-					resetAll.call(this);
+					this.closeQuoteFirst(resetAll.bind(this));
 
 					return true;
 				}
@@ -977,6 +985,23 @@ var Debugger = {
 
 		getExpertSize: function () {
 			return (window.innerWidth * 0.9) / 10;
+		},
+
+		closeQuoteFirst: function (callback) {
+
+			TweenLite.to(this.expertQuoteDiv, 0.3, { scale: 0, ease: Power1.easeOut, onComplete: function () {
+
+					this.expertQuoteDiv.parentNode.removeChild(this.expertQuoteDiv);
+
+					if (typeof callback === "function") {
+
+						callback.call(this);
+
+					}
+
+				}.bind(this)
+			});
+
 		}
 
 	};
