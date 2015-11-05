@@ -166,7 +166,7 @@ var Debugger = {
 
 			this.experts = [];
 
-			total  = 10;
+			total = 10;
 			max = 5;
 
 			if (total > max) {
@@ -507,7 +507,7 @@ var Debugger = {
 
 						(function (i) {
 
-							TweenLite.to(expert[i].el, 0.3, { alpha: 0.75, ease: Power1.easeOut });
+							TweenLite.to(expert[i].el, 0.3, { alpha: 0.85, ease: Power1.easeOut });
 
 						}(i));
 
