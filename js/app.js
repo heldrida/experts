@@ -206,6 +206,9 @@ var Debugger = {
 							data: false,
 							pos: { x: null, y: null }
 						},
+						quote: {
+							line: null
+						},
 						root: {
 							x: posX,
 							y: posY
@@ -247,8 +250,16 @@ var Debugger = {
 					expert.position.y = posY;
 
 					this.experts.push({
+						centered: false,
 						active: false,
 						el: expert,
+						hasText: {
+							data: false,
+							pos: { x: null, y: null }
+						},
+						quote: {
+							line: null
+						},
 						root: {
 							x: posX,
 							y: posY
@@ -745,6 +756,7 @@ var Debugger = {
 
 					console.log('case A');
 
+					this.shrinkLine(i);
 					this.experts[i].active = false;
 
 					(function (expert, delay) {
@@ -767,7 +779,7 @@ var Debugger = {
 					this.experts[index].active = true;
 
 					if (this.expertQuoteDiv) {
-						this.closeQuoteFirst.call(this);
+						this.closeQuoteFirst.call(this, index);
 					}
 
 					(function (expert, delay) {
@@ -792,6 +804,8 @@ var Debugger = {
 
 			var resetAll = function () {
 
+				console.log('resetAll');
+
 				for (var i = 0; i < this.experts.length; i++) {
 
 					(function (experts) {
@@ -813,7 +827,7 @@ var Debugger = {
 
 				if (this.experts[i].active && i === index) {
 
-					this.closeQuoteFirst(resetAll.bind(this));
+					this.closeQuoteFirst(i, resetAll.bind(this));
 
 					return true;
 				}
@@ -986,9 +1000,15 @@ var Debugger = {
 			line.addChild(gfxCircle);
 
 			//this.experts[index].el.addChild(line);
-			this.experts[index].el.addChildAt(line, 0);
+			if (this.experts[index]) {
 
-			TweenLite.to(gfxCircle, 0.4, { x: -((size * 0.4) + size * 0.05), y: -((size * 0.2) + size * 0.05), ease: Power1.easeOut, onUpdate:drawLineHelper, onComplete: callback.bind(this) });
+	 			this.experts[index].el.addChildAt(line, 0);
+	 			this.experts[index].quote.line = line;
+	 			console.log('this.experts[' + index +'].quote.line: ', this.experts[index].quote.line);
+
+				TweenLite.to(gfxCircle, 0.4, { x: -((size * 0.4) + size * 0.05), y: -((size * 0.2) + size * 0.05), ease: Power1.easeOut, onUpdate:drawLineHelper, onComplete: callback.bind(this) });
+
+			}
 
 			function drawLineHelper() {
 				line.lineTo(gfxCircle.x + (size * 0.05), gfxCircle.y + (size * 0.05));
@@ -1000,20 +1020,76 @@ var Debugger = {
 			return (window.innerWidth * 0.9) / 10;
 		},
 
-		closeQuoteFirst: function (callback) {
+		closeQuoteFirst: function (index, callback) {
 
 			TweenLite.to(this.expertQuoteDiv, 0.3, { scale: 0, ease: Power1.easeOut, onComplete: function () {
 
-					this.expertQuoteDiv.parentNode.removeChild(this.expertQuoteDiv);
+					if (this.expertQuoteDiv.parentNode) {
+						this.expertQuoteDiv.parentNode.removeChild(this.expertQuoteDiv);
+						this.shrinkLine(index, callback ? callback.bind(this) : false);
+					}
 
+					/*
 					if (typeof callback === "function") {
 
 						callback.call(this);
 
 					}
+					*/
 
 				}.bind(this)
 			});
+
+		},
+
+		resetExpertLines: function () {
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				if (this.experts[i].quote.line) {
+
+					this.shrinkLine(i, false);
+
+				}
+
+			}
+
+		},
+
+		shrinkLine: function (index, callback) {
+
+			var size = this.getExpertSize();
+
+			// mask
+			var lineMask = new PIXI.Graphics();
+			lineMask.lineStyle(5, 0x000000, 1);
+
+			if (!this.experts[index].quote.line) {
+				return false;
+			}
+
+			var circle = this.experts[index].quote.line.children[0];
+
+			var line = this.experts[index].quote.line;
+
+			line.moveTo(size  / 2, size / 2);
+
+			lineMask.moveTo(circle.x, circle.y);
+
+			line.addChild(lineMask);
+
+			TweenLite.to(circle, 1, { x: size / 2, y: size / 2, ease: Power1.easeOut, onUpdate: drawLineHelper, onComplete: function () {
+
+					callback ? callback.call(this) : null;
+
+					this.experts[index].el.removeChild(line);
+
+				}.bind(this)
+			});
+
+			function drawLineHelper() {
+				lineMask.lineTo(circle.x, circle.y);
+			}
 
 		}
 
