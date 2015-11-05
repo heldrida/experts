@@ -924,6 +924,8 @@ var Debugger = {
 
 			this.expertQuoteDiv.appendChild(span);
 
+			this.expertQuoteDiv.style.opacity = 0;
+
 			this.container.el.appendChild(this.expertQuoteDiv);
 
 			// center element
@@ -948,13 +950,16 @@ var Debugger = {
 
 			positionQuote.call(this);
 
-			this.drawLine.call(this, index, x, y);
+			// draw the line and then show the quote
+			this.drawLine.call(this, index, x, y, function () {
+				TweenLite.to(this.expertQuoteDiv, 0.4, { opacity: 1, ease: Power1.easeOut, onComplete: this.drawLine.bind(this, [index, x, y]) });
+			}.bind(this));
 
 			window.addEventListener('resize', positionQuote.bind(this));
 
 		},
 
-		drawLine: function (index, x, y) {
+		drawLine: function (index, x, y, callback) {
 
 			var size = this.getExpertSize();
 			var line = new PIXI.Graphics();
@@ -963,7 +968,7 @@ var Debugger = {
 
 			line.moveTo(size  / 2, size / 2);
 
-			line.lineTo(-(size * 0.4), -(size * 0.2));
+			//line.lineTo(-(size * 0.4), -(size * 0.2));
 
  			line.endFill();
 
@@ -973,13 +978,21 @@ var Debugger = {
 			gfxCircle.beginFill(0x3b81ff);
 			gfxCircle.lineStyle(this.defaultLineWidth, 0x3b81ff);
 			gfxCircle.drawCircle(size * 0.05, size * 0.05, (size * 0.05) / 2);
-			gfxCircle.x = -((size * 0.4) + size * 0.05);
-			gfxCircle.y = -((size * 0.2) + size * 0.05);
+			//gfxCircle.x = -((size * 0.4) + size * 0.05);
+			//gfxCircle.y = -((size * 0.2) + size * 0.05);
+			gfxCircle.x = gfxCircle.y = size / 2;
 
 			// attach as line child
 			line.addChild(gfxCircle);
 
-			this.experts[index].el.addChild(line);
+			//this.experts[index].el.addChild(line);
+			this.experts[index].el.addChildAt(line, 0);
+
+			TweenLite.to(gfxCircle, 0.4, { x: -((size * 0.4) + size * 0.05), y: -((size * 0.2) + size * 0.05), ease: Power1.easeOut, onUpdate:drawLineHelper, onComplete: callback.bind(this) });
+
+			function drawLineHelper() {
+				line.lineTo(gfxCircle.x + (size * 0.05), gfxCircle.y + (size * 0.05));
+			}
 
 		},
 

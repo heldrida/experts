@@ -5,6 +5,7 @@
 
 	https://www.npmjs.com/package/pixi-multistyle-text
 
+	http://www.snorkl.tv/2011/04/tweenlite-meets-flash-drawing-api-for-animated-line-drawing-fun/
 
 	How i can change zIndex of elements?
 
