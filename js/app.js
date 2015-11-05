@@ -25,6 +25,8 @@ var Debugger = {
 	 */
     var ExpertsTopbox = function () {
 
+    	this.getExpertsData();
+
     	// todo: get data from API or json file in this case
     	// then set `init` as the callback
     	this.init();
@@ -1090,6 +1092,33 @@ var Debugger = {
 			function drawLineHelper() {
 				lineMask.lineTo(circle.x, circle.y);
 			}
+
+		},
+
+		getExpertsData: function () {
+
+			var url = 'data/data-experts.json';
+
+			// compatible with IE7+, Firefox, Chrome, Opera, Safari
+			var xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+
+				if (xhr.readyState == 4 && xhr.status == 200) {
+
+					console.log('xhr.responseText: ', xhr.responseText);
+
+					var expertsData = JSON.parse(xhr.responseText);
+
+					console.log('expertsData.experts[1].name: ', expertsData.experts[1].name);
+
+				}
+
+			};
+
+			xhr.open("GET", url, true);
+
+			xhr.send();
 
 		}
 

@@ -1,0 +1,44 @@
+{
+	"experts": [
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		},
+		{
+			"name": "Foo bar",
+			"img": "img/darth-vader.jpg"
+		}
+	]
+}

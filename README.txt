@@ -17,3 +17,8 @@
 		http://www.angelcode.com/products/bmfont/
 
 		http://greensock.com/ease-visualizer
+
+
+	json editor:
+
+		http://www.danstools.com/json-editor/
