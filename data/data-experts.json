@@ -3,52 +3,62 @@
 		{
 			"name": "Foo bar",
 			"img": "data/person01.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum rem, maiores quaerat quia dolorum quas nam doloribus."
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person02.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Sirium lorem ipsum dolor sit amet, consectetur adipisicing elit."
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person03.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Sirium lorem ipsum dolor sit amet, consectetur adipisicing elit. Abus adipisicing elit salianto, atrapa arrivetta mocasa falare mucco potuse."
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person04.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Dolor sit amet, consectetur adipisicing elit. Abus adipisicing foliarianapoli sta custa."
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person05.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Dolor sit amet, consece tetucing elit. Abus adipisicing foliarianapoli sta custa."
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person06.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Reta amet, consece tetucing elit. Abus adipisicing foliarianapoli poddiski saso unatrova"
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person07.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Reta amet, consece tetuli poddiski saso unatrova"
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person08.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Reta amet, consece tetuli poddiski saso unatrova, doinda poliantra machupitcha as amet, consece tetuli poddiski saso unatrova, doinda poliantra machupitcha as"
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person09.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Argumba doi roiter panta consece tetuli poddiski saso unatrova, doinda poliantra machupitcha as amet conssaso unatrova, doinda poliantra macs"
 		},
 		{
 			"name": "Foo bar",
 			"img": "data/person10.jpg",
-			"icon": "data/icon-info.png?20151106126850"
+			"icon": "data/icon-info.png?20151106126850",
+			"quote": "Rece teddiski saso unatrova, doinda poliantra machupitcha as amet conssaso unatrova, doinda poliantra macs"
 		}
 	]
 }

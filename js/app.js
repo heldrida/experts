@@ -926,13 +926,11 @@ var Debugger = {
 
 		expertShowTextQuote: function (index) {
 
-			console.log('expertShowTextQuote');
-
 			// create a new div element
 			this.expertQuoteDiv = document.createElement('div');
 			this.expertQuoteDiv.setAttribute('id', 'quoteWrp');
 			var p = document.createElement('p');
-			p.innerHTML = "Leorem ipsum dollorioum abusil acotori, saquisi oranmbuan twango, orem ipsum dollorioum abusil acotori.";
+			p.innerHTML = this.expertsData[index].quote;
 			this.expertQuoteDiv.appendChild(p);
 
 			var span = document.createElement('span');
