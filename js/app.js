@@ -25,17 +25,17 @@ var Debugger = {
 	 */
     var ExpertsTopbox = function () {
 
-    	this.getExpertsData(this.init.bind(this));
+		this.getExpertsData(this.init.bind(this));
 
     };
 
 	ExpertsTopbox.prototype = {
 
-		init: function (expertsData) {
+		init: function (data) {
 
 			//Debugger.log('init!');
 
-			this.setProperties(expertsData);
+			this.setProperties(data);
 
 			this.placeExpertsOnStage.call(this);
 
@@ -46,10 +46,10 @@ var Debugger = {
 			this.startTicker.call(this);
 		},
 
-		setProperties: function (expertsData) {
+		setProperties: function (data) {
 
-			this.expertsData = expertsData;
-			console.log('this.expertsData', this.expertsData);
+			this.expertsData = data;
+
 			this.expertsMoveLock = false;
 
 			// calculate project container ratio
@@ -139,6 +139,8 @@ var Debugger = {
 
 		generateExpert: function (index) {
 
+			console.log('index', index);
+
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
@@ -166,7 +168,7 @@ var Debugger = {
 
 			this.experts = [];
 
-			total = 10;
+			total = this.expertsData.length;
 			max = 5;
 
 			if (total > max) {
@@ -180,7 +182,7 @@ var Debugger = {
 				posY = rnd;
 				center = ((this.container.height * 0.6) / 2);
 
-				for (var i = 0; i < this.expertsData.length; i++) {
+				for (var i = 1; i <= total; i++) {
 
 					var expert = this.generateExpert(i);
 
@@ -242,7 +244,7 @@ var Debugger = {
 				posX = 0;
 				posY = 0;
 
-				for (var i = 1; i <= this.expertsData.length; i++) {
+				for (var i = 1; i <= total; i++) {
 
 					var expert = this.generateExpert(i);
 					this.insertCircle(expert, size, i);
@@ -310,21 +312,21 @@ var Debugger = {
 
 			}, true);
 
-			img.src = "img/darth-vader.jpg";
-			console.log('index', index);
-			//img.src = this.expertsData[index].img;
+			img.src = this.expertsData[index - 1].img;
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
 			this.insertLine(el, size);
 			el.addChild(sprite);
 
+
 			this.insertCircleLine(el, size, index);
 			this.insertInfoCircle(el, size, index);
 
+
 		},
 
-		insertCircleLine: function (el, size) {
+		insertCircleLine: function (el, size, index) {
 
 			var graphics = new PIXI.Graphics();
 			graphics.lineStyle(this.defaultLineWidth, 0x3b81ff);
@@ -337,7 +339,7 @@ var Debugger = {
 
 		insertInfoCircle: function (el, size, index) {
 
-			var sprite = PIXI.Sprite.fromImage(this.expertsData[index].icon);
+			var sprite = PIXI.Sprite.fromImage(this.expertsData[index - 1].icon);
 
 			sprite.width = size * 0.25;
 			sprite.height = size * 0.25;
