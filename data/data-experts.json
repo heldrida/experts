@@ -2,43 +2,53 @@
 	"experts": [
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person01.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person02.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person03.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person04.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person05.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person06.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person07.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person08.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person09.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		},
 		{
 			"name": "Foo bar",
-			"img": "img/darth-vader.jpg"
+			"img": "data/person10.jpg",
+			"icon": "data/icon-info.png?20151106126850"
 		}
 	]
 }

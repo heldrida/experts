@@ -25,21 +25,17 @@ var Debugger = {
 	 */
     var ExpertsTopbox = function () {
 
-    	this.getExpertsData();
-
-    	// todo: get data from API or json file in this case
-    	// then set `init` as the callback
-    	this.init();
+    	this.getExpertsData(this.init.bind(this));
 
     };
 
 	ExpertsTopbox.prototype = {
 
-		init: function () {
+		init: function (expertsData) {
 
 			//Debugger.log('init!');
 
-			this.setProperties();
+			this.setProperties(expertsData);
 
 			this.placeExpertsOnStage.call(this);
 
@@ -50,8 +46,10 @@ var Debugger = {
 			this.startTicker.call(this);
 		},
 
-		setProperties: function () {
+		setProperties: function (expertsData) {
 
+			this.expertsData = expertsData;
+			console.log('this.expertsData', this.expertsData);
 			this.expertsMoveLock = false;
 
 			// calculate project container ratio
@@ -182,11 +180,11 @@ var Debugger = {
 				posY = rnd;
 				center = ((this.container.height * 0.6) / 2);
 
-				for (var i = 1; i <= total; i++) {
+				for (var i = 0; i < this.expertsData.length; i++) {
 
 					var expert = this.generateExpert(i);
 
-					this.insertCircle(expert, size);
+					this.insertCircle(expert, size, i);
 
 					// each row has a max of X elements,
 					// reset the posX and move to second row
@@ -244,10 +242,10 @@ var Debugger = {
 				posX = 0;
 				posY = 0;
 
-				for (var i = 1; i <= total; i++) {
+				for (var i = 1; i <= this.expertsData.length; i++) {
 
 					var expert = this.generateExpert(i);
-					this.insertCircle(expert, size);
+					this.insertCircle(expert, size, i);
 					expert.position.x = posX;
 					expert.position.y = posY;
 
@@ -282,7 +280,7 @@ var Debugger = {
 
 		},
 
-		insertCircle: function (el, size) {
+		insertCircle: function (el, size, index) {
 
 			//Debugger.log('inserCircle call()');
 
@@ -313,16 +311,16 @@ var Debugger = {
 			}, true);
 
 			img.src = "img/darth-vader.jpg";
+			console.log('index', index);
+			//img.src = this.expertsData[index].img;
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
 			this.insertLine(el, size);
 			el.addChild(sprite);
 
-
-			this.insertCircleLine(el, size);
-			this.insertInfoCircle(el, size);
-
+			this.insertCircleLine(el, size, index);
+			this.insertInfoCircle(el, size, index);
 
 		},
 
@@ -337,9 +335,9 @@ var Debugger = {
 
 		},
 
-		insertInfoCircle: function (el, size) {
+		insertInfoCircle: function (el, size, index) {
 
-			var sprite = PIXI.Sprite.fromImage("img/icon-info.png?201510221531");
+			var sprite = PIXI.Sprite.fromImage(this.expertsData[index].icon);
 
 			sprite.width = size * 0.25;
 			sprite.height = size * 0.25;
@@ -1095,7 +1093,7 @@ var Debugger = {
 
 		},
 
-		getExpertsData: function () {
+		getExpertsData: function (callback) {
 
 			var url = 'data/data-experts.json';
 
@@ -1106,11 +1104,11 @@ var Debugger = {
 
 				if (xhr.readyState == 4 && xhr.status == 200) {
 
-					console.log('xhr.responseText: ', xhr.responseText);
+					var data = JSON.parse(xhr.responseText);
 
-					var expertsData = JSON.parse(xhr.responseText);
-
-					console.log('expertsData.experts[1].name: ', expertsData.experts[1].name);
+					if (typeof callback === 'function') {
+						callback(data.experts);
+					}
 
 				}
 
