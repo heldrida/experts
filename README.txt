@@ -3,6 +3,8 @@
 	========================
 
 
+	http://www.html5gamedevs.com/topic/9374-change-the-style-of-line-that-is-already-drawn/
+
 	https://www.npmjs.com/package/pixi-multistyle-text
 
 	http://www.snorkl.tv/2011/04/tweenlite-meets-flash-drawing-api-for-animated-line-drawing-fun/

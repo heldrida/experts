@@ -15,6 +15,29 @@ var Debugger = {
 	}
 };
 
+// extend the Graphics lib to allow `line update`
+PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
+	console.log('updateLineStyle');
+
+	// console.log('lineUpdate');
+	var len = this.graphicsData.length;
+
+	for (var i = 0; i < len; i++) {
+		var data = this.graphicsData[i];
+		if (data.lineWidth && lineWidth) {
+			data.lineWidth = lineWidth;
+		}
+		if (data.lineColor && color) {
+			data.lineColor = data._lineTint = color;
+		}
+		if (data.alpha && alpha) {
+			data.alpha = alpha;
+		}
+		this.dirty = true;
+		this.clearDirty = true;
+	}
+
+};
 
 (function () {
 
@@ -128,6 +151,8 @@ var Debugger = {
 				title_animation_delay: 200
 			};
 
+			this.circle_lines = [];
+
 		},
 
 		startTicker: function () {
@@ -221,6 +246,7 @@ var Debugger = {
 						quote: {
 							line: null
 						},
+						circle_line: null,
 						root: {
 							x: posX,
 							y: posY
@@ -272,6 +298,7 @@ var Debugger = {
 						quote: {
 							line: null
 						},
+						circle_line: null,
 						root: {
 							x: posX,
 							y: posY
@@ -343,13 +370,16 @@ var Debugger = {
 			graphics.drawCircle(size, size, size / 2);
 			graphics.x = -size/2;
 			graphics.y = -size/2;
+
 			el.addChild(graphics);
+
+			this.circle_lines[index] = graphics;
 
 		},
 
 		insertInfoCircle: function (el, size, index) {
 
-			var sprite = PIXI.Sprite.fromImage(this.expertsData[index - 1].icon);
+			var sprite = PIXI.Sprite.fromImage('img/icon-info.png');
 
 			sprite.width = size * 0.25;
 			sprite.height = size * 0.25;
@@ -532,7 +562,9 @@ var Debugger = {
 
 						(function (i) {
 
-							TweenLite.to(expert[i].el, context.animationTimes.expert_mouseover, { alpha: 0.85, ease: Power1.easeOut });
+							//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseover, { alpha: 0.85, ease: Power1.easeOut });
+							//context.circle_lines[i].lineStyle(context.defaultLineWidth, context.colours.hex.blue);
+							context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
 
 						}(i));
 
@@ -546,7 +578,8 @@ var Debugger = {
 
 							if (expert[i].el.scale.x === 1) {
 
-								TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
+								//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
+								context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
 
 							}
 
