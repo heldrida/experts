@@ -16,8 +16,14 @@ var Debugger = {
 };
 
 // extend the Graphics lib to allow `line update`
-PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
-	console.log('updateLineStyle');
+PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fillColor) {
+
+	if ( fillColor) {
+
+		console.log('updateLineStyle');
+		console.log('this.graphicsData[i]', this.graphicsData);
+
+	}
 
 	// console.log('lineUpdate');
 	var len = this.graphicsData.length;
@@ -32,6 +38,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 		}
 		if (data.alpha && alpha) {
 			data.alpha = alpha;
+		}
+		if (data.fillColor && fillColor) {
+			data.fillColor = data._fillTint = fillColor;
 		}
 		this.dirty = true;
 		this.clearDirty = true;
@@ -154,6 +163,10 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 			this.circle_lines = [];
 
 			this.icon_lines = [];
+
+			this.icon_line_circle_tip = [];
+
+			this.icon_line_circle_tip_colour = [];
 
 		},
 
@@ -451,7 +464,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 			el.addChildAt(gfxLn, 0);
 
 			// draw circle
-			var gfxCircle = this.attachLineIcon(gfxLn, size);
+			var gfxCircle = this.attachLineIcon(gfxLn, size, index);
 			el.addChildAt(gfxCircle, 1);
 
 			// animate
@@ -463,9 +476,11 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 			this.icon_lines[index] = gfxLn;
 
+			this.icon_line_circle_tip[index] = gfxCircle;
+
 		},
 
-		attachLineIcon: function (gfxLn, size) {
+		attachLineIcon: function (gfxLn, size, index) {
 
 			// draw circle
 			var gfxCircle = new PIXI.Graphics();
@@ -481,16 +496,34 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 			// attach as line child
 			//gfxLn.addChild(gfxCircle);
 
-			var gfxIconSprite = PIXI.Sprite.fromImage("img/icon-ball.png?201511091726");
+			var gfxIconSpriteDark = PIXI.Sprite.fromImage("img/icon-ball-dark.png?201511091726");
 
-			gfxIconSprite.width = size * 0.10;
-			gfxIconSprite.height = size * 0.10;
-			gfxIconSprite.position.x = (size * 0.12) * 1.25;
-			gfxIconSprite.position.y = (size * 0.12) * 1.25;
-			gfxIconSprite.anchor.x = 0.5;
-			gfxIconSprite.anchor.y = 0.5;
+			gfxIconSpriteDark.width = size * 0.10;
+			gfxIconSpriteDark.height = size * 0.10;
+			gfxIconSpriteDark.position.x = (size * 0.12) * 1.25;
+			gfxIconSpriteDark.position.y = (size * 0.12) * 1.25;
+			gfxIconSpriteDark.anchor.x = 0.5;
+			gfxIconSpriteDark.anchor.y = 0.5;
+			gfxIconSpriteDark.alpha = 1;
 
-			gfxCircle.addChild(gfxIconSprite);
+			gfxCircle.addChild(gfxIconSpriteDark);
+
+			var gfxIconSpriteLight = PIXI.Sprite.fromImage("img/icon-ball-white.png?201511091726");
+
+			gfxIconSpriteLight.width = size * 0.10;
+			gfxIconSpriteLight.height = size * 0.10;
+			gfxIconSpriteLight.position.x = (size * 0.12) * 1.25;
+			gfxIconSpriteLight.position.y = (size * 0.12) * 1.25;
+			gfxIconSpriteLight.anchor.x = 0.5;
+			gfxIconSpriteLight.anchor.y = 0.5;
+			gfxIconSpriteLight.alpha = 0;
+
+			gfxCircle.addChild(gfxIconSpriteLight);
+
+			this.icon_line_circle_tip_colour[index] = {
+				dark: gfxIconSpriteDark,
+				light: gfxIconSpriteLight
+			};
 
 			return gfxCircle;
 
@@ -570,6 +603,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 							//context.circle_lines[i].lineStyle(context.defaultLineWidth, context.colours.hex.blue);
 							context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
 							context.icon_lines[i].updateLineStyle(false, context.colours.hex.blue, false);
+							context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
+							context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
+							context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
 
 						}(i));
 
@@ -586,6 +622,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 								//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
 								context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
 								context.icon_lines[i].updateLineStyle(false, context.colours.hex.white, false);
+								context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.white, false, context.colours.hex.white);
+								context.icon_line_circle_tip_colour[i]['dark'].alpha = 1;
+								context.icon_line_circle_tip_colour[i]['light'].alpha = 0;
 
 							}
 
@@ -718,7 +757,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 						expert.centered = false;
 						TweenLite.to(expert.el, this.animationTimes.expert_mousemovehandler_non_active, { x: offsetX, y: offsetY });
 					} else {
-						console.log('expert.centered: ', expert.centered);
 						if (!expert.centered) {
 							expert.centered = true;
 							//this.expertsMoveLock = true;
@@ -818,8 +856,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 				if (i !== index) {
 
-					console.log('case A');
-
 					this.shrinkLine(i);
 					this.experts[i].active = false;
 
@@ -837,8 +873,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 					delay += 30;
 
 				} else {
-
-					console.log('case B');
 
 					this.experts[index].active = true;
 
@@ -867,8 +901,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 			};
 
 			var resetAll = function () {
-
-				console.log('resetAll');
 
 				for (var i = 0; i < this.experts.length; i++) {
 
@@ -961,8 +993,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 		},
 
 		orderExpertsByActiveElement: function () {
-
-			console.log('orderExpertsByActiveElement ()');
 
 			var activeIndex = 0;
 
@@ -1066,7 +1096,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 	 			this.experts[index].el.addChildAt(line, 0);
 	 			this.experts[index].quote.line = line;
-	 			console.log('this.experts[' + index +'].quote.line: ', this.experts[index].quote.line);
 
 				TweenLite.to(gfxCircle, 0.4, { x: -((size * 0.4) + size * 0.05), y: -((size * 0.2) + size * 0.05), ease: Power1.easeOut, onUpdate:drawLineHelper, onComplete: callback.bind(this) });
 
