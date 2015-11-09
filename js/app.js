@@ -153,6 +153,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 			this.circle_lines = [];
 
+			this.icon_lines = [];
+
 		},
 
 		startTicker: function () {
@@ -436,7 +438,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 		},
 
-		insertLine: function (el, size) {
+		insertLine: function (el, size, index) {
 
 			// draw line
 			var gfxLn = new PIXI.Graphics();
@@ -450,7 +452,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 			// draw circle
 			var gfxCircle = this.attachLineIcon(gfxLn, size);
-			el.addChildAt(gfxCircle, 0);
+			el.addChildAt(gfxCircle, 1);
 
 			// animate
 			TweenLite.to(gfxCircle, 0.8, { x: size * 0.9, y: size * 0.9, ease: Power1.easeOut, onUpdate:drawLineHelper });
@@ -458,6 +460,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 			function drawLineHelper() {
 				gfxLn.lineTo(gfxCircle.x - (size * 0.3), gfxCircle.y - (size * 0.3));
 			}
+
+			this.icon_lines[index] = gfxLn;
 
 		},
 
@@ -565,6 +569,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 							//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseover, { alpha: 0.85, ease: Power1.easeOut });
 							//context.circle_lines[i].lineStyle(context.defaultLineWidth, context.colours.hex.blue);
 							context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
+							context.icon_lines[i].updateLineStyle(false, context.colours.hex.blue, false);
 
 						}(i));
 
@@ -580,6 +585,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 								//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
 								context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
+								context.icon_lines[i].updateLineStyle(false, context.colours.hex.white, false);
 
 							}
 
@@ -769,7 +775,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha) {
 
 					setTimeout(function () {
 
-						TweenLite.fromTo(expert.scale, context.animationTimes.expert_init_scale, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut, onComplete: context.insertLine.bind(context, expert, context.defaultExpertSize) });
+						TweenLite.fromTo(expert.scale, context.animationTimes.expert_init_scale, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut, onComplete: context.insertLine.bind(context, expert, context.defaultExpertSize, index) });
 
 					}.bind(this), delay);
 
