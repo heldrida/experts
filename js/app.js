@@ -18,13 +18,6 @@ var Debugger = {
 // extend the Graphics lib to allow `line update`
 PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fillColor) {
 
-	if ( fillColor) {
-
-		console.log('updateLineStyle');
-		console.log('this.graphicsData[i]', this.graphicsData);
-
-	}
-
 	// console.log('lineUpdate');
 	var len = this.graphicsData.length;
 
@@ -571,6 +564,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		attachListeners: function () {
 
+			var lock_mouseout = false;
 			var context = this;
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
@@ -589,7 +583,18 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 					expert[i].el.click = function (e) {
 
+						lock_mouseout = true;
 						context.showExpertInfo(i);
+
+						context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
+						context.icon_lines[i].updateLineStyle(false, context.colours.hex.blue, false);
+						context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
+						context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
+						context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
+
+						setTimeout(function () {
+							lock_mouseout = false;
+						}, 1000);
 
 					};
 
@@ -617,7 +622,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 						(function (i) {
 
-							if (expert[i].el.scale.x === 1) {
+							if (expert[i].el.scale.x === 1 && !lock_mouseout && !expert[i].active) {
 
 								//TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
 								context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
@@ -856,6 +861,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				if (i !== index) {
 
+					console.log('CASE A');
+
 					this.shrinkLine(i);
 					this.experts[i].active = false;
 
@@ -880,13 +887,25 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 						this.closeQuoteFirst.call(this, index);
 					}
 
-					(function (expert, delay) {
+					(function (expert, delay, i) {
 
 						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(expert, 1, { alpha: 1 });
 						context.expertMoveToCenter.call(context, expert);
 
-					}(this.experts[i].el));
+					}(this.experts[i].el), i);
+
+					/*
+					// change colours
+					context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
+					context.icon_lines[i].updateLineStyle(false, context.colours.hex.blue, false);
+					context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
+					context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
+					context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
+					*/
+
+
+					console.log('CASE B');
 
 				}
 
@@ -895,6 +914,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		expertActiveExceptionHandler: function (index) {
+
+			var context = this;
 
 			var unlock = function () {
 				this.expertsMoveLock = false;
@@ -911,6 +932,14 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 						TweenLite.to(experts.el, 1, { x: experts.root.x, y: experts.root.y, ease: Power1.easeOut });
 
 						experts.active = false;
+
+
+						// change colours
+						context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
+						context.icon_lines[i].updateLineStyle(false, context.colours.hex.white, false);
+						context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.white, false, context.colours.hex.white);
+						context.icon_line_circle_tip_colour[i]['dark'].alpha = 1;
+						context.icon_line_circle_tip_colour[i]['light'].alpha = 0;
 
 					}.call(this, this.experts[i]));
 
