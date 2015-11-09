@@ -86,7 +86,9 @@ var Debugger = {
 			// colours
 			this.colours = {
 				hex: {
-					grey: '0xAAAAAA'
+					grey: '0xAAAAAA',
+					blue: '0x3b81ff',
+					white: '0xffffff'
 				}
 			};
 
@@ -153,7 +155,7 @@ var Debugger = {
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
 
-			graphics.beginFill(index <= 5 ? 0x000000 : 0x000000);
+			graphics.beginFill(0x000000);
 
 			graphics.drawCircle(size / 2, size / 2, size / 1.9);
 
@@ -324,7 +326,7 @@ var Debugger = {
 
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
-			this.insertLine(el, size);
+			//this.insertLine(el, size);
 			el.addChild(sprite);
 
 
@@ -337,7 +339,7 @@ var Debugger = {
 		insertCircleLine: function (el, size, index) {
 
 			var graphics = new PIXI.Graphics();
-			graphics.lineStyle(this.defaultLineWidth, 0x3b81ff);
+			graphics.lineStyle(this.defaultLineWidth, this.colours.hex.white);
 			graphics.drawCircle(size, size, size / 2);
 			graphics.x = -size/2;
 			graphics.y = -size/2;
@@ -408,16 +410,24 @@ var Debugger = {
 
 			// draw line
 			var gfxLn = new PIXI.Graphics();
-			gfxLn.lineStyle(this.defaultLineWidth, 0x3b81ff);
-			gfxLn.moveTo(0,0);
-			gfxLn.lineTo(size * 0.8, 0);
+			gfxLn.lineStyle(this.defaultLineWidth, this.colours.hex.white);
+			gfxLn.moveTo(0, 0);
+			//gfxLn.lineTo(size * 0.8, 0);
 			gfxLn.x = size / 2;
 			gfxLn.y = size / 2;
-			gfxLn.rotation = 0.5; // 0 ~ 4.725
-			el.addChild(gfxLn);
+			//gfxLn.rotation = 0.5; // 0 ~ 4.725
+			el.addChildAt(gfxLn, 0);
 
 			// draw circle
-			this.attachLineIcon(gfxLn, size);
+			var gfxCircle = this.attachLineIcon(gfxLn, size);
+			el.addChildAt(gfxCircle, 0);
+
+			// animate
+			TweenLite.to(gfxCircle, 0.8, { x: size * 0.9, y: size * 0.9, ease: Power1.easeOut, onUpdate:drawLineHelper });
+
+			function drawLineHelper() {
+				gfxLn.lineTo(gfxCircle.x - (size * 0.3), gfxCircle.y - (size * 0.3));
+			}
 
 		},
 
@@ -425,16 +435,19 @@ var Debugger = {
 
 			// draw circle
 			var gfxCircle = new PIXI.Graphics();
-			gfxCircle.beginFill(0x3b81ff);
-			gfxCircle.lineStyle (this.defaultLineWidth, 0x3b81ff);
+			gfxCircle.beginFill(this.colours.hex.white);
+			gfxCircle.lineStyle (this.defaultLineWidth, this.colours.hex.white);
 			gfxCircle.drawCircle(size * 0.15, size * 0.15, (size * 0.15) / 2);
-			gfxCircle.x = size * 0.6;
-			gfxCircle.y = - (size * 0.15);
+			gfxCircle.x = size / 2;
+			gfxCircle.y = size / 2;
+
+			gfxCircle.x = gfxCircle.x * 0.75;
+			gfxCircle.y = gfxCircle.y * 0.75;
 
 			// attach as line child
-			gfxLn.addChild(gfxCircle);
+			//gfxLn.addChild(gfxCircle);
 
-			var gfxIconSprite = PIXI.Sprite.fromImage("img/icon-ball.png?201510221531");
+			var gfxIconSprite = PIXI.Sprite.fromImage("img/icon-ball.png?201511091726");
 
 			gfxIconSprite.width = size * 0.10;
 			gfxIconSprite.height = size * 0.10;
@@ -444,6 +457,8 @@ var Debugger = {
 			gfxIconSprite.anchor.y = 0.5;
 
 			gfxCircle.addChild(gfxIconSprite);
+
+			return gfxCircle;
 
 		},
 
@@ -717,15 +732,15 @@ var Debugger = {
 
 			for (var i = 0; i < this.experts.length; i++) {
 
-				(function (expert, delay) {
+				(function (expert, delay, index) {
 
 					setTimeout(function () {
 
-						TweenLite.fromTo(expert.scale, context.animationTimes.expert_init_scale, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
+						TweenLite.fromTo(expert.scale, context.animationTimes.expert_init_scale, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut, onComplete: context.insertLine.bind(context, expert, context.defaultExpertSize) });
 
 					}.bind(this), delay);
 
-				}(this.experts[i].el, delay));
+				}(this.experts[i].el, delay, i));
 
 				delay += 80;
 
