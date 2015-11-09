@@ -118,6 +118,14 @@ var Debugger = {
 
 			this.defaultExpertSize = null;
 
+			this.animationTimes = {
+				expert_mouseover: 0.3,
+				expert_mouseout: 0.3,
+				expert_mousemovehandler_non_active: 0.8,
+				expert_init_scale: 0.8,
+				title_animation_delay: 200
+			};
+
 		},
 
 		startTicker: function () {
@@ -509,7 +517,7 @@ var Debugger = {
 
 						(function (i) {
 
-							TweenLite.to(expert[i].el, 0.3, { alpha: 0.85, ease: Power1.easeOut });
+							TweenLite.to(expert[i].el, context.animationTimes.expert_mouseover, { alpha: 0.85, ease: Power1.easeOut });
 
 						}(i));
 
@@ -523,7 +531,7 @@ var Debugger = {
 
 							if (expert[i].el.scale.x === 1) {
 
-								TweenLite.to(expert[i].el, 0.3, { alpha: 1, ease: Power1.easeOut });
+								TweenLite.to(expert[i].el, context.animationTimes.expert_mouseout, { alpha: 1, ease: Power1.easeOut });
 
 							}
 
@@ -654,7 +662,7 @@ var Debugger = {
 
 					if (!expert.active) {
 						expert.centered = false;
-						TweenLite.to(expert.el, 0.8, { x: offsetX, y: offsetY });
+						TweenLite.to(expert.el, this.animationTimes.expert_mousemovehandler_non_active, { x: offsetX, y: offsetY });
 					} else {
 						console.log('expert.centered: ', expert.centered);
 						if (!expert.centered) {
@@ -713,7 +721,7 @@ var Debugger = {
 
 					setTimeout(function () {
 
-						TweenLite.fromTo(expert.scale, 1, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
+						TweenLite.fromTo(expert.scale, context.animationTimes.expert_init_scale, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
 
 					}.bind(this), delay);
 
@@ -872,7 +880,7 @@ var Debugger = {
 
 				}(this, els[i], delay));
 
-				delay += 300;
+				delay += this.animationTimes.title_animation_delay;
 
 			}
 
