@@ -389,8 +389,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			var sprite = PIXI.Sprite.fromImage('img/icon-info.png');
 
-			sprite.width = size * 0.25;
-			sprite.height = size * 0.25;
+			sprite.width = size * 0.23;
+			sprite.height = size * 0.23;
 
 			/*
 			 * top left
@@ -885,13 +885,16 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 						this.closeQuoteFirst.call(this, index);
 					}
 
-					(function (expert, delay, i) {
+					(function (expert, i) {
 
 						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(expert, 1, { alpha: 1 });
-						context.expertMoveToCenter.call(context, expert);
+						context.expertMoveToCenter.call(context, expert, function () {
+							console.log('callback!!');
+							context.repositionActiveExpert.call(context, i);
+						}.bind(context));
 
-					}(this.experts[i].el), i);
+					}(this.experts[i].el, i));
 
 					/*
 					// change colours
@@ -1009,9 +1012,13 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
 					this.expertsMoveLock = false;
 
+					console.log('callback', callback);
+					console.log(typeof callback);
+
 					if (typeof callback === 'function') {
 						callback.call(this);
 					}
+
 				}.bind(this)
 			});
 
@@ -1235,6 +1242,21 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			xhr.open("GET", url, true);
 
 			xhr.send();
+
+		},
+
+		repositionActiveExpert: function (index) {
+
+			console.log('repositionActiveExpert fn() call');
+
+			// container.removeChild(back) and container.addChildAt(back, container.children.length - 1)
+
+			console.log('index', index);
+
+			console.log('this.experts[index].el', this.experts[index].el);
+
+			this.expertsContainer.removeChild(this.experts[index].el);
+			this.expertsContainer.addChildAt(this.experts[index].el, this.expertsContainer.length - 1);
 
 		}
 
