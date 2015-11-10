@@ -362,7 +362,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
 			//this.insertLine(el, size);
-			el.addChild(sprite);
+			//el.addChild(sprite);
 
 
 			this.insertCircleLine(el, size, index);
@@ -445,20 +445,45 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		insertLine: function (el, size, index) {
+			// http://stackoverflow.com/questions/17505169/pixi-js-pivot-affects-object-position
+			// to allow easier rotation attach to container
+			var createRect = function (x1, y1, x2, y2, color) {
+			    var graphics = new PIXI.Graphics();
+
+			    graphics.beginFill(color || 0x000000);
+			    //This is the point around which the object will rotate.
+			    graphics.position.x = x1 + (x2/2);
+			    graphics.position.y = y1 + (y2/2);
+
+			    // draw a rectangle at -width/2 and -height/2. The rectangle's top-left corner will
+			    // be at position x1/y1
+			    graphics.drawRect(-(x2/2), -(y2/2), x2, y2);
+
+			    return graphics;
+			};
+
+			var container = createRect(0, 0, el.width, el.width, 0xFFCC00);
+			//container.beginFill(0xFFCC00);
+			//container.drawRect(0, 0, el.width, el.height);
 
 			// draw line
 			var gfxLn = new PIXI.Graphics();
 			gfxLn.lineStyle(this.defaultLineWidth, this.colours.hex.white);
 			gfxLn.moveTo(0, 0);
 			//gfxLn.lineTo(size * 0.8, 0);
-			gfxLn.x = size / 2;
-			gfxLn.y = size / 2;
+			gfxLn.x = 0;
+			gfxLn.y = 0;
 			//gfxLn.rotation = 0.5; // 0 ~ 4.725
-			el.addChildAt(gfxLn, 0);
+			container.addChildAt(gfxLn, 0);
 
 			// draw circle
 			var gfxCircle = this.attachLineIcon(gfxLn, size, index);
-			el.addChildAt(gfxCircle, 1);
+			container.addChildAt(gfxCircle, 1);
+
+			// finally add to el
+			el.addChildAt(container, 0);
+
+			container.rotation = 10 * Math.PI / 180; //degrees * Math.PI / 180;
 
 			// animate
 			TweenLite.to(gfxCircle, 0.8, { x: size * 0.9, y: size * 0.9, ease: Power1.easeOut, onUpdate:drawLineHelper });
@@ -466,6 +491,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			function drawLineHelper() {
 				gfxLn.lineTo(gfxCircle.x - (size * 0.3), gfxCircle.y - (size * 0.3));
 			}
+
 
 			this.icon_lines[index] = gfxLn;
 
@@ -484,8 +510,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			gfxCircle.x = size / 2;
 			gfxCircle.y = size / 2;
 
-			gfxCircle.x = gfxCircle.x * 0.75;
-			gfxCircle.y = gfxCircle.y * 0.75;
+			//gfxCircle.x = gfxCircle.x * 0.75;
+			//gfxCircle.y = gfxCircle.y * 0.75;
 
 			// attach as line child
 			//gfxLn.addChild(gfxCircle);
