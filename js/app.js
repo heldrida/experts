@@ -765,7 +765,10 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							//this.expertsMoveLock = true;
 							//this.expertMoveToCenter(expert.el);
 							if (!expert.hasText.data) {
-								this.expertMoveToCenter(expert.el, this.expertShowTextQuote.bind(this, i));
+								this.expertMoveToCenter(expert.el, function () {
+									this.expertShowTextQuote.call(this, i);
+									this.repositionActiveExpert.call(this, i);
+								}.bind(this));
 							}
 						}
 					}
@@ -889,21 +892,14 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
 						TweenLite.to(expert, 1, { alpha: 1 });
+						/*
 						context.expertMoveToCenter.call(context, expert, function () {
 							console.log('callback!!');
 							context.repositionActiveExpert.call(context, i);
 						}.bind(context));
+						*/
 
 					}(this.experts[i].el, i));
-
-					/*
-					// change colours
-					context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.blue, false);
-					context.icon_lines[i].updateLineStyle(false, context.colours.hex.blue, false);
-					context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
-					context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
-					context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
-					*/
 
 
 					console.log('CASE B');
@@ -1004,6 +1000,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		expertMoveToCenter: function (expert, callback) {
 
+			console.log('expertMoveToCenter fn()');
+
 			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
 			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
 
@@ -1011,9 +1009,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			TweenLite.to(expert, 1, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
 					this.expertsMoveLock = false;
-
-					console.log('callback', callback);
-					console.log(typeof callback);
 
 					if (typeof callback === 'function') {
 						callback.call(this);
@@ -1247,16 +1242,22 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		repositionActiveExpert: function (index) {
 
-			console.log('repositionActiveExpert fn() call');
+			console.log("this.experts.length", this.experts.length);
 
-			// container.removeChild(back) and container.addChildAt(back, container.children.length - 1)
+			var reset = function () {
 
-			console.log('index', index);
+				for (var i = 0; i < this.experts.length; i++) {
+					this.expertsContainer.removeChild(this.experts[i].el);
+					this.expertsContainer.addChildAt(this.experts[i].el, this.experts.length - i);
+				}
 
-			console.log('this.experts[index].el', this.experts[index].el);
+			};
+
+			// reset all pos first
+			reset.call(this);
 
 			this.expertsContainer.removeChild(this.experts[index].el);
-			this.expertsContainer.addChildAt(this.experts[index].el, this.expertsContainer.length - 1);
+			this.expertsContainer.addChildAt(this.experts[index].el, this.experts.length);
 
 		}
 
