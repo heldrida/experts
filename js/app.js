@@ -643,6 +643,25 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		titleHandler: function () {
 
+			var h1 = this.titleDiv.querySelector('h1');
+			var p = this.titleDiv.querySelector('p');
+
+			if (window.innerWidth < 1028) {
+
+				this.titleDiv.style.top = '';
+				h1.style.fontSize = '';
+				h1.style.letterSpacing = '';
+				h1.style.position = '';
+				p.style.fontSize = '';
+				p.style.letterSpacing = '';
+				p.style.padding = '';
+				p.style.lineHeight = '';
+				p.style.position = '';
+
+				return false;
+
+			}
+
 			var rm = 67 / 1440;
 			var rh1 = 30 / 1440;
 			var rh1_ls = 1.5 / 1440;
@@ -650,8 +669,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var rp_ls = 1.22 / 1440;
 			var rp_p = 10 / 1440;
 			var rp_ln = 16 / 1440;
-			var h1 = this.titleDiv.querySelector('h1');
-			var p = this.titleDiv.querySelector('p');
 
 			this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
 			h1.style.fontSize = (window.innerWidth * rh1) + 'px';

@@ -146,18 +146,28 @@
     height: auto; }
   .sh-experts-topbox #title-container {
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: 50%;
-    transform: translateX(-50%); }
+    transform: translateX(-50%);
+    width: 100%; }
     .sh-experts-topbox #title-container h1 {
       opacity: 0;
       letter-spacing: 1.5px;
-      line-height: normal; }
+      line-height: normal;
+      font-size: 30px; }
     .sh-experts-topbox #title-container p {
       opacity: 0;
       padding: 10px 0;
       line-height: 16px;
-      letter-spacing: 1.2px; }
+      letter-spacing: 1.2px;
+      font-size: 10px; }
+    @media (max-width: 840px) {
+      .sh-experts-topbox #title-container h1 {
+        font-size: 26px; }
+      .sh-experts-topbox #title-container p {
+        font-size: 8px;
+        line-height: 14px;
+        padding: 5px 0; } }
   .sh-experts-topbox .experts-down-arrow {
     background-image: url(../img/arrow-down.png?201510261810);
     background-repeat: no-repeat;
