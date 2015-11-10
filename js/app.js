@@ -479,7 +479,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var gfxCircle = new PIXI.Graphics();
 			gfxCircle.beginFill(this.colours.hex.white);
 			gfxCircle.lineStyle (this.defaultLineWidth, this.colours.hex.white);
-			gfxCircle.drawCircle(size * 0.15, size * 0.15, (size * 0.15) / 2);
+			gfxCircle.drawCircle(size * 0.23, size * 0.23, (size * 0.23) / 2);
+
 			gfxCircle.x = size / 2;
 			gfxCircle.y = size / 2;
 
@@ -491,24 +492,21 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			var gfxIconSpriteDark = PIXI.Sprite.fromImage(this.expertsData[index].icon.dark);
 
-			gfxIconSpriteDark.width = size * 0.10;
-			gfxIconSpriteDark.height = size * 0.10;
-			gfxIconSpriteDark.position.x = (size * 0.12) * 1.25;
-			gfxIconSpriteDark.position.y = (size * 0.12) * 1.25;
-			gfxIconSpriteDark.anchor.x = 0.5;
-			gfxIconSpriteDark.anchor.y = 0.5;
+			gfxIconSpriteDark.width = size * 0.15;
+			gfxIconSpriteDark.height = size * 0.15;
+			gfxIconSpriteDark.position.x = gfxIconSpriteDark.width * 1.04;
+			gfxIconSpriteDark.position.y = gfxIconSpriteDark.height * 1.04;
 			gfxIconSpriteDark.alpha = 1;
 
 			gfxCircle.addChild(gfxIconSpriteDark);
 
 			var gfxIconSpriteLight = PIXI.Sprite.fromImage(this.expertsData[index].icon.light);
 
-			gfxIconSpriteLight.width = size * 0.10;
-			gfxIconSpriteLight.height = size * 0.10;
-			gfxIconSpriteLight.position.x = (size * 0.12) * 1.25;
-			gfxIconSpriteLight.position.y = (size * 0.12) * 1.25;
-			gfxIconSpriteLight.anchor.x = 0.5;
-			gfxIconSpriteLight.anchor.y = 0.5;
+			gfxIconSpriteLight.width = size * 0.15;
+			gfxIconSpriteLight.height = size * 0.15;
+			gfxIconSpriteLight.position.x = gfxIconSpriteLight.width * 1.04;
+			gfxIconSpriteLight.position.y = gfxIconSpriteLight.height * 1.04;
+
 			gfxIconSpriteLight.alpha = 0;
 
 			gfxCircle.addChild(gfxIconSpriteLight);
