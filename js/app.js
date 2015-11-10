@@ -489,7 +489,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			// attach as line child
 			//gfxLn.addChild(gfxCircle);
 
-			var gfxIconSpriteDark = PIXI.Sprite.fromImage("img/icon-ball-dark.png?201511091726");
+			var gfxIconSpriteDark = PIXI.Sprite.fromImage(this.expertsData[index].icon.dark);
 
 			gfxIconSpriteDark.width = size * 0.10;
 			gfxIconSpriteDark.height = size * 0.10;
@@ -501,7 +501,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			gfxCircle.addChild(gfxIconSpriteDark);
 
-			var gfxIconSpriteLight = PIXI.Sprite.fromImage("img/icon-ball-white.png?201511091726");
+			var gfxIconSpriteLight = PIXI.Sprite.fromImage(this.expertsData[index].icon.light);
 
 			gfxIconSpriteLight.width = size * 0.10;
 			gfxIconSpriteLight.height = size * 0.10;
