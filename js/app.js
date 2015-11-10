@@ -662,13 +662,14 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			}
 
-			var rm = 67 / 1440;
-			var rh1 = 30 / 1440;
-			var rh1_ls = 1.5 / 1440;
-			var rp = 10 / 1440;
-			var rp_ls = 1.22 / 1440;
-			var rp_p = 10 / 1440;
-			var rp_ln = 16 / 1440;
+			var ratio = 1.3;
+			var rm = (30 * ratio) / 1440;
+			var rh1 = (30 * ratio) / 1440;
+			var rh1_ls = (1.5 * ratio) / 1440;
+			var rp = (10 * ratio) / 1440;
+			var rp_ls = (1.22 * ratio) / 1440;
+			var rp_p = (10 * ratio) / 1440;
+			var rp_ln = (16 * ratio) / 1440;
 
 			this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
 			h1.style.fontSize = (window.innerWidth * rh1) + 'px';
