@@ -210,10 +210,14 @@
       .sh-experts-topbox #quoteWrp p:before,
       .sh-experts-topbox #quoteWrp p:after {
         content: '"'; }
-    .sh-experts-topbox #quoteWrp span {
+    .sh-experts-topbox #quoteWrp > span {
       margin-top: 10px;
       font-size: 1em;
       line-height: 1.3em;
       display: block;
       font-style: normal;
-      font-weight: 200; }
+      font-weight: 200;
+      text-transform: uppercase; }
+      .sh-experts-topbox #quoteWrp > span span {
+        font-family: 'OpenSans-SemiBold', helvetica, sans-serif;
+        text-transform: uppercase; }

@@ -2,6 +2,7 @@
 	"experts": [
 		{
 			"name": "Foo bar",
+			"skill": "Footballer",
 			"img": "data/person01.jpg",
 			"icon": {
 				"dark": "img/icon-ball-dark.png?201511101228",
@@ -11,6 +12,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Boxer",
 			"img": "data/person02.jpg",
 			"icon": {
 				"dark": "img/icon-football-dark.png?201511101228",
@@ -20,6 +22,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Runner",
 			"img": "data/person03.jpg",
 			"icon": {
 				"dark": "img/icon-glove-dark.png?201511101228",
@@ -30,6 +33,7 @@
 		{
 			"name": "Foo bar",
 			"img": "data/person04.jpg",
+			"skill": "Cyclist",
 			"icon": {
 				"dark": "img/icon-weight-dark.png?201511101228",
 				"light": "img/icon-weight-light.png?201511101228"
@@ -38,6 +42,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Skateboarder",
 			"img": "data/person05.jpg",
 			"icon": {
 				"dark": "img/icon-glove-dark.png?201511101228",
@@ -47,6 +52,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Surfer",
 			"img": "data/person06.jpg",
 			"icon": {
 				"dark": "img/icon-ball-dark.png?201511101228",
@@ -56,6 +62,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Kickboxer",
 			"img": "data/person07.jpg",
 			"icon": {
 				"dark": "img/icon-weight-dark.png?201511101228",
@@ -65,6 +72,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Racer",
 			"img": "data/person08.jpg",
 			"icon": {
 				"dark": "img/icon-football-dark.png?201511101228",
@@ -74,6 +82,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Swimmer",
 			"img": "data/person09.jpg",
 			"icon": {
 				"dark": "img/icon-weight-dark.png?201511101228",
@@ -83,6 +92,7 @@
 		},
 		{
 			"name": "Foo bar",
+			"skill": "Skydiver",
 			"img": "data/person10.jpg",
 			"icon": {
 				"dark": "img/icon-weight-dark.png?201511101228",

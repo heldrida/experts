@@ -110,13 +110,19 @@
 			}
 		}
 
-		span {
+		> span {
 			margin-top: 10px;
 			font-size: 1em;
 			line-height: 1.3em;
 			display: block;
 			font-style: normal;
 			font-weight: 200;
+			text-transform: uppercase;
+
+			span {
+				font-family: 'OpenSans-SemiBold', helvetica, sans-serif;
+				text-transform: uppercase;
+			}
 		}
 	}
 }

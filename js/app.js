@@ -1072,7 +1072,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.expertQuoteDiv.appendChild(p);
 
 			var span = document.createElement('span');
-			span.innerHTML = "Borum Scuba | Foriamblu";
+			//span.innerHTML = "Borum Scuba | Foriamblu";
+			span.innerHTML = this.getTitleSkill.call(this, index);
 
 			this.expertQuoteDiv.appendChild(span);
 
@@ -1275,6 +1276,20 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.expertsContainer.removeChild(this.experts[index].el);
 			this.expertsContainer.addChildAt(this.experts[index].el, this.experts.length);
+
+		},
+
+		getTitleSkill: function (index) {
+
+			var name = this.expertsData[index].name;
+			var skill = this.expertsData[index].skill;
+
+			if (name) {
+				var s = name.split(" ");
+				name = s[0] + ' ' + '<span>' + s[s.length - 1] + '</span>';
+			}
+
+			return name + " | " + skill;
 
 		}
 
