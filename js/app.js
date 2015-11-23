@@ -161,6 +161,11 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.icon_line_circle_tip_colour = [];
 
+			this.anchorRotateMaxMin = {
+				max: 30,
+				min: -50
+			};
+
 		},
 
 		startTicker: function () {
@@ -362,7 +367,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var sprite = new PIXI.Sprite(PIXI.Texture.fromCanvas(canvas));
 
 			//this.insertLine(el, size);
-			//el.addChild(sprite);
+			el.addChild(sprite);
 
 
 			this.insertCircleLine(el, size, index);
@@ -462,31 +467,32 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			    return graphics;
 			};
 
-			var container = createRect(0, 0, el.width, el.width, 0xFFCC00);
+			var container = createRect(0, 0, el.width, el.width, false);
 			//container.beginFill(0xFFCC00);
 			//container.drawRect(0, 0, el.width, el.height);
 
 			// draw line
 			var gfxLn = new PIXI.Graphics();
 			gfxLn.lineStyle(this.defaultLineWidth, this.colours.hex.white);
-			gfxLn.moveTo(0, 0);
+			gfxLn.moveTo(-(size/2), -(size/2));
 			//gfxLn.lineTo(size * 0.8, 0);
-			gfxLn.x = 0;
-			gfxLn.y = 0;
+			gfxLn.x = (size/2);
+			gfxLn.y = (size/2);
 			//gfxLn.rotation = 0.5; // 0 ~ 4.725
 			container.addChildAt(gfxLn, 0);
 
 			// draw circle
-			var gfxCircle = this.attachLineIcon(gfxLn, size, index);
+			var gfxCircle = this.attachLineIcon(gfxLn, size, index, container);
 			container.addChildAt(gfxCircle, 1);
 
 			// finally add to el
 			el.addChildAt(container, 0);
 
-			container.rotation = 10 * Math.PI / 180; //degrees * Math.PI / 180;
+			// get random `angle` between min and max
+			container.rotation = this.getRotation(); //degrees * Math.PI / 180;
 
 			// animate
-			TweenLite.to(gfxCircle, 0.8, { x: size * 0.9, y: size * 0.9, ease: Power1.easeOut, onUpdate:drawLineHelper });
+			TweenLite.to(gfxCircle, 0.8, { x: size * 0.35, y: size * 0.35, ease: Power1.easeOut, onUpdate:drawLineHelper });
 
 			function drawLineHelper() {
 				gfxLn.lineTo(gfxCircle.x - (size * 0.3), gfxCircle.y - (size * 0.3));
@@ -499,7 +505,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		},
 
-		attachLineIcon: function (gfxLn, size, index) {
+		attachLineIcon: function (gfxLn, size, index, container) {
 
 			// draw circle
 			var gfxCircle = new PIXI.Graphics();
@@ -507,8 +513,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			gfxCircle.lineStyle (this.defaultLineWidth, this.colours.hex.white);
 			gfxCircle.drawCircle(size * 0.23, size * 0.23, (size * 0.23) / 2);
 
-			gfxCircle.x = size / 2;
-			gfxCircle.y = size / 2;
+			gfxCircle.x = -(size/4);
+			gfxCircle.y = -(size/4);
 
 			//gfxCircle.x = gfxCircle.x * 0.75;
 			//gfxCircle.y = gfxCircle.y * 0.75;
@@ -1318,6 +1324,16 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			return name + " | " + skill;
 
+		},
+
+		randomIntFromInterval: function (min, max) {
+
+		    return Math.floor(Math.random() * (max - min + 1) + min);
+
+		},
+
+		getRotation: function () {
+			return this.randomIntFromInterval(this.anchorRotateMaxMin.max, this.anchorRotateMaxMin.min) * Math.PI / 180;
 		}
 
 	};
