@@ -141,7 +141,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				clientY: null
 			};
 
-			this.expertScaleSmallRatio = 0.15;
+			this.expertScaleSmallRatio = 0.19;
 
 			this.defaultExpertSize = null;
 
@@ -151,8 +151,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				expert_mousemovehandler_non_active: 0.8,
 				expert_init_scale: 0.8,
 				title_animation_delay: 200,
-				expertScaleDownSpeed: 0.4,
-				rotationMouseover: 5.2
+				expertScaleDownSpeed: 0.45,
+				rotationMouseover: 5.2,
+				iconRotationTime: 12
 			};
 
 			this.circle_lines = [];
@@ -497,6 +498,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			container.rotation = this.getRotation();
 
 			//TweenLite.to(container, 3, { rotation: this.getRotation() });
+			this.iconRotateAnimator.call(this, container);
 
 			// animate
 			TweenLite.to(gfxCircle, 0.8, { x: size * 0.35, y: size * 0.35, ease: Power1.easeOut, onUpdate:drawLineHelper });
@@ -1360,6 +1362,17 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			console.log('getGlobalPos pos: ',  pos);
 
 			return pos;
+
+		},
+
+		iconRotateAnimator: function (container) {
+
+			var context = this;
+
+			TweenLite.to(container, context.animationTimes.iconRotationTime, { rotation: this.getRotation(), onComplete: function () {
+					context.iconRotateAnimator(container);
+				}
+			});
 
 		}
 
