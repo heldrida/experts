@@ -162,8 +162,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.icon_line_circle_tip_colour = [];
 
 			this.anchorRotateMaxMin = {
-				max: 30,
-				min: -50
+				max: 10,
+				min: -100
 			};
 
 		},
@@ -455,7 +455,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var createRect = function (x1, y1, x2, y2, color) {
 			    var graphics = new PIXI.Graphics();
 
-			    graphics.beginFill(color || 0x000000);
+			    graphics.beginFill(0x000000, 0.1);
 			    //This is the point around which the object will rotate.
 			    graphics.position.x = x1 + (x2/2);
 			    graphics.position.y = y1 + (y2/2);
@@ -489,7 +489,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			el.addChildAt(container, 0);
 
 			// get random `angle` between min and max
-			container.rotation = this.getRotation(); //degrees * Math.PI / 180;
+			container.rotation = this.getRotation();
+
+			//TweenLite.to(container, 3, { rotation: this.getRotation() });
 
 			// animate
 			TweenLite.to(gfxCircle, 0.8, { x: size * 0.35, y: size * 0.35, ease: Power1.easeOut, onUpdate:drawLineHelper });
