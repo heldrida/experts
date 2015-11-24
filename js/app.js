@@ -150,7 +150,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				expert_mouseout: 0.3,
 				expert_mousemovehandler_non_active: 0.8,
 				expert_init_scale: 0.8,
-				title_animation_delay: 200
+				title_animation_delay: 200,
+				expertScaleDownSpeed: 0.4,
+				rotationMouseover: 5.2
 			};
 
 			this.circle_lines = [];
@@ -646,7 +648,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
 							context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
 							context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
-							TweenLite.to(context.containers[i], 1, { rotation: context.getRotation() });
+							TweenLite.to(context.containers[i], context.animationTimes.rotationMouseover, { rotation: context.getRotation(), ease: Power1.easeOut });
+
+							context.getGlobalPos(context.containers[i]);
 
 						}(i));
 
@@ -666,7 +670,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 								context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.white, false, context.colours.hex.white);
 								context.icon_line_circle_tip_colour[i]['dark'].alpha = 1;
 								context.icon_line_circle_tip_colour[i]['light'].alpha = 0;
-								TweenLite.to(context.containers[i], 1, { rotation: context.getRotation() });
+								TweenLite.to(context.containers[i], context.animationTimes.rotationMouseover, { rotation: context.getRotation(), ease: Power1.easeOut });
 
 							}
 
@@ -928,8 +932,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 						setTimeout(function () {
 
-							TweenLite.to(expert.scale, 1, { x: this.expertScaleSmallRatio, y: this.expertScaleSmallRatio, ease: Power1.easeOut });
-							TweenLite.to(expert, 1, { alpha: 0.65, ease: Power1.easeOut, onComplete: unlock.bind(this) });
+							TweenLite.to(expert.scale, this.animationTimes.expertScaleDownSpeed, { x: this.expertScaleSmallRatio, y: this.expertScaleSmallRatio, ease: Power1.easeOut });
+							TweenLite.to(expert, this.animationTimes.expertScaleDownSpeed, { alpha: 0.65, ease: Power1.easeOut, onComplete: unlock.bind(this) });
 
 						}.bind(this), delay);
 
@@ -947,8 +951,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 					(function (expert, i) {
 
-						TweenLite.to(expert.scale, 1, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
-						TweenLite.to(expert, 1, { alpha: 1 });
+						TweenLite.to(expert.scale, context.animationTimes.expertScaleDownSpeed, { x: 1, y: 1 , ease: Power1.easeOut, onComplete: unlock.bind(this) });
+						TweenLite.to(expert, context.animationTimes.expertScaleDownSpeed, { alpha: 1 });
 						/*
 						context.expertMoveToCenter.call(context, expert, function () {
 							console.log('callback!!');
@@ -1341,6 +1345,22 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		getRotation: function () {
 			return this.randomIntFromInterval(this.anchorRotateMaxMin.max, this.anchorRotateMaxMin.min) * Math.PI / 180;
+		},
+
+		getGlobalPos: function (displayObject) {
+
+			// https://github.com/pixijs/pixi.js/issues/130
+			var globalX = displayObject.worldTransform.tx;
+			var globalY = displayObject.worldTransform.ty;
+			var pos = {
+				globalX: globalX,
+				globalY: globalY
+			};
+
+			console.log('getGlobalPos pos: ',  pos);
+
+			return pos;
+
 		}
 
 	};
