@@ -141,7 +141,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				clientY: null
 			};
 
-			this.expertScaleSmallRatio = 0.1;
+			this.expertScaleSmallRatio = 0.15;
 
 			this.defaultExpertSize = null;
 
@@ -160,6 +160,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.icon_line_circle_tip = [];
 
 			this.icon_line_circle_tip_colour = [];
+
+			this.containers = [];
 
 			this.anchorRotateMaxMin = {
 				max: 10,
@@ -468,6 +470,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			};
 
 			var container = createRect(0, 0, el.width, el.width, false);
+			this.containers[index] = container;
 			//container.beginFill(0xFFCC00);
 			//container.drawRect(0, 0, el.width, el.height);
 
@@ -643,6 +646,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.blue, false, context.colours.hex.blue);
 							context.icon_line_circle_tip_colour[i]['dark'].alpha = 0;
 							context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
+							TweenLite.to(context.containers[i], 1, { rotation: context.getRotation() });
 
 						}(i));
 
@@ -662,6 +666,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 								context.icon_line_circle_tip[i].updateLineStyle(false, context.colours.hex.white, false, context.colours.hex.white);
 								context.icon_line_circle_tip_colour[i]['dark'].alpha = 1;
 								context.icon_line_circle_tip_colour[i]['light'].alpha = 0;
+								TweenLite.to(context.containers[i], 1, { rotation: context.getRotation() });
 
 							}
 
