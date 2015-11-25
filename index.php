@@ -15,7 +15,15 @@
 	<body>
 
 		<!-- start: sh experts topbox module -->
-		<div class="sh-experts-topbox"></div>
+		<div class="sh-experts-topbox">
+
+			<!-- start: mobile -->
+			<div class="mobile">
+
+			</div>
+			<!-- end: mobile -->
+
+		</div>
 		<!-- end: sh experts topbox module -->
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>

@@ -94,8 +94,12 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				roundPixels: true
 			});
 
-			// inserts canva element into main container
-			this.container.el.appendChild(this.renderer.view);
+			var wrapper = document.createElement("div");
+			wrapper.setAttribute('class', 'desktop');
+			wrapper.appendChild(this.renderer.view);
+
+			// inserts wrapper element into main container
+			this.container.el.appendChild(wrapper);
 
 			// create stage
 			this.stage = new PIXI.Container();
@@ -171,6 +175,13 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				min: -100
 			};
 
+			this.lerpFnAnimProps = {
+				transitionDuration: 1,
+				startTime: (Date.now() / 1000),
+				startPos: 0,
+				endPos: 1
+			};
+
 		},
 
 		startTicker: function () {
@@ -183,6 +194,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				context.renderer.render(context.stage);
 				!context.particlesScaleLock ? context.particlesAnimateHandler() : null;
 				context.mouseMoveHandler.call(context);
+
+				//console.log('getLerpPos: ', context.getLerpPos.call(context));
 
 			}
 
@@ -1373,6 +1386,33 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 					context.iconRotateAnimator(container);
 				}
 			});
+
+		},
+
+		lerp: function (start, end, amt) {
+
+			return (1 - amt) * start + amt * end;
+
+		},
+
+		repeat: function (t, len) {
+
+			return t - Math.floor(t / len) * len;
+
+		},
+
+		pingPong: function (t, len) {
+			t = this.repeat(t, len * 2);
+			return len - Math.abs(t-len);
+		},
+
+		getLerpPos: function () {
+
+			var currentTime = Date.now() / 1000;
+			var adjustedTime = this.pingPong(currentTime - this.lerpFnAnimProps.startTime, this.lerpFnAnimProps.transitionDuration);
+			var x = this.lerp(this.lerpFnAnimProps.startPos, this.lerpFnAnimProps.endPos, adjustedTime);
+
+			return Math.abs(x.toFixed(2));
 
 		}
 

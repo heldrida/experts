@@ -221,3 +221,6 @@
       .sh-experts-topbox #quoteWrp > span span {
         font-family: 'OpenSans-SemiBold', helvetica, sans-serif;
         text-transform: uppercase; }
+  @media only screen and (max-width: 768px) {
+    .sh-experts-topbox .desktop {
+      display: none; } }
