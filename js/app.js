@@ -234,7 +234,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.experts = [];
 
-			total = this.expertsData.length;
+			total = 6; //this.expertsData.length;
 			max = 5;
 
 			if (total > max) {
@@ -260,6 +260,17 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 						posX = 0;
 						posY = center;
+
+						if (i > max && i < (max * 2)) {
+							posX = (this.container.width * 0.9) - ((size * (total - 5)) + (offsetX * (total - 5)));
+							posX = posX / 2;
+							posX += (this.container.width * 0.1) / 2;
+							console.log('posX', posX);
+							console.log("((size * (total - 5)) + (offsetX * (total - 5))", ((size * (total - 5)) + (offsetX * (total - 5))));
+							console.log("this.container.width * 0.9)", this.container.width * 0.9);
+							console.log('window.innerWidth * 0.9', window.innerWidth * 0.9);
+							console.log("(total - 5)", (total - 5));
+						}
 
 					}
 
@@ -306,10 +317,17 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				size = (this.container.width * 0.9) / 10;
 				this.defaultExpertSize = size;
 				offsetY = (((this.container.height * 0.6) - size) / (max - 1)); // calculated by subtracting the last element, remaining height and the number of elements to even
- 				offsetX = (((this.container.width * 0.9) - size) / (total - 1)) - size;//225;
+ 				//offsetX = (((this.container.width * 0.9) - size) / (total - 1)) - size;
+ 				offsetX = (size * total) / (max);
 				rnd = offsetY * Math.floor(Math.random() * total) + 1;
-				posX = 0;
+				posX = ((this.container.width * 0.9)) - ((size * total) + (offsetX * total));
+				posX = (posX + (size)) / 2;
 				posY = 0;
+
+				//this.expertsContainer.x *= 0.6;
+				this.expertsContainer.y *= 1.3;
+
+				console.log('offsetX', offsetX);
 
 				for (var i = 1; i <= total; i++) {
 
@@ -338,7 +356,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 					this.expertsContainer.addChild(expert);
 
-					rnd = offsetY * Math.floor(Math.random() * 5) + 1;
+					//rnd = offsetY * Math.floor(Math.random() * 5) + 1;
+					var maxPos = 3;
+					rnd = offsetY * Math.floor(Math.random() * maxPos) + 1;
 
 					posX += (size + offsetX);
 					//posY += offsetY;
