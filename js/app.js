@@ -205,8 +205,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		generateExpert: function (index) {
 
-			console.log('index', index);
-
 			var total = 10;
 			var size = (this.container.width * 0.9) / total;
 			var graphics = new PIXI.Graphics();
@@ -234,7 +232,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.experts = [];
 
-			total = 4; //this.expertsData.length;
+			total = this.expertsData.length;
 			max = 5;
 
 			if (total > max) {
@@ -1429,6 +1427,74 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var x = this.lerp(this.lerpFnAnimProps.startPos, this.lerpFnAnimProps.endPos, adjustedTime);
 
 			return Math.abs(x.toFixed(2));
+
+		},
+
+		shuffler: function () {
+
+			// lock `mouse move handler`
+			this.expertsMoveLock = true;
+
+			var tmpA, tmpB;
+			var arr = [];
+			var experts = {
+				a: { x: null, y: null },
+				b: { x: null, y: null }
+			};
+
+			var getRandomExperts = function () {
+
+				var t = this.expertsData.length - 1;
+
+				var pushRandomValueToArr = function () {
+					var x = Math.floor(Math.random() * t) + 1;
+					if (arr.indexOf(x) === -1) {
+						arr.push(x);
+					} else {
+						pushRandomValueToArr();
+					}
+				};
+
+				pushRandomValueToArr.call(this);
+				pushRandomValueToArr.call(this);
+
+			};
+
+			getRandomExperts.call(this);
+
+			// exchange position values
+			tmpA = {
+				x: this.experts[ arr[0] ].el.x,
+				y: this.experts[ arr[0] ].el.y
+			};
+
+			tmpB = {
+				x: this.experts[ arr[1] ].el.x,
+				y: this.experts[ arr[1] ].el.y
+			};
+
+
+			TweenLite.to(this.experts[ arr[1] ].el, 1, { x: tmpA.x, y: tmpA.y, ease: Back.easeOut.config(1.7), onComplete: function () {
+
+					this.experts[ arr[1] ].root = {
+						x: tmpA.x,
+						y: tmpA.y
+					};
+
+				}.bind(this)
+			});
+
+			TweenLite.to(this.experts[ arr[0] ].el, 1, { x: tmpB.x, y: tmpB.y, ease: Back.easeOut.config(1.7), onComplete: function () {
+
+					this.experts[ arr[0] ].root = {
+						x: tmpB.x,
+						y: tmpB.y
+					};
+
+					this.expertsMoveLock = false;
+
+				}.bind(this)
+			});
 
 		}
 
