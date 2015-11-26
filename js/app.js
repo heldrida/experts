@@ -234,7 +234,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.experts = [];
 
-			total = 6; //this.expertsData.length;
+			total = 4; //this.expertsData.length;
 			max = 5;
 
 			if (total > max) {
@@ -265,11 +265,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							posX = (this.container.width * 0.9) - ((size * (total - 5)) + (offsetX * (total - 5)));
 							posX = posX / 2;
 							posX += (this.container.width * 0.1) / 2;
-							console.log('posX', posX);
-							console.log("((size * (total - 5)) + (offsetX * (total - 5))", ((size * (total - 5)) + (offsetX * (total - 5))));
-							console.log("this.container.width * 0.9)", this.container.width * 0.9);
-							console.log('window.innerWidth * 0.9', window.innerWidth * 0.9);
-							console.log("(total - 5)", (total - 5));
 						}
 
 					}
@@ -320,12 +315,13 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
  				//offsetX = (((this.container.width * 0.9) - size) / (total - 1)) - size;
  				offsetX = (size * total) / (max);
 				rnd = offsetY * Math.floor(Math.random() * total) + 1;
-				posX = ((this.container.width * 0.9)) - ((size * total) + (offsetX * total));
-				posX = (posX + (size)) / 2;
-				posY = 0;
 
-				//this.expertsContainer.x *= 0.6;
-				this.expertsContainer.y *= 1.3;
+				posX = ((this.container.width * 0.9)) - ((size * total) + (offsetX * total));
+				posX = (posX - (size / 2)) / 2;
+				posX += (this.container.width * 0.07) / 2;
+
+				posY = (this.container.height * 0.3);
+
 
 				console.log('offsetX', offsetX);
 
