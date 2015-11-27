@@ -69,6 +69,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.expertsAnimShow.call(this);
 
 			this.startTicker.call(this);
+
 		},
 
 		setProperties: function (data) {
@@ -110,7 +111,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.expertsContainer.width = this.container.width * 0.9;
 			this.expertsContainer.height = this.container.height * 0.6;
 			this.expertsContainer.x = (this.container.width * 0.1) / 2;
-			this.expertsContainer.y = (this.container.height * 0.25);
+			this.expertsContainer.y = (this.container.height * 0.275);
 
 			// colours
 			this.colours = {
@@ -182,6 +183,14 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				endPos: 1
 			};
 
+			this.expertActiveModeOn = false;
+
+			// experts velocity
+			this.vx = (Math.random()) - 0.01;
+			this.vy = 0.025;
+			this.boundaryX = this.container.width * 0.8;
+			this.boundaryY = this.container.height * 0.5;
+
 		},
 
 		startTicker: function () {
@@ -190,12 +199,13 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			function animate() {
 
+				// loop
 				requestAnimationFrame(animate);
 				context.renderer.render(context.stage);
 				!context.particlesScaleLock ? context.particlesAnimateHandler() : null;
 				context.mouseMoveHandler.call(context);
 
-				//console.log('getLerpPos: ', context.getLerpPos.call(context));
+				context.expertMoveUpdate.call(context);
 
 			}
 
@@ -232,7 +242,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.experts = [];
 
-			total = this.expertsData.length;
+			total = 10; //this.expertsData.length;
 			max = 5;
 
 			if (total > max) {
@@ -487,7 +497,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var createRect = function (x1, y1, x2, y2, color) {
 			    var graphics = new PIXI.Graphics();
 
-			    graphics.beginFill(0x000000, 0.1);
+			    graphics.beginFill(0xFFCC00, 0);
 			    //This is the point around which the object will rotate.
 			    graphics.position.x = x1 + (x2/2);
 			    graphics.position.y = y1 + (y2/2);
@@ -972,6 +982,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				} else {
 
+					this.expertActiveModeOn = true;
 					this.experts[index].active = true;
 
 					if (this.expertQuoteDiv) {
@@ -1031,6 +1042,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 					}.call(this, this.experts[i]));
 
 				}
+
+				this.expertActiveModeOn = false;
 
 			};
 
@@ -1496,7 +1509,145 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				}.bind(this)
 			});
 
+		},
+
+		randomScaler: function () {
+
+			var pulseMs = 0.4;
+			var t = this.expertsData.length - 1;
+			var delay = 0;
+			var flip = false;
+
+			var lock = function () {
+				var bool = false;
+				for (var i = 0; i < this.experts.length; i++) {
+
+					if (this.experts[i].active) {
+						bool = true;
+					}
+
+				}
+
+				return bool;
+			};
+
+			var go = function (index) {
+
+				if (this.expertActiveModeOn) {
+					return;
+				}
+
+				TweenLite.to(this.experts[index].el.scale, pulseMs, { x: 0.95, y: 0.95 , ease: Sine.easeOut, onComplete: function () {
+
+						TweenLite.to(this.experts[index].el.scale, pulseMs / 2, { x: 1, y: 1 , ease: Sine.easeOut });
+
+						TweenLite.to(this.experts[index].el, pulseMs / 2, {  rotateY: 180 });
+
+					}.bind(this)
+				});
+
+			};
+
+			var stepAnim = function () {
+
+				for (var i = 0; i < this.experts.length; i++) {
+
+					(function (index) {
+
+						if (flip) {
+							index = (this.experts.length - 1) - index;
+						}
+
+						setTimeout(function () {
+
+							go.call(this, index);
+
+						}.bind(this), delay);
+
+						delay += 80;
+
+					}.bind(this)(i));
+
+				}
+
+				flip = !flip;
+
+				console.log('flip', flip);
+
+			};
+
+			setInterval(function () {
+
+				stepAnim.call(this);
+
+			}.bind(this), 5000);
+
+		},
+
+		expertMoveUpdate: function () {
+
+			this.expertsMoveLock = true;
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				var expert = this.experts[i].el;
+
+				//expert.x += Math.sin(this.vx);
+				expert.y +=  Math.sin(this.vy);
+
+				/*
+				if (expert.x > this.boundaryX) {
+
+					expert.x = this.boundaryX;
+					this.vx *= -1;
+
+				} else if (expert.x < 0) {
+
+					expert.x = 0;
+					this.vx *= -1;
+
+				}
+				*/
+
+				if (expert.y > this.boundaryY) {
+
+					expert.y = this.boundaryY;
+					this.vy *= -1;
+
+				} else if (expert.y < 0) {
+
+					expert.y = 0;
+					this.vy *= -1;
+
+				}
+
+			}
+
+		},
+
+		/*
+		collisonDetection: function (index) {
+
+			for (var i = 0; i < this.experts.length; i++) {
+
+				if (i != index) {
+
+					this.isCollide(this.experts[i].el, this.experts[index].el);
+
+				}
+
+			}
+
+		},
+
+		isCollide: function (a, b) {
+			return !(((a.y + a.height) < (b.y)) ||
+			        (a.y > (b.y + b.height)) ||
+			        ((a.x + a.width) < b.x) ||
+		    	    (a.x > (b.x + b.width)));
+
 		}
+		*/
 
 	};
 

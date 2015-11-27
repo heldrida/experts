@@ -9,6 +9,8 @@
 
 	http://www.snorkl.tv/2011/04/tweenlite-meets-flash-drawing-api-for-animated-line-drawing-fun/
 
+	http://math.stackexchange.com/questions/1368904/how-to-find-if-a-point-is-outside-a-circle-circumference-area
+
 	How i can change zIndex of elements?
 
 		https://github.com/pixijs/pixi.js/issues/300
@@ -24,3 +26,8 @@
 	json editor:
 
 		http://www.danstools.com/json-editor/
+
+
+	Particles:
+
+		http://codepen.io/jsndks/pen/ovjAC
