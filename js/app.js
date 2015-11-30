@@ -151,7 +151,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.defaultExpertSize = null;
 
 			this.animationTimes = {
-				expert_mouseover: 0.3,
+				expert_mouseover: 10,
 				expert_mouseout: 0.3,
 				expert_mousemovehandler_non_active: 0.8,
 				expert_init_scale: 0.8,
@@ -192,7 +192,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
 			this.boundaryY = this.container.height * 0.5;
-			this.floatingVelocity = 40;
+			this.floatingVelocity = 42;
 
 			for (var i = 0; i < this.expertsData.length; i++) {
 				this.vx[i] =  Math.random() / this.floatingVelocity;
@@ -1631,7 +1631,16 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			for (var i = 0; i < this.experts.length; i++) {
 
-				if (i != index && this.isCollide(this.experts[index].el, this.experts[i].el)) {
+				/*
+				var iconEl = {
+					x: this.icon_line_circle_tip[i].position.x,
+					y: this.icon_line_circle_tip[i].position.y,
+					width: 10,
+					height: 10
+				};
+				*/
+
+				if (i != index && (this.isCollide(this.experts[index].el, this.experts[i].el) /*|| this.isCollide(iconEl, this.experts[i].el)*/)) {
 					bool = true;
 				}
 
