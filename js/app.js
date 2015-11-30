@@ -685,6 +685,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							lock_mouseout = false;
 						}, 1000);
 
+						context.expertMoveToCenter.call(context, expert[i].el, false);
+
 					};
 
 					expert[i].el.mouseover = function (e) {
@@ -1111,8 +1113,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		expertMoveToCenter: function (expert, callback) {
-
-			console.log("expertMoveToCenter fn()");
 
 			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
 			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
