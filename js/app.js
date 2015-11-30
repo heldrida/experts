@@ -1599,24 +1599,24 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				if (expert.x > this.boundaryX) {
 
-					//expert.x = this.boundaryX;
+					expert.x = this.boundaryX;
 					this.vx[i] *= -1;
 
 				} else if (expert.x < 0) {
 
-					//expert.x = 0;
+					expert.x = 0;
 					this.vx[i] *= -1;
 
 				}
 
 				if (expert.y > this.boundaryY) {
 
-					//expert.y = this.boundaryY;
+					expert.y = this.boundaryY;
 					this.vy[i] *= -1;
 
 				} else if (expert.y < 0) {
 
-					//expert.y = 0;
+					expert.y = 0;
 					this.vy[i] *= -1;
 
 				}
