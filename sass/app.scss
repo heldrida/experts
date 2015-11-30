@@ -1,6 +1,9 @@
 @import "css3MixinLibrary";
 @import "animations";
 
+// colours
+$blue: #3b81ff;
+
 .sh-experts-topbox {
 	background-color: #000;
 	color: #FFF;
@@ -126,9 +129,99 @@
 		}
 	}
 
+	.clip-photo {
+		width: 100px;
+		height: 100px;
+		border: 1px solid #fff;
+		border-radius: 50%;
+		overflow: hidden;
+		margin: auto;
+		position: relative;
+
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			height: auto;
+			@include transform(translateX(-50%) translateY(-50%));
+		}
+	}
+
+	.clip-icon {
+		width: 30px;
+		height: 30px;
+		border: none;
+		border-radius: 50%;
+		overflow: hidden;
+		margin: auto;
+		background: #FFF;
+		position: absolute;
+		left: 50%;
+		@include transform(translateX(-50%) translateY(-50%));
+
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: auto;
+			height: 75%;
+			@include transform(translateX(-50%) translateY(-50%));
+		}
+	}
+
+	.experts-list {
+		padding: 200px 0;
+
+		li {
+			position: relative;
+			text-align: center;
+			width: 25%;
+			float: left;
+
+			&:nth-child(odd) {
+				@include transform(translateY(-50%));
+			}
+		}
+
+		h3 {
+			color: $blue;
+			text-transform: uppercase;
+			font-size: 10px;
+			margin-bottom: 10px;
+			letter-spacing: 1px;
+			font-family: 'OpenSans-Light', arial, sans-serif;
+
+			span {
+				font-family: 'OpenSans-Bold', arial, sans-serif;
+			}
+		}
+
+		p {
+			margin-top: 25px;
+			text-transform: uppercase;
+			font-size: 6px;
+			letter-spacing: 1px;
+			width: 100%;
+		}
+	}
+
+	.desktop {
+		display: block;
+	}
+
+	.mobile,
+	.tablet {
+		display: none;
+	}
+
 	@media only screen and (max-width: 768px) {
 		.desktop {
 			display: none;
+		}
+
+		.tablet {
+			display: block;
 		}
 	}
 }

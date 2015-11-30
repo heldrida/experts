@@ -1162,6 +1162,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			// create a new div element
 			this.expertQuoteDiv = document.createElement('div');
 			this.expertQuoteDiv.setAttribute('id', 'quoteWrp');
+			this.expertQuoteDiv.setAttribute('class', 'desktop');
 			var p = document.createElement('p');
 			p.innerHTML = this.expertsData[index].quote;
 			this.expertQuoteDiv.appendChild(p);
