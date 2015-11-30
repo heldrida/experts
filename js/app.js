@@ -186,10 +186,20 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.expertActiveModeOn = false;
 
 			// experts velocity
-			this.vx = (Math.random()) - 0.01;
-			this.vy = 0.025;
+			//this.vx = (Math.random()) - 0.01;
+			//this.vy = 0.025;
+			this.vx = [];
+			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
 			this.boundaryY = this.container.height * 0.5;
+			this.floatingVelocity = 50;
+
+			for (var i = 0; i < this.expertsData.length; i++) {
+				this.vx[i] =  Math.random() / this.floatingVelocity;
+				this.vy[i] =  Math.random() / this.floatingVelocity;
+			}
+
+			this.pauseDebugger = false;
 
 		},
 
@@ -198,6 +208,10 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var context = this;
 
 			function animate() {
+
+				if (context.pauseDebugger) {
+					return;
+				}
 
 				// loop
 				requestAnimationFrame(animate);
@@ -329,9 +343,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				posX += (this.container.width * 0.07) / 2;
 
 				posY = (this.container.height * 0.3);
-
-
-				console.log('offsetX', offsetX);
 
 				for (var i = 1; i <= total; i++) {
 
@@ -962,8 +973,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				if (i !== index) {
 
-					console.log('CASE A');
-
 					this.shrinkLine(i);
 					this.experts[i].active = false;
 
@@ -1001,9 +1010,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 						*/
 
 					}(this.experts[i].el, i));
-
-
-					console.log('CASE B');
 
 				}
 
@@ -1102,8 +1108,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		expertMoveToCenter: function (expert, callback) {
-
-			console.log('expertMoveToCenter fn()');
 
 			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
 			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
@@ -1346,8 +1350,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		repositionActiveExpert: function (index) {
 
-			console.log("this.experts.length", this.experts.length);
-
 			var reset = function () {
 
 				for (var i = 0; i < this.experts.length; i++) {
@@ -1398,8 +1400,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				globalX: globalX,
 				globalY: globalY
 			};
-
-			console.log('getGlobalPos pos: ',  pos);
 
 			return pos;
 
@@ -1572,8 +1572,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				flip = !flip;
 
-				console.log('flip', flip);
-
 			};
 
 			setInterval(function () {
@@ -1591,33 +1589,35 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			for (var i = 0; i < this.experts.length; i++) {
 
 				var expert = this.experts[i].el;
+				expert.x += Math.sin(this.vx[i]);
+				expert.y +=  Math.sin(this.vy[i]);
 
-				//expert.x += Math.sin(this.vx);
-				expert.y +=  Math.sin(this.vy);
+				if (this.collisonDetection(i)) {
+					this.vx[i] *= -1;
+					this.vy[i] *= -1;
+				}
 
-				/*
 				if (expert.x > this.boundaryX) {
 
-					expert.x = this.boundaryX;
-					this.vx *= -1;
+					//expert.x = this.boundaryX;
+					this.vx[i] *= -1;
 
 				} else if (expert.x < 0) {
 
-					expert.x = 0;
-					this.vx *= -1;
+					//expert.x = 0;
+					this.vx[i] *= -1;
 
 				}
-				*/
 
 				if (expert.y > this.boundaryY) {
 
-					expert.y = this.boundaryY;
-					this.vy *= -1;
+					//expert.y = this.boundaryY;
+					this.vy[i] *= -1;
 
 				} else if (expert.y < 0) {
 
-					expert.y = 0;
-					this.vy *= -1;
+					//expert.y = 0;
+					this.vy[i] *= -1;
 
 				}
 
@@ -1625,18 +1625,19 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		},
 
-		/*
 		collisonDetection: function (index) {
+
+			var bool = false;
 
 			for (var i = 0; i < this.experts.length; i++) {
 
-				if (i != index) {
-
-					this.isCollide(this.experts[i].el, this.experts[index].el);
-
+				if (i != index && this.isCollide(this.experts[index].el, this.experts[i].el)) {
+					bool = true;
 				}
 
 			}
+
+			return bool;
 
 		},
 
@@ -1647,7 +1648,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		    	    (a.x > (b.x + b.width)));
 
 		}
-		*/
 
 	};
 
