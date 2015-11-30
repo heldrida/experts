@@ -158,7 +158,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				title_animation_delay: 200,
 				expertScaleDownSpeed: 0.45,
 				rotationMouseover: 5.2,
-				iconRotationTime: 12
+				iconRotationTime: 80
 			};
 
 			this.circle_lines = [];
@@ -192,7 +192,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
 			this.boundaryY = this.container.height * 0.5;
-			this.floatingVelocity = 50;
+			this.floatingVelocity = 40;
 
 			for (var i = 0; i < this.expertsData.length; i++) {
 				this.vx[i] =  Math.random() / this.floatingVelocity;
