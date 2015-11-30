@@ -700,7 +700,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 							context.icon_line_circle_tip_colour[i]['light'].alpha = 1;
 							TweenLite.to(context.containers[i], context.animationTimes.rotationMouseover, { rotation: context.getRotation(), ease: Power1.easeOut });
 
-							context.getGlobalPos(context.containers[i]);
+							//context.getGlobalPos(context.containers[i]);
 
 						}(i));
 
@@ -1589,14 +1589,15 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			for (var i = 0; i < this.experts.length; i++) {
 
 				var expert = this.experts[i].el;
-				expert.x += Math.sin(this.vx[i]);
+				//expert.x += Math.sin(this.vx[i]);
 				expert.y +=  Math.sin(this.vy[i]);
 
 				if (this.collisonDetection(i)) {
-					this.vx[i] *= -1;
+					//this.vx[i] *= -1;
 					this.vy[i] *= -1;
 				}
 
+				/*
 				if (expert.x > this.boundaryX) {
 
 					expert.x = this.boundaryX;
@@ -1608,6 +1609,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 					this.vx[i] *= -1;
 
 				}
+				*/
 
 				if (expert.y > this.boundaryY) {
 
@@ -1628,19 +1630,22 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		collisonDetection: function (index) {
 
 			var bool = false;
+			/*
+			var iconPosA = this.getGlobalPos(this.icon_line_circle_tip[index]);
+
+			var iconElA = {
+				x: iconPosA.globalX,
+				y: iconPosA.globalY,
+				width: this.defaultExpertSize,
+				height: this.defaultExpertSize
+			};
+
+			console.log(iconElA);
+			*/
 
 			for (var i = 0; i < this.experts.length; i++) {
 
-				/*
-				var iconEl = {
-					x: this.icon_line_circle_tip[i].position.x,
-					y: this.icon_line_circle_tip[i].position.y,
-					width: 10,
-					height: 10
-				};
-				*/
-
-				if (i != index && (this.isCollide(this.experts[index].el, this.experts[i].el) /*|| this.isCollide(iconEl, this.experts[i].el)*/)) {
+				if (i != index && (this.isCollide(this.experts[index].el, this.experts[i].el))) {
 					bool = true;
 				}
 
