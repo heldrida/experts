@@ -192,7 +192,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
 			this.boundaryY = this.container.height * 0.5;
-			this.floatingVelocity = 42;
+			this.floatingVelocity = 1;
 
 			for (var i = 0; i < this.expertsData.length; i++) {
 				this.vx[i] =  Math.random() / this.floatingVelocity;
@@ -219,7 +219,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				!context.particlesScaleLock ? context.particlesAnimateHandler() : null;
 				context.mouseMoveHandler.call(context);
 
-				context.expertMoveUpdate.call(context);
+				if (!this.expertsMoveLock) {
+					context.expertMoveUpdate.call(context);
+				}
 
 			}
 
@@ -946,6 +948,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.expertsMoveLock = true;
 
+			console.log('showExpertInfo');
+
 			// exception handler
 			if (!this.expertActiveExceptionHandler.call(this, index)) {
 
@@ -1037,7 +1041,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 						experts.active = false;
 
-
 						// change colours
 						context.circle_lines[i + 1].updateLineStyle(false, context.colours.hex.white, false);
 						context.icon_lines[i].updateLineStyle(false, context.colours.hex.white, false);
@@ -1108,6 +1111,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		expertMoveToCenter: function (expert, callback) {
+
+			console.log("expertMoveToCenter fn()");
 
 			var x = this.expertsContainer.width / 2 - (this.defaultExpertSize / 2);
 			var y = this.expertsContainer.height / 2 - (this.defaultExpertSize / 2);
@@ -1588,7 +1593,12 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			for (var i = 0; i < this.experts.length; i++) {
 
+				if (this.experts[i].active) {
+					return;
+				}
+
 				var expert = this.experts[i].el;
+
 				//expert.x += Math.sin(this.vx[i]);
 				expert.y +=  Math.sin(this.vy[i]);
 
