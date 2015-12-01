@@ -221,7 +221,7 @@ body {
       line-height: 1.2em;
       color: #3b81ff;
       font-style: italic;
-      background-color: rbga(0, 0, 0, 0.8); }
+      background-color: rgba(0, 0, 0, 0.7); }
       .sh-experts-topbox #quoteWrp p:before,
       .sh-experts-topbox #quoteWrp p:after {
         content: '"'; }
