@@ -500,8 +500,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			sprite.position.y = size * 0.85;
 			 */
 
-			console.log('size', size);
-
 			sprite.position.x = size * 0.08;
 			sprite.position.y = size * 0.18;
 
