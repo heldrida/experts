@@ -298,6 +298,11 @@
       font-size: 6px;
       letter-spacing: 1px;
       width: 100%; }
+  .sh-experts-topbox .bg-static {
+    background: url(../img/bg-circles-static.png?201512011121);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 768px; }
   .sh-experts-topbox .desktop {
     display: block; }
   .sh-experts-topbox .mobile,

@@ -18,7 +18,7 @@
 		<div class="sh-experts-topbox">
 
 			<!-- start: tablet -->
-			<div class="tablet">
+			<div class="tablet bg-static">
 
 				<ul class="experts-list">
 					<li>

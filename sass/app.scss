@@ -206,6 +206,13 @@ $blue: #3b81ff;
 		}
 	}
 
+	.bg-static {
+		background: url(../img/bg-circles-static.png?201512011121);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 768px;
+	}
+
 	.desktop {
 		display: block;
 	}
