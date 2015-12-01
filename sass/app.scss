@@ -35,12 +35,17 @@ $blue: #3b81ff;
 
 	#title-container {
 		width: 90%;
-		max-width: 600px;
+		max-width: 550px;
 		margin: 0 auto;
 		padding-top: 30px;
 		position: absolute;
 		left: 50%;
 		@include transform(translateX(-50%));
+
+		h1,
+		p {
+			position: relative;
+		}
 
 		h1 {
 			opacity: 0;
@@ -264,7 +269,7 @@ $blue: #3b81ff;
 		}
 	}
 
-	@media only screen and (min-device-width: 668px) and (max-device-width: 1024px) {
+	@media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
 		.mobile ~ .experts-down-arrow,
 		.tablet ~ .experts-down-arrow {
 			display: none;
@@ -301,7 +306,7 @@ $blue: #3b81ff;
 		}
 	}
 
-	@media only screen and (max-device-width: 667px) {
+	@media only screen and (max-width: 667px), (max-device-width: 667px) {
 		.mobile ~ .experts-down-arrow,
 		.tablet ~ .experts-down-arrow {
 			display: none;

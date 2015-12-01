@@ -136,6 +136,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.defaultLineWidth = 1;
 
 			this.titleDiv = document.querySelector('#title-container');
+			this.expertsList = document.querySelectorAll('.experts-list li');
+
 			this.attachTitle();
 
 			this.attachArrow();
@@ -630,7 +632,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			elements.push(h1);
 			elements.push(p);
 
-			this.titleHandler();
+			//this.titleHandler();
 
 			setTimeout(function () {
 
@@ -729,6 +731,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		titleHandler: function () {
 
+			return;
+
 			var h1 = this.titleDiv.querySelector('h1');
 			var p = this.titleDiv.querySelector('p');
 
@@ -766,6 +770,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			p.style.padding = (window.innerWidth * rp_p) + 'px 0';
 			p.style.lineHeight = (window.innerWidth * rp_ln) + 'px';
 			p.style.position = "relative";
+
 
 		},
 
