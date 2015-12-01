@@ -192,7 +192,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.vx = [];
 			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
-			this.boundaryY = this.container.height * 0.5;
+			this.boundaryY = this.container.height * 0.4;
 			this.floatingVelocity = 28;
 
 			for (var i = 0; i < this.expertsData.length; i++) {
@@ -629,18 +629,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var elements = [];
 			elements.push(h1);
 			elements.push(p);
-
-			/*
-			h1.innerHTML = "THE EXPERTS";
-			p.innerHTML = "OUR NETWORK OF EXPERTS ARE SOME OF THE MOST SORT AFTER PEOPLE IN THE INDUSTRY.<br>GIVING ADVICE OF A MULTITUDE OF SPORTS AND ACTIVITIES";
-
-			this.titleDiv.appendChild(h1);
-			this.titleDiv.appendChild(p);
-
-			this.titleDiv.setAttribute('id', 'title-container');
-
-			this.container.el.appendChild(this.titleDiv);
-			*/
 
 			this.titleHandler();
 

@@ -145,8 +145,18 @@
     width: 100%;
     height: auto; }
   .sh-experts-topbox #title-container {
-    width: 100%;
-    padding-top: 60px; }
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 30px;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -khtml-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%); }
     .sh-experts-topbox #title-container h1 {
       opacity: 0;
       letter-spacing: 1.5px;
@@ -303,9 +313,6 @@
   .sh-experts-topbox .mobile,
   .sh-experts-topbox .tablet {
     display: none; }
-  .sh-experts-topbox .mobile ~ .experts-down-arrow,
-  .sh-experts-topbox .tablet ~ .experts-down-arrow {
-    display: none; }
   .sh-experts-topbox .mobile h3,
   .sh-experts-topbox .mobile p {
     display: none; }
@@ -327,29 +334,55 @@
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: center center; }
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  @media only screen and (min-device-width: 668px) and (max-device-width: 1024px) {
+    .sh-experts-topbox .mobile ~ .experts-down-arrow,
+    .sh-experts-topbox .tablet ~ .experts-down-arrow {
+      display: none; }
     .sh-experts-topbox .mobile,
     .sh-experts-topbox .desktop {
       display: none; }
     .sh-experts-topbox .tablet {
       display: block; }
-    .sh-experts-topbox #title-container h1 {
-      font-size: 30px;
-      margin-bottom: 30px; }
-    .sh-experts-topbox #title-container p {
-      font-size: 12px;
-      line-height: 19px;
-      margin: 0;
-      padding: 0; } }
-  @media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+    .sh-experts-topbox #title-container {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      left: auto;
+      -webkit-transform: none;
+      -khtml-transform: none;
+      -moz-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
+      transform: none; }
+      .sh-experts-topbox #title-container h1 {
+        font-size: 30px;
+        margin-bottom: 30px; }
+      .sh-experts-topbox #title-container p {
+        font-size: 12px;
+        line-height: 19px;
+        margin: 0;
+        padding: 0; } }
+  @media only screen and (max-device-width: 667px) {
+    .sh-experts-topbox .mobile ~ .experts-down-arrow,
+    .sh-experts-topbox .tablet ~ .experts-down-arrow {
+      display: none; }
     .sh-experts-topbox .tablet,
     .sh-experts-topbox .desktop {
       display: none; }
     .sh-experts-topbox .mobile {
       display: block; }
     .sh-experts-topbox #title-container {
+      position: relative;
       width: 90%;
       margin: 0 auto;
-      padding-top: 30px; }
+      padding-top: 30px;
+      left: auto;
+      -webkit-transform: none;
+      -khtml-transform: none;
+      -moz-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
+      transform: none; }
       .sh-experts-topbox #title-container p {
         text-align: left; } }
