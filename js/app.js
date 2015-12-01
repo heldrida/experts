@@ -197,7 +197,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.vy = [];
 			this.boundaryX = this.container.width * 0.8;
 			this.boundaryY = this.container.height * 0.4;
-			this.floatingVelocity = 28;
+			this.floatingVelocity = 23;
 
 			for (var i = 0; i < this.expertsData.length; i++) {
 				this.vx[i] =  Math.random() / this.floatingVelocity;
