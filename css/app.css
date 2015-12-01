@@ -411,3 +411,8 @@ body {
         background-color: black; }
     .sh-experts-topbox .experts-list {
       padding-bottom: 60px; } }
+  @media only screen and (max-device-width: 667px) and (orientation: landscape) {
+    .sh-experts-topbox .mobile .experts-list {
+      padding-bottom: 60px; }
+      .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
+        margin-top: 0px; } }

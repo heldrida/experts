@@ -366,4 +366,18 @@ body {
 			}
 		}
 	}
+
+	@media only screen and (max-device-width: 667px) and (orientation: landscape) {
+		.mobile {
+			.experts-list {
+				padding-bottom: 60px;
+
+				li {
+					&:nth-child(even) {
+						margin-top: 0px;
+					}
+				}
+			}
+		}
+	}
 }
