@@ -79,14 +79,17 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.expertsMoveLock = false;
 
 			// calculate project container ratio
-			var containerRatio = 1440 / 760;
+			this.containerRatio = 1440 / 760;
 
 			// container related properties
+			var shExpertsTopbox = document.querySelector('.sh-experts-topbox');
 			this.container = {
-				el: document.querySelector('.sh-experts-topbox'),
-				width: window.innerWidth,
-				height: window.innerWidth / containerRatio
+				el: shExpertsTopbox,
+				width: shExpertsTopbox.offsetWidth,
+				height: shExpertsTopbox.offsetWidth / this.containerRatio
 			};
+
+			this.container.el.style.height = (shExpertsTopbox.offsetWidth / this.containerRatio) + 'px';
 
 			// create renderer
 			this.renderer = new PIXI.CanvasRenderer(this.container.width, this.container.height, {
@@ -656,6 +659,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			var context = this;
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
+
+			window.addEventListener('resize', this.containerSizeHandler.bind(this));
 
 			this.container.el.addEventListener('mousemove', function (e) {
 
@@ -1725,6 +1730,14 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			}, {
 				opacity: 1
 			});
+
+		},
+
+		containerSizeHandler: function () {
+
+			this.container.height = (this.container.el.offsetWidth / this.containerRatio);
+
+			this.container.el.style.height = this.container.height + 'px';
 
 		}
 

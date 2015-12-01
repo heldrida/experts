@@ -147,7 +147,7 @@ body {
     font-size: 10px; }
   .sh-experts-topbox canvas {
     width: 100%;
-    height: auto; }
+    height: 100%; }
   .sh-experts-topbox #title-container {
     width: 90%;
     max-width: 550px;
@@ -323,7 +323,8 @@ body {
     background-position: center center;
     background-size: 768px; }
   .sh-experts-topbox .desktop {
-    display: block; }
+    display: block;
+    height: 100%; }
   .sh-experts-topbox .mobile,
   .sh-experts-topbox .tablet {
     display: none; }
