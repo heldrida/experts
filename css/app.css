@@ -145,11 +145,8 @@
     width: 100%;
     height: auto; }
   .sh-experts-topbox #title-container {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%; }
+    width: 100%;
+    padding-top: 60px; }
     .sh-experts-topbox #title-container h1 {
       opacity: 0;
       letter-spacing: 1.5px;
@@ -222,8 +219,8 @@
         font-family: 'OpenSans-SemiBold', helvetica, sans-serif;
         text-transform: uppercase; }
   .sh-experts-topbox .clip-photo {
-    width: 100px;
-    height: 100px;
+    width: 122px;
+    height: 122px;
     border: 1px solid #fff;
     border-radius: 50%;
     overflow: hidden;
@@ -242,8 +239,8 @@
       -o-transform: translateX(-50%) translateY(-50%);
       transform: translateX(-50%) translateY(-50%); }
   .sh-experts-topbox .clip-icon {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border: none;
     border-radius: 50%;
     overflow: hidden;
@@ -270,26 +267,24 @@
       -o-transform: translateX(-50%) translateY(-50%);
       transform: translateX(-50%) translateY(-50%); }
   .sh-experts-topbox .experts-list {
-    padding: 200px 0; }
+    height: auto;
+    overflow: hidden;
+    padding: 80px 0; }
     .sh-experts-topbox .experts-list li {
       position: relative;
       text-align: center;
       width: 25%;
+      height: 186px;
       float: left; }
-      .sh-experts-topbox .experts-list li:nth-child(odd) {
-        -webkit-transform: translateY(-50%);
-        -khtml-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%); }
+      .sh-experts-topbox .experts-list li:nth-child(even) {
+        margin-top: 93px; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;
-      font-size: 10px;
+      font-size: 14px;
       margin-bottom: 10px;
       letter-spacing: 1px;
-      font-family: 'OpenSans-Light', arial, sans-serif; }
+      font-family: 'OpenSans-Regular', arial, sans-serif; }
       .sh-experts-topbox .experts-list h3 span {
         font-family: 'OpenSans-Bold', arial, sans-serif; }
     .sh-experts-topbox .experts-list p {
@@ -308,8 +303,53 @@
   .sh-experts-topbox .mobile,
   .sh-experts-topbox .tablet {
     display: none; }
-  @media only screen and (max-width: 768px) {
+  .sh-experts-topbox .mobile ~ .experts-down-arrow,
+  .sh-experts-topbox .tablet ~ .experts-down-arrow {
+    display: none; }
+  .sh-experts-topbox .mobile h3,
+  .sh-experts-topbox .mobile p {
+    display: none; }
+  .sh-experts-topbox .mobile .clip-photo {
+    width: 70px;
+    height: 70px; }
+  .sh-experts-topbox .mobile .clip-icon {
+    width: 18px;
+    height: 18px; }
+  .sh-experts-topbox .mobile .experts-list {
+    height: 160px;
+    padding: 30px; }
+    .sh-experts-topbox .mobile .experts-list li {
+      width: 33.3333%; }
+      .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
+        margin-top: 80px; }
+  .sh-experts-topbox .mobile.bg-static {
+    background: url(../img/bg-circles-mobile-static.png?201512011208);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center center; }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .sh-experts-topbox .mobile,
     .sh-experts-topbox .desktop {
       display: none; }
     .sh-experts-topbox .tablet {
-      display: block; } }
+      display: block; }
+    .sh-experts-topbox #title-container h1 {
+      font-size: 30px;
+      margin-bottom: 30px; }
+    .sh-experts-topbox #title-container p {
+      font-size: 12px;
+      line-height: 19px;
+      margin: 0;
+      padding: 0; } }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+    .sh-experts-topbox .tablet,
+    .sh-experts-topbox .desktop {
+      display: none; }
+    .sh-experts-topbox .mobile {
+      display: block; }
+    .sh-experts-topbox #title-container {
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 30px; }
+      .sh-experts-topbox #title-container p {
+        text-align: left; } }

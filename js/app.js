@@ -135,6 +135,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.defaultLineWidth = 1;
 
+			this.titleDiv = document.querySelector('#title-container');
 			this.attachTitle();
 
 			this.attachArrow();
@@ -623,14 +624,13 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		attachTitle: function () {
 
-			// create a new div element
-			this.titleDiv = document.createElement("div");
-			var h1 = document.createElement("h1");
-			var p = document.createElement("p");
+			var h1 = this.titleDiv.querySelector('h1');
+			var p = this.titleDiv.querySelector('p');
 			var elements = [];
 			elements.push(h1);
 			elements.push(p);
 
+			/*
 			h1.innerHTML = "THE EXPERTS";
 			p.innerHTML = "OUR NETWORK OF EXPERTS ARE SOME OF THE MOST SORT AFTER PEOPLE IN THE INDUSTRY.<br>GIVING ADVICE OF A MULTITUDE OF SPORTS AND ACTIVITIES";
 
@@ -640,6 +640,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			this.titleDiv.setAttribute('id', 'title-container');
 
 			this.container.el.appendChild(this.titleDiv);
+			*/
 
 			this.titleHandler();
 

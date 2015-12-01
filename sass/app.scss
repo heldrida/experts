@@ -34,11 +34,8 @@ $blue: #3b81ff;
 	}
 
 	#title-container {
-		position: absolute;
-		top: 20px;
-		left: 50%;
-		transform: translateX(-50%);
 		width: 100%;
+		padding-top: 60px;
 
 		h1 {
 			opacity: 0;
@@ -130,8 +127,8 @@ $blue: #3b81ff;
 	}
 
 	.clip-photo {
-		width: 100px;
-		height: 100px;
+		width: 122px;
+		height: 122px;
 		border: 1px solid #fff;
 		border-radius: 50%;
 		overflow: hidden;
@@ -149,8 +146,8 @@ $blue: #3b81ff;
 	}
 
 	.clip-icon {
-		width: 30px;
-		height: 30px;
+		width: 35px;
+		height: 35px;
 		border: none;
 		border-radius: 50%;
 		overflow: hidden;
@@ -171,26 +168,29 @@ $blue: #3b81ff;
 	}
 
 	.experts-list {
-		padding: 200px 0;
+		height: auto;
+		overflow: hidden;
+		padding: 80px 0;
 
 		li {
 			position: relative;
 			text-align: center;
 			width: 25%;
+			height: 186px;
 			float: left;
 
-			&:nth-child(odd) {
-				@include transform(translateY(-50%));
+			&:nth-child(even) {
+				margin-top: 93px;
 			}
 		}
 
 		h3 {
 			color: $blue;
 			text-transform: uppercase;
-			font-size: 10px;
+			font-size: 14px;
 			margin-bottom: 10px;
 			letter-spacing: 1px;
-			font-family: 'OpenSans-Light', arial, sans-serif;
+			font-family: 'OpenSans-Regular', arial, sans-serif;
 
 			span {
 				font-family: 'OpenSans-Bold', arial, sans-serif;
@@ -222,13 +222,98 @@ $blue: #3b81ff;
 		display: none;
 	}
 
-	@media only screen and (max-width: 768px) {
+	.mobile ~ .experts-down-arrow,
+	.tablet ~ .experts-down-arrow {
+		display: none;
+	}
+
+	.mobile {
+		h3,
+		p {
+			display: none;
+		}
+
+		.clip-photo {
+			width: 70px;
+			height: 70px;
+		}
+
+		.clip-icon {
+			width: 18px;
+			height: 18px;
+		}
+
+		.experts-list {
+			height: 160px;
+			padding: 30px;
+
+			li {
+				width: 33.3333%;
+
+				&:nth-child(even) {
+					margin-top: 80px;
+				}
+			}
+		}
+
+		&.bg-static {
+			background: url(../img/bg-circles-mobile-static.png?201512011208);
+			background-size: 90%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+	}
+
+	@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		.mobile,
 		.desktop {
 			display: none;
 		}
 
 		.tablet {
 			display: block;
+		}
+
+		#title-container {
+			h1 {
+				font-size: 30px;
+				margin-bottom: 30px;
+			}
+
+			p {
+				font-size: 12px;
+				line-height: 19px;
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+
+	@media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+		.tablet,
+		.desktop {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
+		}
+		.clip-photo {}
+
+		#title-container {
+			width: 90%;
+			margin: 0 auto;
+			padding-top: 30px;
+
+			p {
+				text-align: left;
+			}
+		}
+
+		.experts-list {
+			li {
+				&:nth-child(even) {}
+			}
 		}
 	}
 }
