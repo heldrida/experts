@@ -126,12 +126,16 @@
     -o-transform: translateX(-50%) translateY(-30%);
     transform: translateX(-50%) translateY(-30%); } }
 
+body {
+  background-color: #000; }
+
 .sh-experts-topbox {
   background-color: #000;
   color: #FFF;
   font-family: 'OpenSans-Extrabold', arial, sans-serif;
   text-align: center;
-  position: relative; }
+  position: relative;
+  opacity: 0; }
   .sh-experts-topbox.mouseover {
     cursor: pointer !important; }
   .sh-experts-topbox p,
@@ -216,7 +220,8 @@
       font-size: 1.4em;
       line-height: 1.2em;
       color: #3b81ff;
-      font-style: italic; }
+      font-style: italic;
+      background-color: rbga(0, 0, 0, 0.8); }
       .sh-experts-topbox #quoteWrp p:before,
       .sh-experts-topbox #quoteWrp p:after {
         content: '"'; }
@@ -321,8 +326,7 @@
     display: block; }
   .sh-experts-topbox .mobile,
   .sh-experts-topbox .tablet {
-    display: none;
-    opacity: 0; }
+    display: none; }
   .sh-experts-topbox .mobile h3,
   .sh-experts-topbox .mobile p {
     display: none; }
@@ -339,11 +343,6 @@
       width: 33.3333%; }
       .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
         margin-top: 80px; }
-  .sh-experts-topbox .mobile.bg-static {
-    background: url(../img/bg-circles-mobile-static.png?201512011208);
-    background-size: 90%;
-    background-repeat: no-repeat;
-    background-position: center center; }
   @media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
     .sh-experts-topbox .mobile ~ .experts-down-arrow,
     .sh-experts-topbox .tablet ~ .experts-down-arrow {
@@ -374,6 +373,19 @@
         margin: 0;
         padding: 0; } }
   @media only screen and (max-width: 667px), (max-device-width: 667px) {
+    .sh-experts-topbox:before {
+      content: "";
+      background: url(../img/bg-circles-mobile-static.png?201512011121);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    .sh-experts-topbox .bg-static {
+      background-image: none; }
     .sh-experts-topbox .mobile ~ .experts-down-arrow,
     .sh-experts-topbox .tablet ~ .experts-down-arrow {
       display: none; }
@@ -395,4 +407,7 @@
       -o-transform: none;
       transform: none; }
       .sh-experts-topbox #title-container p {
-        text-align: left; } }
+        text-align: left;
+        background-color: black; }
+    .sh-experts-topbox .experts-list {
+      padding-bottom: 60px; } }

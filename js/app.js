@@ -643,7 +643,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				this.titleAnimationsHandler.call(this, elements);
 				this.expertListAnimationHandler.call(this, this.expertsList);
-				this.bgStaticListAnimationHandler.call(this, this.bgStaticList);
+				this.staticListAnimationHandler.call(this, this.bgStaticList);
+				this.bgAnimationHandler.call(this, this.container.el);
 
 			}.bind(this), 400);
 
@@ -1703,7 +1704,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		},
 
-		bgStaticListAnimationHandler: function (els) {
+		staticListAnimationHandler: function (els) {
 
 			for (var i = 0; i < els.length; i++) {
 
@@ -1714,6 +1715,16 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				});
 
 			}
+
+		},
+
+		bgAnimationHandler: function (el) {
+
+			TweenLite.fromTo(el, this.animationTimes.mobileTabletContainerOpacityMs, {
+				opacity: 0
+			}, {
+				opacity: 1
+			});
 
 		}
 
