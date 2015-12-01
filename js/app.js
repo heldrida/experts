@@ -137,6 +137,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 			this.titleDiv = document.querySelector('#title-container');
 			this.expertsList = document.querySelectorAll('.experts-list li');
+			this.bgStaticList = document.querySelectorAll('.bg-static');
 
 			this.attachTitle();
 
@@ -161,7 +162,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 				title_animation_delay: 200,
 				expertScaleDownSpeed: 0.45,
 				rotationMouseover: 5.2,
-				iconRotationTime: 80
+				iconRotationTime: 80,
+				mobileTabletContainerOpacityMs: 3
 			};
 
 			this.circle_lines = [];
@@ -637,6 +639,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			setTimeout(function () {
 
 				this.titleAnimationsHandler.call(this, elements);
+				this.expertListAnimationHandler.call(this, this.expertsList);
+				this.bgStaticListAnimationHandler.call(this, this.bgStaticList);
 
 			}.bind(this), 400);
 
@@ -730,8 +734,6 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 		},
 
 		titleHandler: function () {
-
-			return;
 
 			var h1 = this.titleDiv.querySelector('h1');
 			var p = this.titleDiv.querySelector('p');
@@ -1082,7 +1084,9 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 		titleAnimationsHandler: function (els) {
 
-			for (var i = 0, delay = 0; i < els.length; i++) {
+			var delay = 0;
+
+			for (var i = 0; i < els.length; i++) {
 
 				(function (context, el, delay) {
 
@@ -1665,6 +1669,48 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			        (a.y > (b.y + b.height)) ||
 			        ((a.x + a.width) < b.x) ||
 		    	    (a.x > (b.x + b.width)));
+
+		},
+
+		expertListAnimationHandler: function (els) {
+
+			var delay = 0;
+
+			for (var i = 0; i < els.length; i++) {
+
+				(function (context, el, delay) {
+
+					setTimeout(function () {
+
+						TweenLite.fromTo(el, 1.2, {
+							left: '-50px',
+							opacity: 0
+						}, {
+							left: '0px',
+							opacity: 1
+						});
+
+					}.bind(context), delay);
+
+				}(this, els[i], delay));
+
+				delay += this.animationTimes.title_animation_delay;
+
+			}
+
+		},
+
+		bgStaticListAnimationHandler: function (els) {
+
+			for (var i = 0; i < els.length; i++) {
+
+				TweenLite.fromTo(els[i], this.animationTimes.mobileTabletContainerOpacityMs, {
+					opacity: 0
+				}, {
+					opacity: 1
+				});
+
+			}
 
 		}
 
