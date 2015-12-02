@@ -105,7 +105,7 @@ var Debugger = {
 
 		attachListeners: function () {
 
-			window.addEventListener('resize', this.titleHandler.bind(this));
+			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
 
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
@@ -121,8 +121,6 @@ var Debugger = {
 			var elements = [];
 			elements.push(h1);
 			elements.push(p);
-
-			this.titleHandler();
 
 			setTimeout(function () {
 
@@ -325,6 +323,14 @@ var Debugger = {
 				anim.call(this, i);
 
 			}
+
+		},
+
+		rendererSizeHandler: function () {
+
+			this.globalSizes.width = this.container.offsetWidth;
+
+			this.renderer.resize(this.globalSizes.width, this.globalSizes.height);
 
 		}
 

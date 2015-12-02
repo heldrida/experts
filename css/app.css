@@ -135,7 +135,9 @@ body {
   font-family: 'OpenSans-Extrabold', arial, sans-serif;
   text-align: center;
   position: relative;
-  opacity: 0; }
+  opacity: 0;
+  margin: 0 auto;
+  max-width: 1500px; }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
