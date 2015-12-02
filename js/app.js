@@ -90,7 +90,7 @@ var Debugger = {
 			this.particleSize = [1.2, 2, 2.3, 2.5, 3, 3.2];
 			this.particlesTotal = 80;
 			this.particles = [];
-			this.particlesFrictionValue = 420;
+			this.particlesFrictionValue = 400;
 			this.generateParticles();
 
 		},

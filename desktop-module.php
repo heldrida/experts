@@ -51,6 +51,17 @@
 			</div>
 			<h3>Duras <span>Catlan</span></h3>
 		</li>
+
+		<li>
+			<div class="clip-photo">
+				<img src="data/person05.jpg?201511301834" alt="">
+			</div>
+			<div class="clip-icon">
+				<img src="img/icon-football-dark.png?201511301824" alt="" class="icon">
+			</div>
+			<h3>Orion <span>Massai</span></h3>
+		</li>
+
 	</ul>
 
 </div>
