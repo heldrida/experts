@@ -152,15 +152,7 @@ body {
     width: 90%;
     max-width: 530px;
     margin: 0 auto;
-    padding-top: 30px;
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -khtml-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%); }
+    padding-top: 30px; }
     .sh-experts-topbox #title-container h1,
     .sh-experts-topbox #title-container p {
       position: relative; }
@@ -183,7 +175,7 @@ body {
         line-height: 14px;
         padding: 5px 0; } }
   .sh-experts-topbox .experts-down-arrow {
-    background-image: url(../img/arrow-down.png?201510261810);
+    background-image: url(../img/arrow-down.png?201512021534);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -239,7 +231,7 @@ body {
   .sh-experts-topbox .clip-photo {
     width: 122px;
     height: 122px;
-    border: 1px solid #fff;
+    border: 3px solid #fff;
     border-radius: 50%;
     overflow: hidden;
     margin: auto;
@@ -265,19 +257,14 @@ body {
     margin: auto;
     background: #FFF;
     position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -khtml-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -o-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%); }
+    bottom: 32%;
+    right: 25%; }
     .sh-experts-topbox .clip-icon img {
       position: absolute;
       top: 50%;
       left: 50%;
       width: auto;
-      height: 75%;
+      height: 55%;
       -webkit-transform: translateX(-50%) translateY(-50%);
       -khtml-transform: translateX(-50%) translateY(-50%);
       -moz-transform: translateX(-50%) translateY(-50%);
@@ -287,20 +274,23 @@ body {
   .sh-experts-topbox .experts-list {
     height: auto;
     overflow: hidden;
-    padding: 80px 0; }
+    padding: 40px 0 80px; }
     .sh-experts-topbox .experts-list li {
       opacity: 0;
       position: relative;
       text-align: center;
-      width: 25%;
+      width: auto;
       height: 186px;
       float: left; }
       .sh-experts-topbox .experts-list li:nth-child(even) {
         margin-top: 93px; }
+      .sh-experts-topbox .experts-list li > * {
+        cursor: pointer; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;
       font-size: 14px;
+      margin-top: 20px;
       margin-bottom: 8px;
       letter-spacing: 1px;
       font-family: 'OpenSans-Regular', arial, sans-serif;

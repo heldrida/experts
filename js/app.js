@@ -41,10 +41,10 @@ var Debugger = {
 		setProperties: function (data) {
 
 			this.container = document.querySelector('.sh-experts-topbox');
-
 			this.titleDiv = document.querySelector('#title-container');
+			this.expertsList = document.querySelectorAll('.experts-list li');
+			this.setExpertsSize();
 			this.attachTitle();
-
 			this.animationTimes = {
 				title_animation_delay: 200
 			};
@@ -54,6 +54,7 @@ var Debugger = {
 		initAnimations: function () {
 
 			TweenLite.to(this.container, 0.3, { opacity: 1 });
+			this.expertListAnimationHandler(this.expertsList);
 
 		},
 
@@ -153,6 +154,47 @@ var Debugger = {
 			}
 
 		},
+
+		expertListAnimationHandler: function (els) {
+
+			var delay = 0;
+
+			for (var i = 0; i < els.length; i++) {
+
+				(function (context, el, delay) {
+
+					setTimeout(function () {
+
+						TweenLite.fromTo(el, 1.2, {
+							left: '-50px',
+							opacity: 0
+						}, {
+							left: '0px',
+							opacity: 1
+						});
+
+					}.bind(context), delay);
+
+				}(this, els[i], delay));
+
+				delay += this.animationTimes.title_animation_delay;
+
+			}
+
+		},
+
+		setExpertsSize: function () {
+
+			var total = this.expertsList.length;
+			var perc = 100 / total;
+
+			for (var i = 0; i < total; i++) {
+
+				this.expertsList[i].style.width = perc + '%';
+
+			}
+
+		}
 
 	};
 
