@@ -101,10 +101,6 @@ var Debugger = {
 			this.expertListAnimationHandler(this.expertsList);
 			this.startTicker();
 
-			setTimeout(function () {
-				//this.initParticleAnimationHanlder.call(this);
-			}.bind(this), 1200);
-
 		},
 
 		attachListeners: function () {
@@ -305,18 +301,6 @@ var Debugger = {
 			});
 
 			this.stage.addChild(gfxCircle);
-
-		},
-
-		initParticleAnimationHanlder: function () {
-
-			for (var i = 0; i < this.particles.length; i++) {
-
-				var gfxCircle = this.particles[i].circle;
-
-				TweenLite.fromTo(gfxCircle.scale, this.animationTimes.particleDisplayLengthSecs, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
-
-			}
 
 		},
 
