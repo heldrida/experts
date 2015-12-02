@@ -49,6 +49,21 @@ var Debugger = {
 				title_animation_delay: 200
 			};
 
+			// calculate project container ratio
+			this.containerRatio = 1440 / 677;
+
+			// create renderer
+			this.renderer = new PIXI.CanvasRenderer(this.container.offsetWidth, this.container.offsetWidth * this.containerRatio, {
+				antialias: true,
+				resolution: 2,
+				roundPixels: true
+			});
+
+			this.container.appendChild(this.renderer.view);
+
+			// create stage
+			this.stage = new PIXI.Container();
+
 		},
 
 		initAnimations: function () {
@@ -61,6 +76,7 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
+			window.addEventListener('resize', this.containerSizeHandler.bind(this));
 
 		},
 
@@ -193,6 +209,14 @@ var Debugger = {
 				this.expertsList[i].style.width = perc + '%';
 
 			}
+
+		},
+
+		containerSizeHandler: function () {
+
+			var height = (this.container.offsetWidth / this.containerRatio);
+
+			this.container.style.height = height + 'px';
 
 		}
 
