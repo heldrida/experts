@@ -356,6 +356,7 @@ body {
       .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
         margin-top: 80px; }
   @media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
+    .sh-experts-topbox canvas,
     .sh-experts-topbox .mobile ~ .experts-down-arrow,
     .sh-experts-topbox .tablet ~ .experts-down-arrow {
       display: none; }
@@ -398,6 +399,7 @@ body {
       height: 100%; }
     .sh-experts-topbox .bg-static {
       background-image: none; }
+    .sh-experts-topbox canvas,
     .sh-experts-topbox .mobile ~ .experts-down-arrow,
     .sh-experts-topbox .tablet ~ .experts-down-arrow {
       display: none; }

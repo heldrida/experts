@@ -305,6 +305,7 @@ body {
 	}
 
 	@media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
+		canvas,
 		.mobile ~ .experts-down-arrow,
 		.tablet ~ .experts-down-arrow {
 			display: none;
@@ -359,6 +360,7 @@ body {
 			background-image: none;
 		}
 
+		canvas,
 		.mobile ~ .experts-down-arrow,
 		.tablet ~ .experts-down-arrow {
 			display: none;
