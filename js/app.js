@@ -208,7 +208,8 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 			}
 
 			this.pauseDebugger = false;
-			this.infoIconDebugger;
+
+			this.particlesFrictionValue = 200;
 
 		},
 
@@ -850,7 +851,7 @@ PIXI.Graphics.prototype.updateLineStyle = function(lineWidth, color, alpha, fill
 
 				var posX, posY, friction;
 
-				friction = this.particles[i].root.size / 20;
+				friction = this.particles[i].root.size / this.particlesFrictionValue;
 
 				posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * friction);
 				posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * friction);
