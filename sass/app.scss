@@ -166,6 +166,7 @@ body {
 		overflow: hidden;
 		margin: auto;
 		position: relative;
+		@include transition(border 0.3s);
 
 		img {
 			position: absolute;
@@ -188,6 +189,7 @@ body {
 		position: absolute;
 		bottom: 32%;
 		right: 25%;
+		@include transition(background 0.3s);
 
 		img {
 			position: absolute;
@@ -196,6 +198,11 @@ body {
 			width: auto;
 			height: 55%;
 			@include transform(translateX(-50%) translateY(-50%));
+			@include transition(opacity 0.3s);
+
+			&.light {
+				opacity: 0;
+			}
 		}
 	}
 
@@ -219,6 +226,30 @@ body {
 			> * {
 				cursor: pointer;
 			}
+
+			&:hover {
+				h3 {
+					color: #fff;
+				}
+
+				.clip-icon {
+					background: $blue;
+
+					img {
+						&.light {
+							opacity: 1;
+						}
+
+						&.dark {
+							opacity: 0;
+						}
+					}
+				}
+
+				.clip-photo {
+					border: 3px solid $blue;
+				}
+			}
 		}
 
 		h3 {
@@ -232,6 +263,7 @@ body {
 			padding: 1px;
 			background-color: rgba(0, 0, 0, 0.8);
 			display: inline-block;
+			@include transition(color 0.3s);
 
 			span {
 				font-family: 'OpenSans-Bold', arial, sans-serif;

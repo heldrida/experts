@@ -250,7 +250,13 @@ body {
     border-radius: 50%;
     overflow: hidden;
     margin: auto;
-    position: relative; }
+    position: relative;
+    -webkit-transition: border 0.3s;
+    -khtml-transition: border 0.3s;
+    -moz-transition: border 0.3s;
+    -ms-transition: border 0.3s;
+    -o-transition: border 0.3s;
+    transition: border 0.3s; }
     .sh-experts-topbox .clip-photo img {
       position: absolute;
       top: 50%;
@@ -273,7 +279,13 @@ body {
     background: #FFF;
     position: absolute;
     bottom: 32%;
-    right: 25%; }
+    right: 25%;
+    -webkit-transition: background 0.3s;
+    -khtml-transition: background 0.3s;
+    -moz-transition: background 0.3s;
+    -ms-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s; }
     .sh-experts-topbox .clip-icon img {
       position: absolute;
       top: 50%;
@@ -285,7 +297,15 @@ body {
       -moz-transform: translateX(-50%) translateY(-50%);
       -ms-transform: translateX(-50%) translateY(-50%);
       -o-transform: translateX(-50%) translateY(-50%);
-      transform: translateX(-50%) translateY(-50%); }
+      transform: translateX(-50%) translateY(-50%);
+      -webkit-transition: opacity 0.3s;
+      -khtml-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s; }
+      .sh-experts-topbox .clip-icon img.light {
+        opacity: 0; }
   .sh-experts-topbox .experts-list {
     height: auto;
     overflow: hidden;
@@ -301,6 +321,16 @@ body {
         margin-top: 186px; }
       .sh-experts-topbox .experts-list li > * {
         cursor: pointer; }
+      .sh-experts-topbox .experts-list li:hover h3 {
+        color: #fff; }
+      .sh-experts-topbox .experts-list li:hover .clip-icon {
+        background: #3b81ff; }
+        .sh-experts-topbox .experts-list li:hover .clip-icon img.light {
+          opacity: 1; }
+        .sh-experts-topbox .experts-list li:hover .clip-icon img.dark {
+          opacity: 0; }
+      .sh-experts-topbox .experts-list li:hover .clip-photo {
+        border: 3px solid #3b81ff; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;
@@ -311,7 +341,13 @@ body {
       font-family: 'OpenSans-Regular', arial, sans-serif;
       padding: 1px;
       background-color: rgba(0, 0, 0, 0.8);
-      display: inline-block; }
+      display: inline-block;
+      -webkit-transition: color 0.3s;
+      -khtml-transition: color 0.3s;
+      -moz-transition: color 0.3s;
+      -ms-transition: color 0.3s;
+      -o-transition: color 0.3s;
+      transition: color 0.3s; }
       .sh-experts-topbox .experts-list h3 span {
         font-family: 'OpenSans-Bold', arial, sans-serif; }
     .sh-experts-topbox .experts-list p {
