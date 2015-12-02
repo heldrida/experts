@@ -184,11 +184,11 @@ body {
 		border: none;
 		border-radius: 50%;
 		overflow: hidden;
-		margin: auto;
 		background: #FFF;
 		position: absolute;
-		bottom: 32%;
-		right: 25%;
+		bottom: 33%;
+		right: 50%;
+		@include transform(translateX(175%));
 		@include transition(background 0.3s);
 
 		img {
