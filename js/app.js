@@ -46,14 +46,29 @@ var Debugger = {
 			this.setExpertsSize();
 			this.attachTitle();
 			this.animationTimes = {
-				title_animation_delay: 200
+				title_animation_delay: 200,
+				particleDisplayLengthSecs: 8
+			};
+
+			// colours
+			this.colours = {
+				hex: {
+					grey: '0xAAAAAA',
+					blue: '0x3b81ff',
+					white: '0xffffff'
+				}
 			};
 
 			// calculate project container ratio
 			this.containerRatio = 1440 / 677;
 
+			this.globalSizes = {
+				width: this.container.offsetWidth,
+				height: this.container.offsetWidth / this.containerRatio
+			};
+
 			// create renderer
-			this.renderer = new PIXI.CanvasRenderer(this.container.offsetWidth, this.container.offsetWidth * this.containerRatio, {
+			this.renderer = new PIXI.CanvasRenderer(this.globalSizes.width, this.globalSizes.height, {
 				antialias: true,
 				resolution: 2,
 				roundPixels: true
@@ -64,12 +79,25 @@ var Debugger = {
 			// create stage
 			this.stage = new PIXI.Container();
 
+			/*
+			this.bgContainer = new PIXI.Graphics();
+			this.bgContainer.beginFill(0xFFFFFF);
+			this.bgContainer.drawRect(0, 0, 1157, 544);
+			this.stage.addChild(this.bgContainer);
+			*/
+
+			// generate the particles
+			this.particles = [];
+			this.generateParticles();
+
 		},
 
 		initAnimations: function () {
 
 			TweenLite.to(this.container, 0.3, { opacity: 1 });
 			this.expertListAnimationHandler(this.expertsList);
+			this.startTicker();
+			this.initParticleAnimationHanlder();
 
 		},
 
@@ -217,6 +245,78 @@ var Debugger = {
 			var height = (this.container.offsetWidth / this.containerRatio);
 
 			this.container.style.height = height + 'px';
+
+		},
+
+		startTicker: function () {
+
+			var context = this;
+
+			function animate() {
+
+				// loop
+				requestAnimationFrame(animate);
+				context.renderer.render(context.stage);
+
+			}
+
+			animate.call(this);
+
+		},
+
+		generateParticles: function () {
+
+			for (var col = 1; col <= 3; col++) {
+
+				for (var i = 1; i <= 75; i++) {
+
+					this.particle.call(this, col);
+
+				}
+
+			}
+
+		},
+
+		particle: function (col) {
+
+			var size = (this.globalSizes.width * 0.005) * Math.random() % (this.globalSizes.height * 0.005);
+			var gfxCircle = new PIXI.Graphics();
+			gfxCircle.beginFill(this.colours.hex.grey);
+			gfxCircle.lineStyle(1, this.colours.hex.grey);
+			gfxCircle.drawCircle(size, size, size);
+			gfxCircle.x = ((this.globalSizes.width / 2) * col) * Math.random();
+			gfxCircle.y = ((this.globalSizes.height / 2) * Math.random()) + this.globalSizes.height * 0.3;;
+
+			gfxCircle.alpha = Math.max(0.2, Math.random());
+
+			gfxCircle.pivot.x = 0.5;
+			gfxCircle.pivot.y = 0.5;
+
+			gfxCircle.scale.x = gfxCircle.scale.y = 0;
+
+			this.particles.push({
+				root: {
+					x: gfxCircle.x,
+					y: gfxCircle.y,
+					size: size
+				},
+				circle: gfxCircle
+			});
+
+			this.stage.addChild(gfxCircle);
+
+		},
+
+		initParticleAnimationHanlder: function () {
+
+			for (var i = 0; i < this.particles.length; i++) {
+
+				var gfxCircle = this.particles[i].circle;
+
+				TweenLite.fromTo(gfxCircle.scale, this.animationTimes.particleDisplayLengthSecs, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
+
+			}
 
 		}
 
