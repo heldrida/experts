@@ -1,5 +1,5 @@
 <!-- start: desktop -->
-<div class="desktop">
+<div class="desktop experts-wrap">
 
 	<ul class="experts-list">
 		<li>
