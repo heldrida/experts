@@ -59,13 +59,20 @@ var Debugger = {
 				}
 			};
 
+			this.mouseMoveEvent = {
+				clientX: null,
+				clientY: null
+			};
+
 			// calculate project container ratio
 			this.containerRatio = 1440 / 677;
 
 			this.globalSizes = {
 				width: this.container.offsetWidth,
-				height: this.container.offsetWidth / this.containerRatio
+				height: 677
 			};
+
+			this.container.style.height = this.globalSizes.height + 'px';
 
 			// create renderer
 			this.renderer = new PIXI.CanvasRenderer(this.globalSizes.width, this.globalSizes.height, {
@@ -80,9 +87,10 @@ var Debugger = {
 			this.stage = new PIXI.Container();
 
 			// generate the particles
-			this.particleSize = (this.globalSizes.width * 0.006) * Math.random() % (this.globalSizes.height * 0.006);
+			this.particleSize = [1.2, 2, 2.3, 2.5, 3, 3.2];
 			this.particlesTotal = 80;
 			this.particles = [];
+			this.particlesFrictionValue = 420;
 			this.generateParticles();
 
 		},
@@ -102,7 +110,11 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.titleHandler.bind(this));
-			window.addEventListener('resize', this.containerSizeHandler.bind(this));
+
+			this.container.addEventListener('mousemove', function (e) {
+				this.mouseMoveEvent.clientX = e.clientX;
+				this.mouseMoveEvent.clientY = e.clientY;
+			}.bind(this));
 
 		},
 
@@ -131,7 +143,7 @@ var Debugger = {
 
 			if (window.innerWidth < 1028) {
 
-				this.titleDiv.style.top = '';
+				//this.titleDiv.style.top = '';
 				h1.style.fontSize = '';
 				h1.style.letterSpacing = '';
 				h1.style.position = '';
@@ -155,7 +167,7 @@ var Debugger = {
 			var rp_ln = (16 * ratio) / 1440;
 			var rp_container = 675 / 1440;
 
-			this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
+			//this.titleDiv.style.top = (window.innerWidth * rm) + 'px';
 			h1.style.fontSize = (window.innerWidth * rh1) + 'px';
 			h1.style.letterSpacing = (window.innerWidth * rh1_ls) + 'px';
 			h1.style.position = "relative";
@@ -238,14 +250,6 @@ var Debugger = {
 
 		},
 
-		containerSizeHandler: function () {
-
-			var height = (this.container.offsetWidth / this.containerRatio);
-
-			this.container.style.height = height + 'px';
-
-		},
-
 		startTicker: function () {
 
 			var context = this;
@@ -254,6 +258,7 @@ var Debugger = {
 
 				// loop
 				requestAnimationFrame(animate);
+				context.particleMouseMoveHandler.call(context);
 				context.renderer.render(context.stage);
 
 			}
@@ -278,7 +283,7 @@ var Debugger = {
 
 		particle: function (col) {
 
-			var size = this.particleSize;
+			var size = this.particleSize[Math.floor(Math.random() * this.particleSize.length) + 1];
 			var gfxCircle = new PIXI.Graphics();
 			gfxCircle.beginFill(this.colours.hex.grey);
 			gfxCircle.lineStyle(1, this.colours.hex.grey);
@@ -310,6 +315,30 @@ var Debugger = {
 				var gfxCircle = this.particles[i].circle;
 
 				TweenLite.fromTo(gfxCircle.scale, this.animationTimes.particleDisplayLengthSecs, { x: 0, y: 0 }, { x: 1, y: 1, ease: Power1.easeOut });
+
+			}
+
+		},
+
+		particleMouseMoveHandler: function () {
+
+			var anim = function (i) {
+
+				var posX, posY, friction;
+
+				friction = this.particles[i].root.size / this.particlesFrictionValue;
+
+				posX = this.particles[i].circle.x = this.particles[i].root.x + (this.mouseMoveEvent.clientX * friction);
+				posY = this.particles[i].circle.y = this.particles[i].root.y + (this.mouseMoveEvent.clientY * friction);
+
+				this.particles[i].circle.x = posX;
+				this.particles[i].circle.y = posY;
+
+			};
+
+			for (var i = 0; i < this.particles.length; i++) {
+
+				anim.call(this, i);
 
 			}
 
