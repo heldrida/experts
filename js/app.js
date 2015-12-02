@@ -79,14 +79,9 @@ var Debugger = {
 			// create stage
 			this.stage = new PIXI.Container();
 
-			/*
-			this.bgContainer = new PIXI.Graphics();
-			this.bgContainer.beginFill(0xFFFFFF);
-			this.bgContainer.drawRect(0, 0, 1157, 544);
-			this.stage.addChild(this.bgContainer);
-			*/
-
 			// generate the particles
+			this.particleSize = (this.globalSizes.width * 0.006) * Math.random() % (this.globalSizes.height * 0.006);
+			this.particlesTotal = 80;
 			this.particles = [];
 			this.generateParticles();
 
@@ -97,7 +92,10 @@ var Debugger = {
 			TweenLite.to(this.container, 0.3, { opacity: 1 });
 			this.expertListAnimationHandler(this.expertsList);
 			this.startTicker();
-			this.initParticleAnimationHanlder();
+
+			setTimeout(function () {
+				//this.initParticleAnimationHanlder.call(this);
+			}.bind(this), 1200);
 
 		},
 
@@ -268,7 +266,7 @@ var Debugger = {
 
 			for (var col = 1; col <= 3; col++) {
 
-				for (var i = 1; i <= 75; i++) {
+				for (var i = 1; i <= this.particlesTotal; i++) {
 
 					this.particle.call(this, col);
 
@@ -280,7 +278,7 @@ var Debugger = {
 
 		particle: function (col) {
 
-			var size = (this.globalSizes.width * 0.005) * Math.random() % (this.globalSizes.height * 0.005);
+			var size = this.particleSize;
 			var gfxCircle = new PIXI.Graphics();
 			gfxCircle.beginFill(this.colours.hex.grey);
 			gfxCircle.lineStyle(1, this.colours.hex.grey);
@@ -290,10 +288,7 @@ var Debugger = {
 
 			gfxCircle.alpha = Math.max(0.2, Math.random());
 
-			gfxCircle.pivot.x = 0.5;
-			gfxCircle.pivot.y = 0.5;
-
-			gfxCircle.scale.x = gfxCircle.scale.y = 0;
+			gfxCircle.scale.x = gfxCircle.scale.y = Math.max(0.2, Math.random());
 
 			this.particles.push({
 				root: {
