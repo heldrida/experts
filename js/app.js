@@ -105,8 +105,6 @@ var Debugger = {
 
 		attachListeners: function () {
 
-			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
-
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
 				this.mouseMoveEvent.clientY = e.clientY;
@@ -323,14 +321,6 @@ var Debugger = {
 				anim.call(this, i);
 
 			}
-
-		},
-
-		rendererSizeHandler: function () {
-
-			this.globalSizes.width = this.container.offsetWidth;
-
-			this.renderer.resize(this.globalSizes.width, this.globalSizes.height);
 
 		}
 

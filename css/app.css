@@ -310,7 +310,8 @@ body {
       letter-spacing: 1px;
       font-family: 'OpenSans-Regular', arial, sans-serif;
       padding: 1px;
-      background-color: rgba(0, 0, 0, 0.8); }
+      background-color: rgba(0, 0, 0, 0.8);
+      display: inline-block; }
       .sh-experts-topbox .experts-list h3 span {
         font-family: 'OpenSans-Bold', arial, sans-serif; }
     .sh-experts-topbox .experts-list p {
