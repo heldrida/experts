@@ -105,6 +105,8 @@ var Debugger = {
 			// set expert element xy origin
 			this.setExpertListOrigin();
 
+			this.activeExpertElement = false;
+
 		},
 
 		initAnimations: function () {
@@ -119,6 +121,7 @@ var Debugger = {
 
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
 			window.addEventListener('resize', this.setExpertListOrigin.bind(this));
+			window.addEventListener('resize',  _.throttle(this.expertCenterHandler.bind(this), 1200));
 
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
@@ -371,21 +374,12 @@ var Debugger = {
 
 		showExpertInfoClickHandler: function (element) {
 
-			// container center
-			var containerClientRect = this.container.getBoundingClientRect();
-			var x = (containerClientRect.width / 2);
-			var y = (containerClientRect.height / 2);
-
-			// offset the positions
-			x = x - (this.defaultExpertSize.width / 2);
-
-			x = x - element.getAttribute('data-origin-x');
-			y = y - element.getAttribute('data-origin-y');
+			var pos = this.getCenter(element);
 
 			// toggle active
 			this.toggleActiveHandler(element);
 
-			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut });
+			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: pos.x, y: pos.y, ease: Power1.easeOut });
 
 		},
 
@@ -405,6 +399,9 @@ var Debugger = {
 
 			// activate target element
 			element.classList.add('active');
+
+			// keep a reference for the active expert element
+			this.activeExpertElement = element;
 
 			// for non targeted, remove class active and scale down
 			for (var i = 0; i < this.expertsList.length; i++) {
@@ -439,6 +436,9 @@ var Debugger = {
 
 		resetExperts: function (element) {
 
+			// remove the reference
+			this.activeExpertElement = false;
+
 			// for non targeted, remove class active and scale down
 			for (var i = 0; i < this.expertsList.length; i++) {
 
@@ -447,6 +447,42 @@ var Debugger = {
 				current.classList.remove('active');
 
 				TweenLite.to(this.expertsList[i], this.animationTimes.expertScaleDownMs, { scale: 1 });
+
+			}
+
+		},
+
+		getCenter: function (element) {
+
+			// container center
+			var containerClientRect = this.container.getBoundingClientRect();
+
+			var x = ((containerClientRect.width) / 2) + containerClientRect.left;
+			var y = (containerClientRect.height / 2);
+
+			console.log('x: ' + x + ', y: ' + y);
+
+			// offset the positions
+			x = x - (this.defaultExpertSize.width / 2);
+
+			x = x - element.getAttribute('data-origin-x');
+			y = y - element.getAttribute('data-origin-y');
+
+			var pos = { x: x, y: y};
+
+			console.log('pox.x: ' + pos.x + ', pos.y: ' + pos.y);
+
+			return pos;
+
+		},
+
+		expertCenterHandler: function () {
+
+			console.log("expertCenterHandler");
+
+			if (this.activeExpertElement) {
+
+				this.closeExpertInfoClickHandler(this.activeExpertElement);
 
 			}
 
