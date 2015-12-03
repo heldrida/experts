@@ -329,14 +329,19 @@ body {
         margin-top: 186px; }
       .sh-experts-topbox .experts-list li > * {
         cursor: pointer; }
+      .sh-experts-topbox .experts-list li.active h3,
       .sh-experts-topbox .experts-list li:hover h3 {
         color: #fff; }
+      .sh-experts-topbox .experts-list li.active .clip-icon,
       .sh-experts-topbox .experts-list li:hover .clip-icon {
         background: #3b81ff; }
+        .sh-experts-topbox .experts-list li.active .clip-icon img.light,
         .sh-experts-topbox .experts-list li:hover .clip-icon img.light {
           opacity: 1; }
+        .sh-experts-topbox .experts-list li.active .clip-icon img.dark,
         .sh-experts-topbox .experts-list li:hover .clip-icon img.dark {
           opacity: 0; }
+      .sh-experts-topbox .experts-list li.active .clip-photo,
       .sh-experts-topbox .experts-list li:hover .clip-photo {
         border: 3px solid #3b81ff; }
     .sh-experts-topbox .experts-list h3 {

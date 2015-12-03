@@ -232,6 +232,7 @@ body {
 				cursor: pointer;
 			}
 
+			&.active,
 			&:hover {
 				h3 {
 					color: #fff;
