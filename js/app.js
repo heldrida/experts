@@ -101,6 +101,10 @@ var Debugger = {
 			this.particlesFrictionValue = 400;
 			this.generateParticles();
 
+
+			// set expert element xy origin
+			this.setExpertListOrigin();
+
 		},
 
 		initAnimations: function () {
@@ -114,6 +118,7 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
+			window.addEventListener('resize', this.setExpertListOrigin.bind(this));
 
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
@@ -366,8 +371,6 @@ var Debugger = {
 
 		showExpertInfoClickHandler: function (element) {
 
-			var targetPos = element.getBoundingClientRect();
-
 			// container center
 			var containerClientRect = this.container.getBoundingClientRect();
 			var x = (containerClientRect.width / 2);
@@ -376,8 +379,8 @@ var Debugger = {
 			// offset the positions
 			x = x - (this.defaultExpertSize.width / 2);
 
-			x = x - targetPos.left;
-			y = y - targetPos.top;
+			x = x - element.getAttribute('data-origin-x');
+			y = y - element.getAttribute('data-origin-y');
 
 			// toggle active
 			this.toggleActiveHandler(element);
@@ -388,6 +391,7 @@ var Debugger = {
 		},
 
 		closeExpertInfoClickHandler: function (element) {
+
 
 
 		},
@@ -409,6 +413,20 @@ var Debugger = {
 					TweenLite.to(this.expertsList[i], this.animationTimes.expertScaleDownMs, { scale: 0 });
 
 				}
+
+			}
+
+		},
+
+		setExpertListOrigin: function () {
+
+			for (var i = 0; i < this.expertsList.length; i++) {
+
+				var element = this.expertsList[i];
+				var pos = element.getBoundingClientRect();
+
+				element.setAttribute('data-origin-x', pos.left);
+				element.setAttribute('data-origin-y', pos.top);
 
 			}
 
