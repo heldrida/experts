@@ -54,7 +54,7 @@ var Debugger = {
 
 			// set default expert size
 			this.defaultExpertSize = {
-				width: this.expertsList[0].querySelector('.clip-photo').offsetWidth,
+				width: this.expertsList[0].offsetWidth,
 				height: this.expertsList[0].offsetHeight
 			};
 
@@ -355,13 +355,12 @@ var Debugger = {
 
 			// container center
 			var containerClientRect = this.container.getBoundingClientRect();
+			console.log('containerClientRect: ', containerClientRect);
 			var x = (containerClientRect.width / 2);
 			var y = (containerClientRect.height / 2);
 
-			console.log('this.defaultExpertSize: ', this.defaultExpertSize);
-
 			// offset the positions
-			x = x - this.defaultExpertSize.width;
+			x = x - (this.defaultExpertSize.width / 2);
 
 			x = x - targetPos.left;
 			y = y - targetPos.top;
