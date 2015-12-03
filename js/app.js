@@ -351,11 +351,25 @@ var Debugger = {
 
 			// current target positions
 			var element = e.currentTarget;
+
+			if (element.classList.contains('active')) {
+
+				this.closeExpertInfoClickHandler(element);
+
+			} else {
+
+				this.showExpertInfoClickHandler(element);
+
+			}
+
+		},
+
+		showExpertInfoClickHandler: function (element) {
+
 			var targetPos = element.getBoundingClientRect();
 
 			// container center
 			var containerClientRect = this.container.getBoundingClientRect();
-			console.log('containerClientRect: ', containerClientRect);
 			var x = (containerClientRect.width / 2);
 			var y = (containerClientRect.height / 2);
 
@@ -369,6 +383,12 @@ var Debugger = {
 			this.toggleActiveHandler(element);
 
 			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut });
+
+
+		},
+
+		closeExpertInfoClickHandler: function (element) {
+
 
 		},
 
