@@ -387,12 +387,17 @@ var Debugger = {
 
 			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut });
 
-
 		},
 
 		closeExpertInfoClickHandler: function (element) {
 
+			var x = 0;
+			var y = 0;
 
+			// reset all
+			this.resetExperts();
+
+			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut });
 
 		},
 
@@ -427,6 +432,21 @@ var Debugger = {
 
 				element.setAttribute('data-origin-x', pos.left);
 				element.setAttribute('data-origin-y', pos.top);
+
+			}
+
+		},
+
+		resetExperts: function (element) {
+
+			// for non targeted, remove class active and scale down
+			for (var i = 0; i < this.expertsList.length; i++) {
+
+				var current = this.expertsList[i];
+
+				current.classList.remove('active');
+
+				TweenLite.to(this.expertsList[i], this.animationTimes.expertScaleDownMs, { scale: 1 });
 
 			}
 
