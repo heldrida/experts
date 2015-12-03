@@ -47,7 +47,15 @@ var Debugger = {
 			this.attachTitle();
 			this.animationTimes = {
 				title_animation_delay: 200,
-				particleDisplayLengthSecs: 8
+				particleDisplayLengthSecs: 8,
+				moveExpertToCenterSecs: 0.6,
+				expertScaleDownMs: 0.3
+			};
+
+			// set default expert size
+			this.defaultExpertSize = {
+				width: this.expertsList[0].querySelector('.clip-photo').offsetWidth,
+				height: this.expertsList[0].offsetHeight
 			};
 
 			// colours
@@ -111,6 +119,12 @@ var Debugger = {
 				this.mouseMoveEvent.clientX = e.clientX;
 				this.mouseMoveEvent.clientY = e.clientY;
 			}.bind(this));
+
+			for (var i = 0; i < this.expertsList.length; i++) {
+
+				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this));
+
+			}
 
 		},
 
@@ -330,6 +344,54 @@ var Debugger = {
 
 			this.globalSizes.width = this.container.offsetWidth;
 			this.renderer.resize(this.globalSizes.width, this.globalSizes.height);
+
+		},
+
+		expertListClickHandler: function (e) {
+
+			// current target positions
+			var element = e.currentTarget;
+			var targetPos = element.getBoundingClientRect();
+
+			// container center
+			var containerClientRect = this.container.getBoundingClientRect();
+			var x = (containerClientRect.width / 2);
+			var y = (containerClientRect.height / 2);
+
+			console.log('this.defaultExpertSize: ', this.defaultExpertSize);
+
+			// offset the positions
+			x = x - this.defaultExpertSize.width;
+
+			x = x - targetPos.left;
+			y = y - targetPos.top;
+
+			// toggle active
+			this.toggleActiveHandler(element);
+
+			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut });
+
+		},
+
+		toggleActiveHandler: function (element) {
+
+			// activate target element
+			element.classList.add('active');
+
+			// for non targeted, remove class active and scale down
+			for (var i = 0; i < this.expertsList.length; i++) {
+
+				var current = this.expertsList[i];
+
+				if (current !== element) {
+
+					current.classList.remove('active');
+
+					TweenLite.to(this.expertsList[i], this.animationTimes.expertScaleDownMs, { scale: 0 });
+
+				}
+
+			}
 
 		}
 

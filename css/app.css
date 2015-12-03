@@ -321,7 +321,10 @@ body {
       text-align: center;
       width: auto;
       height: 186px;
-      float: left; }
+      float: left;
+      z-index: 1; }
+      .sh-experts-topbox .experts-list li.active {
+        z-index: 2; }
       .sh-experts-topbox .experts-list li:nth-child(odd) {
         margin-top: 186px; }
       .sh-experts-topbox .experts-list li > * {

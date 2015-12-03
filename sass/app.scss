@@ -218,6 +218,11 @@ body {
 			width: auto;
 			height: 186px;
 			float: left;
+			z-index: 1;
+
+			&.active {
+				z-index: 2;
+			}
 
 			&:nth-child(odd) {
 				margin-top: 186px;
