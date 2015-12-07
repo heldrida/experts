@@ -112,6 +112,8 @@ var Debugger = {
 
 			this.quoteModule = document.querySelector('#quoteWrp');
 
+			this.showQuoteModuleTimeline = [];
+
 		},
 
 		initAnimations: function () {
@@ -571,6 +573,8 @@ var Debugger = {
 			tl.to(tipEl, 0.3, { opacity: 0, scale: 1 });
 			tl.to(lineEl, 0.3, { opacity: 0.7, width: 0 }, "-=0.4");
 
+			this.showQuoteModuleTimeline[index].reverse();
+
 			tl.eventCallback("onComplete", function () {
 
 				if (typeof callback !== "undefined") {
@@ -583,26 +587,36 @@ var Debugger = {
 
 		showQuoteModule: function (index) {
 
-			var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
+			if (typeof this.showQuoteModuleTimeline[index] !== "undefined") {
 
-			// find pointer tip pos
-			var pointerPos = element.getBoundingClientRect();
+				this.showQuoteModuleTimeline[index].restart();
 
-			var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
-			var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
-			var offsetWidth = max - min;
+			} else {
 
-			var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
+				var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
 
-			var offsetMargin = 15;
+				// find pointer tip pos
+				var pointerPos = element.getBoundingClientRect();
 
-			// set quote module position
-			this.quoteModule.style.top = offsetHeight + "px";
-			this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
+				var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
+				var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
+				var offsetWidth = max - min;
 
-			var tl = new TimelineLite();
-			tl.fromTo(this.quoteModule.querySelector('p'), 0.3, { opacity: 0.4, left: '-50%' }, { opacity: 1, left: '0%' });
-			tl.fromTo(this.quoteModule.querySelector('span'), 0.3, { opacity: 0.4, right: '-50%' }, { opacity: 1, right: '0%' }, "-=0.4");
+				var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
+
+				var offsetMargin = 15;
+
+				// set quote module position
+				this.quoteModule.style.top = offsetHeight + "px";
+				this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
+
+				var tl = new TimelineLite();
+				tl.fromTo(this.quoteModule.querySelector('p'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
+				tl.fromTo(this.quoteModule.querySelector('span'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
+
+				this.showQuoteModuleTimeline[index] = tl;
+
+			}
 
 		}
 
