@@ -28,6 +28,12 @@
 				<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Taviana <span>Naguaran</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 		<li>
@@ -39,6 +45,12 @@
 				<img src="img/icon-glove-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Chiske <span>Odisglaw</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 		<li>
@@ -50,6 +62,12 @@
 				<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Anne <span>Poposca</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 		<li>
@@ -61,6 +79,12 @@
 				<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Duras <span>Catlan</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 		<li>
@@ -72,6 +96,12 @@
 				<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Orion <span>Massai</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 	</ul>

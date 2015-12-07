@@ -425,9 +425,10 @@ body {
       display: inline-block;
       position: absolute;
       top: 50%;
-      right: 112.5%; }
+      right: 112.5%;
+      opacity: 0; }
     .sh-experts-topbox .pointer-wrp .pointer .line {
-      width: 110px;
+      width: 0px;
       height: 2px;
       background-color: #3b81ff;
       position: absolute;

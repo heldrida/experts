@@ -361,12 +361,11 @@ body {
 				position: absolute;
 				top: 50%;
 				right: 112.5%;
-				//@include transform(translateX(-50%));
-
+				opacity: 0;
 			}
 
 			.line {
-				width: 110px;
+				width: 0px;
 				height: 2px;
 				background-color: $blue;
 				position: absolute;

@@ -108,6 +108,8 @@ var Debugger = {
 
 			this.lockExpertClick = false;
 
+			this.quotePointerTimeline = [];
+
 		},
 
 		initAnimations: function () {
@@ -514,6 +516,40 @@ var Debugger = {
 				width: document.querySelector('.experts-list li').offsetWidth,
 				height: document.querySelector('.experts-list li').offsetHeight
 			};
+
+		},
+
+		showQuotePointerAnim: function (index) {
+
+			if (typeof this.quotePointerTimeline[index] !== "undefined") {
+
+				this.quotePointerTimeline[index].play();
+
+			} else {
+
+				var lineEl = this.expertsList[index].querySelector('.line');
+				var tipEl = this.expertsList[index].querySelector('.tip');
+
+				// timeline animation
+				var tl = new TimelineLite();
+				tl.to(lineEl, 0.3, { width: 110 });
+				tl.to(tipEl, 0.3, { opacity: 1, scale: 3 }, "-=0.25");
+				tl.to(tipEl, 0.3, { scale: 1 });
+
+				// cache if not existent
+				if (typeof this.quotePointerTimeline[index] === "undefined") {
+
+					this.quotePointerTimeline[index] = tl;
+
+				}
+
+			}
+
+		},
+
+		hideQuotePointerAnim: function (index) {
+
+			this.quotePointerTimeline[index].reverse();
 
 		}
 
