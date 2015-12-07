@@ -127,9 +127,10 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
-			window.addEventListener('resize', _.throttle(this.setExpertListOrigin.bind(this), 200));
+			window.addEventListener('resize', this.setExpertListOrigin.bind(this));
 			window.addEventListener('resize', this.setDefaultExpertSize.bind(this));
-
+			window.addEventListener('resize', this.expertCenterHandler.bind(this));
+			//window.addEventListener('resize', this.repositionQuote.bind(this));
 
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
@@ -139,9 +140,6 @@ var Debugger = {
 			for (var i = 0; i < this.expertsList.length; i++) {
 
 				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this, i));
-
-				window.addEventListener('resize', this.expertCenterHandler.bind(this, i));
-				window.addEventListener('resize', this.positionQuote.bind(this, i));
 
 			}
 
@@ -507,11 +505,26 @@ var Debugger = {
 
 		},
 
-		expertCenterHandler: function (index) {
+		expertCenterHandler: function () {
+
+			var index = this.getExpertIndexByEl(this.activeExpertElement);
 
 			if (this.activeExpertElement) {
 
-				this.closeExpertInfoClickHandler(index);
+				//this.closeExpertInfoClickHandler(index);
+
+				setTimeout(function () {
+
+					var pos = this.getCenter(this.activeExpertElement);
+
+					if (pos.x !== 0 && pos.y !== 0) {
+
+						this.activeExpertElement.style.transform = 'matrix(1, 0, 0, 1, ' + pos.x + ', ' + pos.y + ')';
+						this.positionQuote(index);
+
+					}
+
+				}.bind(this), 0);
 
 			}
 
@@ -618,6 +631,14 @@ var Debugger = {
 			// set quote module position
 			this.quoteModule.style.top = offsetHeight + "px";
 			this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
+
+		},
+
+		repositionQuote: function () {
+
+			var index = this.getExpertIndexByEl(this.activeExpertElement);
+
+			this.positionQuote(index);
 
 		},
 
