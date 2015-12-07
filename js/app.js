@@ -589,39 +589,31 @@ var Debugger = {
 
 			this.setQuoteText(index);
 
-			if (typeof this.showQuoteModuleTimeline[index] !== "undefined") {
+			var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
 
-				this.showQuoteModuleTimeline[index].restart();
+			// find pointer tip pos
+			var pointerPos = element.getBoundingClientRect();
 
-			} else {
+			var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
+			var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
+			var offsetWidth = max - min;
 
-				var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
+			var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
 
-				// find pointer tip pos
-				var pointerPos = element.getBoundingClientRect();
+			var offsetMargin = 15;
 
-				var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
-				var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
-				var offsetWidth = max - min;
+			// set quote module position
+			this.quoteModule.style.top = offsetHeight + "px";
+			this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
 
-				var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
+			var tl = new TimelineLite();
 
-				var offsetMargin = 15;
+			var p = this.quoteModule.querySelector('p');
+			var span = this.quoteModule.querySelector('span');
+			tl.fromTo(p, 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
+			tl.fromTo(span, 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
 
-				// set quote module position
-				this.quoteModule.style.top = offsetHeight + "px";
-				this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
-
-				var tl = new TimelineLite();
-
-				var p = this.quoteModule.querySelector('p');
-				var span = this.quoteModule.querySelector('span');
-				tl.fromTo(p, 0.2, { opacity: 1, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
-				tl.fromTo(span, 0.2, { opacity: 1, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
-
-				this.showQuoteModuleTimeline[index] = tl;
-
-			}
+			this.showQuoteModuleTimeline[index] = tl;
 
 		},
 
