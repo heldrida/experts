@@ -129,7 +129,7 @@ var Debugger = {
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
 			window.addEventListener('resize', _.throttle(this.setExpertListOrigin.bind(this), 200));
 			window.addEventListener('resize', this.setDefaultExpertSize.bind(this));
-			window.addEventListener('resize',  _.throttle(this.expertCenterHandler.bind(this), 200));
+
 
 			this.container.addEventListener('mousemove', function (e) {
 				this.mouseMoveEvent.clientX = e.clientX;
@@ -139,6 +139,9 @@ var Debugger = {
 			for (var i = 0; i < this.expertsList.length; i++) {
 
 				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this, i));
+
+				window.addEventListener('resize', this.expertCenterHandler.bind(this, i));
+				window.addEventListener('resize', this.positionQuote.bind(this, i));
 
 			}
 
@@ -406,6 +409,8 @@ var Debugger = {
 
 		closeExpertInfoClickHandler: function (index) {
 
+			console.log('closeExpertInfoClickHandler');
+
 			var element = this.expertsList[index];
 			var x = 0;
 			var y = 0;
@@ -502,13 +507,21 @@ var Debugger = {
 
 		},
 
-		expertCenterHandler: function () {
+		expertCenterHandler: function (index) {
 
 			if (this.activeExpertElement) {
 
-				this.closeExpertInfoClickHandler(this.activeExpertElement);
+				this.closeExpertInfoClickHandler(index);
 
 			}
+
+		},
+
+		getExpertIndexByEl: function (el) {
+
+			var index = Array.prototype.indexOf.call(this.expertsList, el);
+
+			return index;
 
 		},
 
@@ -566,6 +579,9 @@ var Debugger = {
 			this.quotePointerTimeline[index].reverse();
 			*/
 
+			console.log("hideQuotePointerAnim, index: ");
+			console.log(index);
+
 			var lineEl = this.expertsList[index].querySelector('.line');
 			var tipEl = this.expertsList[index].querySelector('.tip');
 			var tl = new TimelineLite();
@@ -585,9 +601,7 @@ var Debugger = {
 
 		},
 
-		showQuoteModule: function (index) {
-
-			this.setQuoteText(index);
+		positionQuote: function (index) {
 
 			var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
 
@@ -599,12 +613,19 @@ var Debugger = {
 			var offsetWidth = max - min;
 
 			var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
-
 			var offsetMargin = 15;
 
 			// set quote module position
 			this.quoteModule.style.top = offsetHeight + "px";
 			this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
+
+		},
+
+		showQuoteModule: function (index) {
+
+			this.setQuoteText(index);
+
+			this.positionQuote.call(this, index);
 
 			var tl = new TimelineLite();
 

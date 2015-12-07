@@ -127,6 +127,7 @@ body {
 		text-align: right;
 		font-size: 1em;
 		line-height: 1.5em;
+		max-width: 450px;
 
 		p {
 			font-size: 1.4em;
@@ -367,7 +368,7 @@ body {
 				display: inline-block;
 				position: absolute;
 				top: 50%;
-				right: 115%;
+				right: 215px;
 				opacity: 0;
 			}
 

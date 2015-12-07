@@ -222,7 +222,8 @@ body {
     height: auto;
     text-align: right;
     font-size: 1em;
-    line-height: 1.5em; }
+    line-height: 1.5em;
+    max-width: 450px; }
     .sh-experts-topbox #quoteWrp p {
       font-size: 1.4em;
       line-height: 1.2em;
@@ -429,7 +430,7 @@ body {
       display: inline-block;
       position: absolute;
       top: 50%;
-      right: 115%;
+      right: 215px;
       opacity: 0; }
     .sh-experts-topbox .pointer-wrp .pointer .line {
       width: 0px;
