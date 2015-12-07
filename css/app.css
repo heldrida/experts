@@ -313,7 +313,6 @@ body {
         opacity: 0; }
   .sh-experts-topbox .experts-list {
     height: auto;
-    overflow: hidden;
     padding: 40px 0 80px; }
     .sh-experts-topbox .experts-list li {
       opacity: 0;
@@ -404,6 +403,36 @@ body {
       width: 33.3333%; }
       .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
         margin-top: 80px; }
+  .sh-experts-topbox .pointer-wrp {
+    position: absolute;
+    z-index: 15;
+    top: 0;
+    width: 100%;
+    height: 127px;
+    opacity: 0.9;
+    -webkit-transform: rotate(45deg);
+    -khtml-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg); }
+    .sh-experts-topbox .pointer-wrp .pointer .tip {
+      width: 5px;
+      height: 5px;
+      border: 1px solid #3b81ff;
+      border-radius: 100%;
+      background-color: #3b81ff;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 112.5%; }
+    .sh-experts-topbox .pointer-wrp .pointer .line {
+      width: 110px;
+      height: 2px;
+      background-color: #3b81ff;
+      position: absolute;
+      top: calc(50% + 2px);
+      right: 50%; }
   @media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
     .sh-experts-topbox canvas,
     .sh-experts-topbox .mobile ~ .experts-down-arrow,

@@ -11,6 +11,12 @@
 				<img src="img/icon-weight-light.png?201511301824" alt="" class="icon light">
 			</div>
 			<h3>Aican <span>Susca</span></h3>
+			<div class="pointer-wrp">
+				<div class="pointer">
+					<span class="tip"></span>
+					<span class="line"></span>
+				</div>
+			</div>
 		</li>
 
 		<li>

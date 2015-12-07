@@ -208,7 +208,6 @@ body {
 
 	.experts-list {
 		height: auto;
-		overflow: hidden;
 		padding: 40px 0 80px;
 
 		li {
@@ -338,6 +337,41 @@ body {
 				&:nth-child(even) {
 					margin-top: 80px;
 				}
+			}
+		}
+	}
+
+	.pointer-wrp {
+		position: absolute;
+		z-index: 15;
+		top: 0;
+		width: 100%;
+		height: 127px;
+		opacity: 0.9;
+		@include transform(rotate(45deg));
+
+		.pointer {
+			.tip {
+				width: 5px;
+				height: 5px;
+				border: 1px solid $blue;
+				border-radius: 100%;
+				background-color: $blue;
+				display: inline-block;
+				position: absolute;
+				top: 50%;
+				right: 112.5%;
+				//@include transform(translateX(-50%));
+
+			}
+
+			.line {
+				width: 110px;
+				height: 2px;
+				background-color: $blue;
+				position: absolute;
+				top: calc(50% + 2px);
+				right: 50%;
 			}
 		}
 	}
