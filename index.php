@@ -28,6 +28,8 @@
 			<?php //include_once('tablet-module.php'); ?>
 			<?php //include_once('mobile-module.php'); ?>
 
+			<?php include_once('quote-module.php'); ?>
+
 			<div class="experts-down-arrow"></div>
 
 		</div>

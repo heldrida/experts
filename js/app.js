@@ -110,6 +110,8 @@ var Debugger = {
 
 			this.quotePointerTimeline = [];
 
+			this.quoteModule = document.querySelector('#quoteWrp');
+
 		},
 
 		initAnimations: function () {
@@ -483,24 +485,14 @@ var Debugger = {
 			// container center
 			var containerClientRect = this.container.getBoundingClientRect();
 
-			console.log('containerClientRect', containerClientRect);
-
 			var x = ((containerClientRect.width) / 2) + containerClientRect.left;
 			var y = (containerClientRect.height / 2);
 
 			// offset the positions
 			x = x - (this.defaultExpertSize.width / 2);
 
-			console.log('this.defaultExpertSize: ', this.defaultExpertSize);
-			console.log('x', x);
-
 			x = x - element.getAttribute('data-origin-x');
 			y = y - element.getAttribute('data-origin-y');
-
-			console.log("element.getAttribute('data-origin-x'): ", element.getAttribute('data-origin-x'));
-			console.log("element.getAttribute('data-origin-y'): ", element.getAttribute('data-origin-y'));
-
-			console.log('getAttr, x: ' + x + ', y: ' + y);
 
 			var pos = { x: x, y: y};
 
@@ -530,9 +522,11 @@ var Debugger = {
 
 		showQuotePointerAnim: function (index) {
 
-			console.log("this.quotePointerTimeline[index]", this.quotePointerTimeline[index]);
-
 			if (typeof this.quotePointerTimeline[index] !== "undefined") {
+
+				this.quotePointerTimeline[index].eventCallback('onComplete', function () {
+					this.showQuoteModule(index);
+				}.bind(this));
 
 				this.quotePointerTimeline[index].restart();
 
@@ -543,6 +537,11 @@ var Debugger = {
 
 				// timeline animation
 				var tl = new TimelineLite();
+
+				tl.eventCallback('onComplete', function () {
+					this.showQuoteModule(index);
+				}.bind(this));
+
 				tl.to(lineEl, 0.3, { width: 110, opacity: 1 });
 				tl.to(tipEl, 0.3, { opacity: 1, scale: 3 }, "-=0.1");
 				tl.to(tipEl, 0.3, { scale: 1 });
@@ -579,6 +578,31 @@ var Debugger = {
 				}
 
 			});
+
+		},
+
+		showQuoteModule: function (index) {
+
+			var element = this.expertsList[index].querySelector('.pointer-wrp .tip');
+
+			// find pointer tip pos
+			var pointerPos = element.getBoundingClientRect();
+
+			var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
+			var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
+			var offsetWidth = max - min;
+
+			var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
+
+			var offsetMargin = 15;
+
+			// set quote module position
+			this.quoteModule.style.top = offsetHeight + "px";
+			this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
+
+			var tl = new TimelineLite();
+			tl.fromTo(this.quoteModule.querySelector('p'), 0.3, { opacity: 0.4, left: '-50%' }, { opacity: 1, left: '0%' });
+			tl.fromTo(this.quoteModule.querySelector('span'), 0.3, { opacity: 0.4, right: '-50%' }, { opacity: 1, right: '0%' }, "-=0.4");
 
 		}
 
