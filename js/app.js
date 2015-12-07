@@ -533,7 +533,7 @@ var Debugger = {
 				// timeline animation
 				var tl = new TimelineLite();
 				tl.to(lineEl, 0.3, { width: 110 });
-				tl.to(tipEl, 0.3, { opacity: 1, scale: 3 }, "-=0.25");
+				tl.to(tipEl, 0.3, { opacity: 1, scale: 3 }, "-=0.1");
 				tl.to(tipEl, 0.3, { scale: 1 });
 
 				// cache if not existent
