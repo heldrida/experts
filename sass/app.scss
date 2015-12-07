@@ -352,8 +352,7 @@ body {
 
 		.pointer {
 			.tip {
-				width: 5px;
-				height: 5px;
+				padding: 3px;
 				border: 1px solid $blue;
 				border-radius: 100%;
 				background-color: $blue;

@@ -417,8 +417,7 @@ body {
     -o-transform: rotate(45deg);
     transform: rotate(45deg); }
     .sh-experts-topbox .pointer-wrp .pointer .tip {
-      width: 5px;
-      height: 5px;
+      padding: 3px;
       border: 1px solid #3b81ff;
       border-radius: 100%;
       background-color: #3b81ff;

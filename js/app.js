@@ -530,9 +530,11 @@ var Debugger = {
 
 		showQuotePointerAnim: function (index) {
 
+			console.log("this.quotePointerTimeline[index]", this.quotePointerTimeline[index]);
+
 			if (typeof this.quotePointerTimeline[index] !== "undefined") {
 
-				this.quotePointerTimeline[index].play();
+				this.quotePointerTimeline[index].restart();
 
 			} else {
 
@@ -541,7 +543,7 @@ var Debugger = {
 
 				// timeline animation
 				var tl = new TimelineLite();
-				tl.to(lineEl, 0.3, { width: 110 });
+				tl.to(lineEl, 0.3, { width: 110, opacity: 1 });
 				tl.to(tipEl, 0.3, { opacity: 1, scale: 3 }, "-=0.1");
 				tl.to(tipEl, 0.3, { scale: 1 });
 
@@ -558,15 +560,25 @@ var Debugger = {
 
 		hideQuotePointerAnim: function (index, callback) {
 
-			this.quotePointerTimeline[index].eventCallback("onReverseComplete", function () {
+			/*
+
+			this.quotePointerTimeline[index].reverse();
+			*/
+
+			var lineEl = this.expertsList[index].querySelector('.line');
+			var tipEl = this.expertsList[index].querySelector('.tip');
+			var tl = new TimelineLite();
+			tl.to(tipEl, 0.3, { opacity: 0.7, scale: 3 });
+			tl.to(tipEl, 0.3, { opacity: 0, scale: 1 });
+			tl.to(lineEl, 0.3, { opacity: 0.7, width: 0 }, "-=0.4");
+
+			tl.eventCallback("onComplete", function () {
 
 				if (typeof callback !== "undefined") {
 					callback.call(this);
 				}
 
 			});
-
-			this.quotePointerTimeline[index].reverse();
 
 		}
 
