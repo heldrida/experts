@@ -587,6 +587,8 @@ var Debugger = {
 
 		showQuoteModule: function (index) {
 
+			this.setQuoteText(index);
+
 			if (typeof this.showQuoteModuleTimeline[index] !== "undefined") {
 
 				this.showQuoteModuleTimeline[index].restart();
@@ -612,13 +614,29 @@ var Debugger = {
 
 				var tl = new TimelineLite();
 
-				tl.fromTo(this.quoteModule.querySelector('p'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
-				tl.fromTo(this.quoteModule.querySelector('span'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
+				var p = this.quoteModule.querySelector('p');
+				var span = this.quoteModule.querySelector('span');
+				tl.fromTo(p, 0.2, { opacity: 1, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
+				tl.fromTo(span, 0.2, { opacity: 1, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
 
 				this.showQuoteModuleTimeline[index] = tl;
 
 			}
 
+		},
+
+		setQuoteText: function (index) {
+
+			var element = this.expertsList[index];
+			var quote = element.querySelector('[name="quote"]').value;
+			var first_name = element.querySelector('[name="first_name"]').value;
+			var second_name = element.querySelector('[name="second_name"]').value;
+			var skill = element.querySelector('[name="skill"]').value;
+
+			var quoteHtmlNode = '<p>' + quote + '</p>';
+			var spanHtmlNode = '<span>' + first_name + '<span>' + second_name + '</span> | ' + skill + '</span>';
+
+			this.quoteModule.innerHTML = quoteHtmlNode + spanHtmlNode;
 		}
 
 	};

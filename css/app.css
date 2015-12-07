@@ -346,6 +346,8 @@ body {
       .sh-experts-topbox .experts-list li.active .clip-photo,
       .sh-experts-topbox .experts-list li:hover .clip-photo {
         border: 3px solid #3b81ff; }
+      .sh-experts-topbox .experts-list li input, .sh-experts-topbox .experts-list li textarea {
+        display: none; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;

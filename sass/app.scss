@@ -259,6 +259,10 @@ body {
 					border: 3px solid $blue;
 				}
 			}
+
+			input, textarea {
+				display: none;
+			}
 		}
 
 		h3 {
