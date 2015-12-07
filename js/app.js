@@ -122,6 +122,7 @@ var Debugger = {
 
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
 			window.addEventListener('resize', _.throttle(this.setExpertListOrigin.bind(this), 200));
+			window.addEventListener('resize', this.setDefaultExpertSize.bind(this));
 			window.addEventListener('resize',  _.throttle(this.expertCenterHandler.bind(this), 200));
 
 			this.container.addEventListener('mousemove', function (e) {
@@ -485,6 +486,9 @@ var Debugger = {
 			x = x - element.getAttribute('data-origin-x');
 			y = y - element.getAttribute('data-origin-y');
 
+			console.log("element.getAttribute('data-origin-x'): ", element.getAttribute('data-origin-x'));
+			console.log("element.getAttribute('data-origin-y'): ", element.getAttribute('data-origin-y'));
+
 			console.log('getAttr, x: ' + x + ', y: ' + y);
 
 			var pos = { x: x, y: y};
@@ -500,6 +504,16 @@ var Debugger = {
 				this.closeExpertInfoClickHandler(this.activeExpertElement);
 
 			}
+
+		},
+
+		setDefaultExpertSize: function () {
+
+			// set default expert size
+			this.defaultExpertSize = {
+				width: document.querySelector('.experts-list li').offsetWidth,
+				height: document.querySelector('.experts-list li').offsetHeight
+			};
 
 		}
 
