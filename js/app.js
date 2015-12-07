@@ -611,6 +611,7 @@ var Debugger = {
 				this.quoteModule.style.left = (offsetWidth - offsetMargin) + "px";
 
 				var tl = new TimelineLite();
+
 				tl.fromTo(this.quoteModule.querySelector('p'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) });
 				tl.fromTo(this.quoteModule.querySelector('span'), 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
 

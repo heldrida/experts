@@ -243,7 +243,7 @@ body {
       .sh-experts-topbox #quoteWrp > span span {
         font-family: 'OpenSans-SemiBold', helvetica, sans-serif;
         text-transform: uppercase; }
-    .sh-experts-topbox #quoteWrp p, .sh-experts-topbox #quoteWrp span {
+    .sh-experts-topbox #quoteWrp p, .sh-experts-topbox #quoteWrp > span {
       position: relative;
       opacity: 0; }
   .sh-experts-topbox .clip-photo {
