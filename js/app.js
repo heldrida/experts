@@ -134,7 +134,7 @@ var Debugger = {
 
 			for (var i = 0; i < this.expertsList.length; i++) {
 
-				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this));
+				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this, i));
 
 			}
 
@@ -359,7 +359,7 @@ var Debugger = {
 
 		},
 
-		expertListClickHandler: function (e) {
+		expertListClickHandler: function (index) {
 
 			if (this.lockExpertClick) {
 				return;
@@ -369,46 +369,55 @@ var Debugger = {
 			this.lockExpertClick = true;
 
 			// current target positions
-			var element = e.currentTarget;
+			var element = this.expertsList[index];
 
 			if (element.classList.contains('active')) {
 
-				this.closeExpertInfoClickHandler(element);
+				this.closeExpertInfoClickHandler(index);
 
 			} else {
 
-				this.showExpertInfoClickHandler(element);
+				this.showExpertInfoClickHandler(index);
 
 			}
 
 		},
 
-		showExpertInfoClickHandler: function (element) {
+		showExpertInfoClickHandler: function (index) {
 
+			var element = this.expertsList[index];
 			var pos = this.getCenter(element);
 
 			// toggle active
 			this.toggleActiveHandler(element);
 
+			// move expert to the center
 			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: pos.x, y: pos.y, ease: Power1.easeOut, onComplete: function () {
 					this.lockExpertClick = false;
+					this.showQuotePointerAnim(index);
 				}.bind(this)
 			});
 
 		},
 
-		closeExpertInfoClickHandler: function (element) {
+		closeExpertInfoClickHandler: function (index) {
 
+			var element = this.expertsList[index];
 			var x = 0;
 			var y = 0;
 
-			// reset all
-			this.resetExperts();
+			var moveToOrigin = function () {
 
-			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
-					this.lockExpertClick = false;
-				}.bind(this)
-			});
+				// reset all
+				this.resetExperts();
+
+				TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
+						this.lockExpertClick = false;
+					}.bind(this)
+				});
+			};
+
+			this.hideQuotePointerAnim(index, moveToOrigin.bind(this));
 
 		},
 
@@ -547,7 +556,15 @@ var Debugger = {
 
 		},
 
-		hideQuotePointerAnim: function (index) {
+		hideQuotePointerAnim: function (index, callback) {
+
+			this.quotePointerTimeline[index].eventCallback("onReverseComplete", function () {
+
+				if (typeof callback !== "undefined") {
+					callback.call(this);
+				}
+
+			});
 
 			this.quotePointerTimeline[index].reverse();
 

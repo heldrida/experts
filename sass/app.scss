@@ -343,7 +343,7 @@ body {
 
 	.pointer-wrp {
 		position: absolute;
-		z-index: 15;
+		z-index: -1;
 		top: 0;
 		width: 100%;
 		height: 127px;
@@ -360,7 +360,7 @@ body {
 				display: inline-block;
 				position: absolute;
 				top: 50%;
-				right: 112.5%;
+				right: 115%;
 				opacity: 0;
 			}
 
