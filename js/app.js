@@ -129,9 +129,9 @@ var Debugger = {
 		attachListeners: function () {
 
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
-			window.addEventListener('resize', this.setExpertListOrigin.bind(this));
+			window.addEventListener('resize', _.debounce(this.setExpertListOrigin.bind(this), 100));
 			window.addEventListener('resize', this.setDefaultExpertSize.bind(this));
-			window.addEventListener('resize', this.expertCenterHandler.bind(this));
+			//window.addEventListener('resize', this.expertCenterHandler.bind(this));
 			//window.addEventListener('resize', this.repositionQuote.bind(this));
 
 			this.container.addEventListener('mousemove', function (e) {
@@ -147,6 +147,11 @@ var Debugger = {
 
 			// close when clicking outside expert element
 			this.container.addEventListener('click', function (e) {
+
+				if (this.lockExpertClick) {
+					e.preventDefault();
+					return;
+				}
 
 				if ((e.target === this.container || e.target === this.expertsWrap || e.target === this.expertsListContainer) && this.activeExpertElement) {
 
@@ -469,6 +474,8 @@ var Debugger = {
 
 		setExpertListOrigin: function () {
 
+			console.log('setExpertListOrigin');
+
 			for (var i = 0; i < this.expertsList.length; i++) {
 
 				var element = this.expertsList[i];
@@ -478,6 +485,10 @@ var Debugger = {
 				element.setAttribute('data-origin-y', pos.top);
 
 			}
+
+			setTimeout(function () {
+				this.expertCenterHandler();
+			}.bind(this), 0);
 
 		},
 
@@ -505,7 +516,7 @@ var Debugger = {
 			var containerClientRect = this.container.getBoundingClientRect();
 
 			var x = ((containerClientRect.width) / 2) + containerClientRect.left;
-			var y = (containerClientRect.height / 2);
+			var y = (this.expertsWrap.offsetHeight / 2) - (this.quoteModule.offsetHeight / 2);
 
 			// offset the positions
 			x = x - (this.defaultExpertSize.width / 2);
@@ -521,24 +532,22 @@ var Debugger = {
 
 		expertCenterHandler: function () {
 
+			console.log('expertCenterHandler');
+
 			var index = this.getExpertIndexByEl(this.activeExpertElement);
 
 			if (this.activeExpertElement) {
 
-				//this.closeExpertInfoClickHandler(index);
+				console.log('this.activeExpertElement');
 
-				setTimeout(function () {
+				var pos = this.getCenter(this.activeExpertElement);
 
-					var pos = this.getCenter(this.activeExpertElement);
+				if (pos.x !== 0 && pos.y !== 0) {
 
-					if (pos.x !== 0 && pos.y !== 0) {
+					this.activeExpertElement.style.transform = 'matrix(1, 0, 0, 1, ' + pos.x + ', ' + pos.y + ')';
+					this.positionQuote(index);
 
-						this.activeExpertElement.style.transform = 'matrix(1, 0, 0, 1, ' + pos.x + ', ' + pos.y + ')';
-						this.positionQuote(index);
-
-					}
-
-				}.bind(this), 0);
+				}
 
 			}
 

@@ -317,13 +317,15 @@ body {
         opacity: 0; }
   .sh-experts-topbox .experts-list {
     height: auto;
-    padding: 40px 0 80px; }
+    padding: 40px 0 80px;
+    position: relative; }
     .sh-experts-topbox .experts-list li {
       opacity: 0;
       position: relative;
       text-align: center;
       width: auto;
       height: 186px;
+      /*min-width: 182px;*/
       float: left;
       z-index: 1; }
       .sh-experts-topbox .experts-list li.active {
