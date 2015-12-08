@@ -524,6 +524,20 @@ var Debugger = {
 			x = x - element.getAttribute('data-origin-x');
 			y = y - element.getAttribute('data-origin-y');
 
+			// offset if LI smaller then the child el
+			var child = element.querySelector('.expert-wrp');
+
+			if (child.offsetWidth > element.offsetWidth) {
+
+				var offset = child.offsetWidth - element.offsetWidth;
+				child.style.left = -(offset / 2) + 'px';
+
+			} else {
+
+				child.style.marginLeft = '';
+
+			}
+
 			var pos = { x: x, y: y};
 
 			return pos;
