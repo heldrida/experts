@@ -41,6 +41,7 @@ var Debugger = {
 		setProperties: function (data) {
 
 			this.container = document.querySelector('.sh-experts-topbox');
+			this.expertsWrap = this.container.querySelector('.experts-wrap');
 			this.titleDiv = document.querySelector('#title-container');
 			this.expertsList = document.querySelectorAll('.experts-list li');
 			this.setExpertsSize();
@@ -623,10 +624,14 @@ var Debugger = {
 
 			var max = Math.max(this.quoteModule.offsetWidth, pointerPos.left);
 			var min = Math.min(this.quoteModule.offsetWidth, pointerPos.left);
+
 			var offsetWidth = max - min;
 
 			var offsetHeight = pointerPos.top - (this.quoteModule.offsetHeight / 2);
 			var offsetMargin = 15;
+
+			var desktopContainerPos = this.expertsWrap.getBoundingClientRect();
+			offsetWidth = (offsetWidth - desktopContainerPos.left) + this.expertsWrap.offsetLeft;
 
 			// set quote module position
 			this.quoteModule.style.top = offsetHeight + "px";
@@ -668,7 +673,7 @@ var Debugger = {
 			var skill = element.querySelector('[name="skill"]').value;
 
 			var quoteHtmlNode = '<p>' + quote + '</p>';
-			var spanHtmlNode = '<span>' + first_name + '<span>' + second_name + '</span> | ' + skill + '</span>';
+			var spanHtmlNode = '<span>' + first_name + ' <span>' + second_name + '</span> | ' + skill + '</span>';
 
 			this.quoteModule.innerHTML = quoteHtmlNode + spanHtmlNode;
 		}
