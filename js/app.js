@@ -43,7 +43,8 @@ var Debugger = {
 			this.container = document.querySelector('.sh-experts-topbox');
 			this.expertsWrap = this.container.querySelector('.experts-wrap');
 			this.titleDiv = document.querySelector('#title-container');
-			this.expertsList = document.querySelectorAll('.experts-list li');
+			this.expertsListContainer = document.querySelector('.experts-list');
+			this.expertsList = this.expertsListContainer.querySelectorAll('li');
 			this.setExpertsSize();
 			this.attachTitle();
 			this.animationTimes = {
@@ -143,6 +144,18 @@ var Debugger = {
 				this.expertsList[i].addEventListener('click', this.expertListClickHandler.bind(this, i));
 
 			}
+
+			// close when clicking outside expert element
+			this.container.addEventListener('click', function (e) {
+
+				if ((e.target === this.container || e.target === this.expertsWrap || e.target === this.expertsListContainer) && this.activeExpertElement) {
+
+					var index = this.getExpertIndexByEl(this.activeExpertElement);
+					this.closeExpertInfoClickHandler(index);
+
+				}
+
+			}.bind(this));
 
 		},
 

@@ -281,7 +281,7 @@ body {
     overflow: hidden;
     background: #FFF;
     position: absolute;
-    bottom: 33%;
+    bottom: 26%;
     right: 50%;
     -webkit-transform: translateX(175%);
     -khtml-transform: translateX(175%);

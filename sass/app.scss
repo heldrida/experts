@@ -191,7 +191,7 @@ body {
 		overflow: hidden;
 		background: #FFF;
 		position: absolute;
-		bottom: 33%;
+		bottom: 26%;
 		right: 50%;
 		@include transform(translateX(175%));
 		@include transition(background 0.3s);
