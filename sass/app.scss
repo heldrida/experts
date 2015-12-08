@@ -264,6 +264,12 @@ body {
 			input, textarea {
 				display: none;
 			}
+
+			.expert-wrp {
+				width: 182px;
+				margin: 0 auto;
+				position: relative;
+			}
 		}
 
 		h3 {
@@ -368,7 +374,7 @@ body {
 				display: inline-block;
 				position: absolute;
 				top: 50%;
-				right: 215px;
+				right: 200px;
 				opacity: 0;
 			}
 

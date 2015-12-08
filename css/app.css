@@ -349,6 +349,10 @@ body {
         border: 3px solid #3b81ff; }
       .sh-experts-topbox .experts-list li input, .sh-experts-topbox .experts-list li textarea {
         display: none; }
+      .sh-experts-topbox .experts-list li .expert-wrp {
+        width: 182px;
+        margin: 0 auto;
+        position: relative; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;
@@ -430,7 +434,7 @@ body {
       display: inline-block;
       position: absolute;
       top: 50%;
-      right: 215px;
+      right: 200px;
       opacity: 0; }
     .sh-experts-topbox .pointer-wrp .pointer .line {
       width: 0px;
