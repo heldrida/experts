@@ -53,6 +53,7 @@ var Debugger = {
 				moveExpertToCenterSecs: 0.6,
 				expertScaleDownMs: 0.3
 			};
+			this.expertUnlockerTimeoutMs = 1800;
 
 			// set default expert size
 			this.defaultExpertSize = {
@@ -109,6 +110,7 @@ var Debugger = {
 			this.activeExpertElement = false;
 
 			this.lockExpertClick = false;
+			console.log('lockExpertClick starts: false @ ln 133');
 
 			this.quotePointerTimeline = [];
 
@@ -153,10 +155,11 @@ var Debugger = {
 					return;
 				}
 
+				this.lockExpertClick = true;
+
 				if ((e.target === this.container || e.target === this.expertsWrap || e.target === this.expertsListContainer) && this.activeExpertElement) {
 
-					var index = this.getExpertIndexByEl(this.activeExpertElement);
-					this.closeExpertInfoClickHandler(index);
+					this.expertCenterHandler();
 
 				}
 
@@ -391,6 +394,7 @@ var Debugger = {
 
 			// lock
 			this.lockExpertClick = true;
+			console.log('lockExpertClick set: true @ ln 395 on the fn expertListClickHandler()');
 
 			// current target positions
 			var element = this.expertsList[index];
@@ -417,7 +421,12 @@ var Debugger = {
 
 			// move expert to the center
 			TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: pos.x, y: pos.y, ease: Power1.easeOut, onComplete: function () {
-					this.lockExpertClick = false;
+					/*
+					// unlock after
+					setTimeout(function () {
+						this.lockExpertClick = false;
+					}.bind(this), this.expertUnlockerTimeoutMs);
+					*/
 					this.showQuotePointerAnim(index);
 				}.bind(this)
 			});
@@ -436,7 +445,9 @@ var Debugger = {
 				this.resetExperts();
 
 				TweenLite.to(element, this.animationTimes.moveExpertToCenterSecs, { x: x, y: y, ease: Power1.easeOut, onComplete: function () {
-						this.lockExpertClick = false;
+						// drop quoteModule to the background / zindex depth
+						this.quoteModule.style.zIndex = -1;
+						this.setExpertListOrigin.call(this);
 					}.bind(this)
 				});
 			};
@@ -486,9 +497,6 @@ var Debugger = {
 
 		resetExperts: function (element) {
 
-			// remove the reference
-			this.activeExpertElement = false;
-
 			// for non targeted, remove class active and scale down
 			for (var i = 0; i < this.expertsList.length; i++) {
 
@@ -499,6 +507,17 @@ var Debugger = {
 				TweenLite.to(this.expertsList[i], this.animationTimes.expertScaleDownMs, { scale: 1, onComplete: false });
 
 			}
+
+			// remove the reference
+			this.activeExpertElement = false;
+
+			// unlock after
+			setTimeout(function () {
+				this.lockExpertClick = false;
+				console.log('lockExpertClick set: false after a few Ms @ ln 522 on the fn  resetExperts');
+			}.bind(this), this.expertUnlockerTimeoutMs);
+
+			this.setExpertListOrigin.call(this);
 
 		},
 
@@ -545,23 +564,6 @@ var Debugger = {
 
 			}
 
-			/*
-			var index = this.getExpertIndexByEl(this.activeExpertElement);
-
-			if (this.activeExpertElement) {
-
-				var pos = this.getCenter(this.activeExpertElement);
-
-				if (pos.x !== 0 && pos.y !== 0) {
-
-					this.activeExpertElement.style.transform = 'matrix(1, 0, 0, 1, ' + pos.x + ', ' + pos.y + ')';
-					this.positionQuote(index);
-
-				}
-
-			}
-			*/
-
 		},
 
 		getExpertIndexByEl: function (el) {
@@ -583,6 +585,9 @@ var Debugger = {
 		},
 
 		showQuotePointerAnim: function (index) {
+
+			// change zIndex, to top
+			this.quoteModule.style.zIndex = 10;
 
 			if (typeof this.quotePointerTimeline[index] !== "undefined") {
 
@@ -690,6 +695,14 @@ var Debugger = {
 			//tl.fromTo(span, 0.2, { opacity: 0, right: '-5%' }, { opacity: 1, right: '0%', ease: Back.easeOut.config(1.7) }, "-=0.3");
 
 			this.showQuoteModuleTimeline[index] = tl;
+
+			tl.eventCallback('onComplete', function () {
+				// unlock after
+				setTimeout(function () {
+					this.lockExpertClick = false;
+					console.log('lockExpertClick set: false after a few Ms @ ln 708 on the fn  showQuoteModule, after the tl onComplete event');
+				}.bind(this), this.expertUnlockerTimeoutMs);
+			}.bind(this));
 
 		},
 
