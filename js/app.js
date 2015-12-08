@@ -131,7 +131,7 @@ var Debugger = {
 			window.addEventListener('resize', this.rendererSizeHandler.bind(this));
 			window.addEventListener('resize', _.debounce(this.setExpertListOrigin.bind(this), 100));
 			window.addEventListener('resize', this.setDefaultExpertSize.bind(this));
-			//window.addEventListener('resize', this.expertCenterHandler.bind(this));
+			window.addEventListener('resize', this.expertCenterHandler.bind(this));
 			//window.addEventListener('resize', this.repositionQuote.bind(this));
 
 			this.container.addEventListener('mousemove', function (e) {
@@ -426,8 +426,6 @@ var Debugger = {
 
 		closeExpertInfoClickHandler: function (index) {
 
-			console.log('closeExpertInfoClickHandler');
-
 			var element = this.expertsList[index];
 			var x = 0;
 			var y = 0;
@@ -474,8 +472,6 @@ var Debugger = {
 
 		setExpertListOrigin: function () {
 
-			console.log('setExpertListOrigin');
-
 			for (var i = 0; i < this.expertsList.length; i++) {
 
 				var element = this.expertsList[i];
@@ -485,10 +481,6 @@ var Debugger = {
 				element.setAttribute('data-origin-y', pos.top);
 
 			}
-
-			setTimeout(function () {
-				this.expertCenterHandler();
-			}.bind(this), 0);
 
 		},
 
@@ -546,13 +538,17 @@ var Debugger = {
 
 		expertCenterHandler: function () {
 
-			console.log('expertCenterHandler');
+			if (this.activeExpertElement) {
 
+				var index = this.getExpertIndexByEl(this.activeExpertElement);
+				this.closeExpertInfoClickHandler(index);
+
+			}
+
+			/*
 			var index = this.getExpertIndexByEl(this.activeExpertElement);
 
 			if (this.activeExpertElement) {
-
-				console.log('this.activeExpertElement');
 
 				var pos = this.getCenter(this.activeExpertElement);
 
@@ -564,6 +560,7 @@ var Debugger = {
 				}
 
 			}
+			*/
 
 		},
 
@@ -625,12 +622,8 @@ var Debugger = {
 		hideQuotePointerAnim: function (index, callback) {
 
 			/*
-
 			this.quotePointerTimeline[index].reverse();
 			*/
-
-			console.log("hideQuotePointerAnim, index: ");
-			console.log(index);
 
 			var lineEl = this.expertsList[index].querySelector('.line');
 			var tipEl = this.expertsList[index].querySelector('.tip');
