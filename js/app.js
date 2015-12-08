@@ -53,7 +53,7 @@ var Debugger = {
 				moveExpertToCenterSecs: 0.6,
 				expertScaleDownMs: 0.3
 			};
-			this.expertUnlockerTimeoutMs = 1800;
+			this.expertUnlockerTimeoutMs = 1200;
 
 			// set default expert size
 			this.defaultExpertSize = {
@@ -155,9 +155,9 @@ var Debugger = {
 					return;
 				}
 
-				this.lockExpertClick = true;
-
 				if ((e.target === this.container || e.target === this.expertsWrap || e.target === this.expertsListContainer) && this.activeExpertElement) {
+
+					this.lockExpertClick = true;
 
 					this.expertCenterHandler();
 
