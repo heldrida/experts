@@ -150,6 +150,10 @@ var Debugger = {
 			// close when clicking outside expert element
 			this.container.addEventListener('click', function (e) {
 
+				if (this.isMobileTablet()) {
+					return;
+				}
+
 				if (this.lockExpertClick) {
 					e.preventDefault();
 					return;
@@ -381,12 +385,20 @@ var Debugger = {
 
 		rendererSizeHandler: function () {
 
+			if (this.isMobileTablet()) {
+				return;
+			}
+
 			this.globalSizes.width = this.container.offsetWidth;
 			this.renderer.resize(this.globalSizes.width, this.globalSizes.height);
 
 		},
 
 		expertListClickHandler: function (index) {
+
+			if (this.isMobileTablet()) {
+				return;
+			}
 
 			if (this.lockExpertClick) {
 				return;
@@ -483,6 +495,10 @@ var Debugger = {
 
 		setExpertListOrigin: function () {
 
+			if (this.isMobileTablet()) {
+				return;
+			}
+
 			for (var i = 0; i < this.expertsList.length; i++) {
 
 				var element = this.expertsList[i];
@@ -557,6 +573,10 @@ var Debugger = {
 
 		expertCenterHandler: function () {
 
+			if (this.isMobileTablet()) {
+				return;
+			}
+
 			if (this.activeExpertElement) {
 
 				var index = this.getExpertIndexByEl(this.activeExpertElement);
@@ -575,6 +595,10 @@ var Debugger = {
 		},
 
 		setDefaultExpertSize: function () {
+
+			if (this.isMobileTablet()) {
+				return;
+			}
 
 			// set default expert size
 			this.defaultExpertSize = {
@@ -718,6 +742,10 @@ var Debugger = {
 			//var spanHtmlNode = '<span>' + first_name + ' <span>' + second_name + '</span> | ' + skill + '</span>';
 
 			this.quoteModule.innerHTML = quoteHtmlNode; //+ spanHtmlNode;
+		},
+
+		isMobileTablet: function () {
+			return window.innerWidth < 1024 ? true : false;
 		}
 
 	};

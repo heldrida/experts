@@ -327,37 +327,37 @@ body {
 	.tablet {
 		display: none;
 	}
+								/*
+								.mobile {
+									h3,
+									p {
+										display: none;
+									}
 
-	.mobile {
-		h3,
-		p {
-			display: none;
-		}
+									.clip-photo {
+										width: 70px;
+										height: 70px;
+									}
 
-		.clip-photo {
-			width: 70px;
-			height: 70px;
-		}
+									.clip-icon {
+										width: 18px;
+										height: 18px;
+									}
 
-		.clip-icon {
-			width: 18px;
-			height: 18px;
-		}
+									.experts-list {
+										height: 160px;
+										padding: 30px;
 
-		.experts-list {
-			height: 160px;
-			padding: 30px;
+										li {
+											width: 33.3333%;
 
-			li {
-				width: 33.3333%;
-
-				&:nth-child(even) {
-					margin-top: 80px;
-				}
-			}
-		}
-	}
-
+											&:nth-child(even) {
+												margin-top: 80px;
+											}
+										}
+									}
+								}
+								*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;
@@ -458,76 +458,82 @@ body {
 			}
 		}
 	}
-															/*
-															@media only screen and (max-width: 667px), (max-device-width: 667px) {
-																&:before {
-																	content: "";
-																	background: url(../img/bg-circles-mobile-static.png?201512011121);
-																	background-repeat: no-repeat;
-																	background-position: center center;
-																	background-size: contain;
-																	position: absolute;
-																	top: 0;
-																	left: 0;
-																	width: 100%;
-																	height: 100%;
-																}
 
-																.bg-static {
-																	background-image: none;
-																}
+	@media only screen and (max-width: 667px), (max-device-width: 667px) {
+		&:before {
+			content: "";
+			background: url(../img/bg-circles-mobile-static.png?201512011121);
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: contain;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
 
-																canvas,
-																.mobile ~ .experts-down-arrow,
-																.tablet ~ .experts-down-arrow {
-																	display: none;
-																}
+		canvas,
+		.mobile ~ .experts-down-arrow,
+		.tablet ~ .experts-down-arrow {
+			display: none;
+		}
 
-																.tablet,
-																.desktop {
-																	display: none;
-																}
+		.mobile {
+			display: block;
+		}
 
-																.mobile {
-																	display: block;
-																}
-																.clip-photo {}
+		#title-container {
+			position: relative;
+			width: 90%;
+			margin: 0 auto;
+			padding-top: 30px;
+			left: auto;
+			@include transform(none);
 
-																#title-container {
-																	position: relative;
-																	width: 90%;
-																	margin: 0 auto;
-																	padding-top: 30px;
-																	left: auto;
-																	@include transform(none);
+			p {
+				text-align: left;
+				background-color: rgba(0, 0, 0, 1);
+			}
+		}
 
-																	p {
-																		text-align: left;
-																		background-color: rgba(0, 0, 0, 1);
-																	}
-																}
+		.experts-list {
+			height: 160px;
+			padding: 30px;
 
-																.experts-list {
-																	padding-bottom: 60px;
+			li {
+				width: 33.3333% !important;
 
-																	li {
-																		&:nth-child(even) {}
-																	}
-																}
-															}
+				&:nth-child(n+4) {
+					display: none;
+				}
 
-															@media only screen and (max-device-width: 667px) and (orientation: landscape) {
-																.mobile {
-																	.experts-list {
-																		padding-bottom: 60px;
+				&:nth-child(odd) {
+					margin-top: 0;
+				}
 
-																		li {
-																			&:nth-child(even) {
-																				margin-top: 0px;
-																			}
-																		}
-																	}
-																}
-															}
-															*/
+				&:nth-child(even) {
+					margin-top: 80px;
+				}
+
+				.expert-wrp {
+					width: 100%;
+
+					h3 {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.clip-photo {
+			width: 70px;
+			height: 70px;
+		}
+
+		.clip-icon {
+			width: 18px;
+			height: 18px;
+		}
+	}
 }

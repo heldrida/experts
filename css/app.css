@@ -139,77 +139,36 @@ body {
   margin: 0 auto;
   max-width: 1500px;
   /*
-															@media only screen and (max-width: 667px), (max-device-width: 667px) {
-																&:before {
-																	content: "";
-																	background: url(../img/bg-circles-mobile-static.png?201512011121);
-																	background-repeat: no-repeat;
-																	background-position: center center;
-																	background-size: contain;
-																	position: absolute;
-																	top: 0;
-																	left: 0;
-																	width: 100%;
-																	height: 100%;
-																}
+								.mobile {
+									h3,
+									p {
+										display: none;
+									}
 
-																.bg-static {
-																	background-image: none;
-																}
+									.clip-photo {
+										width: 70px;
+										height: 70px;
+									}
 
-																canvas,
-																.mobile ~ .experts-down-arrow,
-																.tablet ~ .experts-down-arrow {
-																	display: none;
-																}
+									.clip-icon {
+										width: 18px;
+										height: 18px;
+									}
 
-																.tablet,
-																.desktop {
-																	display: none;
-																}
+									.experts-list {
+										height: 160px;
+										padding: 30px;
 
-																.mobile {
-																	display: block;
-																}
-																.clip-photo {}
+										li {
+											width: 33.3333%;
 
-																#title-container {
-																	position: relative;
-																	width: 90%;
-																	margin: 0 auto;
-																	padding-top: 30px;
-																	left: auto;
-																	@include transform(none);
-
-																	p {
-																		text-align: left;
-																		background-color: rgba(0, 0, 0, 1);
-																	}
-																}
-
-																.experts-list {
-																	padding-bottom: 60px;
-
-																	li {
-																		&:nth-child(even) {}
-																	}
-																}
-															}
-
-															@media only screen and (max-device-width: 667px) and (orientation: landscape) {
-																.mobile {
-																	.experts-list {
-																		padding-bottom: 60px;
-
-																		li {
-																			&:nth-child(even) {
-																				margin-top: 0px;
-																			}
-																		}
-																	}
-																}
-															}
-															*/ }
+											&:nth-child(even) {
+												margin-top: 80px;
+											}
+										}
+									}
+								}
+								*/ }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
@@ -471,22 +430,6 @@ body {
   .sh-experts-topbox .mobile,
   .sh-experts-topbox .tablet {
     display: none; }
-  .sh-experts-topbox .mobile h3,
-  .sh-experts-topbox .mobile p {
-    display: none; }
-  .sh-experts-topbox .mobile .clip-photo {
-    width: 70px;
-    height: 70px; }
-  .sh-experts-topbox .mobile .clip-icon {
-    width: 18px;
-    height: 18px; }
-  .sh-experts-topbox .mobile .experts-list {
-    height: 160px;
-    padding: 30px; }
-    .sh-experts-topbox .mobile .experts-list li {
-      width: 33.3333%; }
-      .sh-experts-topbox .mobile .experts-list li:nth-child(even) {
-        margin-top: 80px; }
   .sh-experts-topbox .pointer-wrp {
     position: absolute;
     z-index: -1;
@@ -563,3 +506,57 @@ body {
           margin-top: 0; }
         .sh-experts-topbox .experts-list li:nth-child(even) {
           margin-top: 93px; } }
+  @media only screen and (max-width: 667px), (max-device-width: 667px) {
+    .sh-experts-topbox:before {
+      content: "";
+      background: url(../img/bg-circles-mobile-static.png?201512011121);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    .sh-experts-topbox canvas,
+    .sh-experts-topbox .mobile ~ .experts-down-arrow,
+    .sh-experts-topbox .tablet ~ .experts-down-arrow {
+      display: none; }
+    .sh-experts-topbox .mobile {
+      display: block; }
+    .sh-experts-topbox #title-container {
+      position: relative;
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 30px;
+      left: auto;
+      -webkit-transform: none;
+      -khtml-transform: none;
+      -moz-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
+      transform: none; }
+      .sh-experts-topbox #title-container p {
+        text-align: left;
+        background-color: black; }
+    .sh-experts-topbox .experts-list {
+      height: 160px;
+      padding: 30px; }
+      .sh-experts-topbox .experts-list li {
+        width: 33.3333% !important; }
+        .sh-experts-topbox .experts-list li:nth-child(n+4) {
+          display: none; }
+        .sh-experts-topbox .experts-list li:nth-child(odd) {
+          margin-top: 0; }
+        .sh-experts-topbox .experts-list li:nth-child(even) {
+          margin-top: 80px; }
+        .sh-experts-topbox .experts-list li .expert-wrp {
+          width: 100%; }
+          .sh-experts-topbox .experts-list li .expert-wrp h3 {
+            display: none; }
+    .sh-experts-topbox .clip-photo {
+      width: 70px;
+      height: 70px; }
+    .sh-experts-topbox .clip-icon {
+      width: 18px;
+      height: 18px; } }
