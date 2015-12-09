@@ -331,37 +331,37 @@ body {
 	.tablet {
 		display: none;
 	}
-																					/*
-																					.mobile {
-																						h3,
-																						p {
-																							display: none;
-																						}
+																								/*
+																								.mobile {
+																									h3,
+																									p {
+																										display: none;
+																									}
 
-																						.clip-photo {
-																							width: 70px;
-																							height: 70px;
-																						}
+																									.clip-photo {
+																										width: 70px;
+																										height: 70px;
+																									}
 
-																						.clip-icon {
-																							width: 18px;
-																							height: 18px;
-																						}
+																									.clip-icon {
+																										width: 18px;
+																										height: 18px;
+																									}
 
-																						.experts-list {
-																							height: 160px;
-																							padding: 30px;
+																									.experts-list {
+																										height: 160px;
+																										padding: 30px;
 
-																							li {
-																								width: 33.3333%;
+																										li {
+																											width: 33.3333%;
 
-																								&:nth-child(even) {
-																									margin-top: 80px;
+																											&:nth-child(even) {
+																												margin-top: 80px;
+																											}
+																										}
+																									}
 																								}
-																							}
-																						}
-																					}
-																					*/
+																								*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;
@@ -396,9 +396,10 @@ body {
 	}
 	// tablet styles
 	@media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
+		height: auto;
+
 		canvas,
-		.mobile ~ .experts-down-arrow,
-		.tablet ~ .experts-down-arrow {
+		.experts-down-arrow {
 			display: none;
 		}
 
@@ -411,6 +412,8 @@ body {
 		}
 
 		.experts-wrap {
+			height: auto;
+
 			.experts-list {
 				background: url(../img/bg-circles-static.png?201512011121);
 				background-repeat: no-repeat;
@@ -484,8 +487,7 @@ body {
 		}
 
 		canvas,
-		.mobile ~ .experts-down-arrow,
-		.tablet ~ .experts-down-arrow {
+		.experts-down-arrow {
 			display: none;
 		}
 
