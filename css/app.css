@@ -139,36 +139,36 @@ body {
   margin: 0 auto;
   max-width: 1500px;
   /*
-																								.mobile {
-																									h3,
-																									p {
-																										display: none;
-																									}
+																													.mobile {
+																														h3,
+																														p {
+																															display: none;
+																														}
 
-																									.clip-photo {
-																										width: 70px;
-																										height: 70px;
-																									}
+																														.clip-photo {
+																															width: 70px;
+																															height: 70px;
+																														}
 
-																									.clip-icon {
-																										width: 18px;
-																										height: 18px;
-																									}
+																														.clip-icon {
+																															width: 18px;
+																															height: 18px;
+																														}
 
-																									.experts-list {
-																										height: 160px;
-																										padding: 30px;
+																														.experts-list {
+																															height: 160px;
+																															padding: 30px;
 
-																										li {
-																											width: 33.3333%;
+																															li {
+																																width: 33.3333%;
 
-																											&:nth-child(even) {
-																												margin-top: 80px;
-																											}
-																										}
-																									}
-																								}
-																								*/ }
+																																&:nth-child(even) {
+																																	margin-top: 80px;
+																																}
+																															}
+																														}
+																													}
+																													*/ }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
@@ -260,7 +260,7 @@ body {
       line-height: 1.2em;
       color: #3b81ff;
       font-style: italic;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.5);
       padding-right: 3px;
       /* fix cropped quotes on safari */ }
       .sh-experts-topbox #quoteWrp p:before {
@@ -398,7 +398,7 @@ body {
       letter-spacing: 1px;
       font-family: 'OpenSans-Regular', arial, sans-serif;
       padding: 1px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.5);
       display: inline-block;
       -webkit-transition: color 0.3s;
       -khtml-transition: color 0.3s;
@@ -416,7 +416,7 @@ body {
       width: auto;
       display: inline-block;
       padding: 2px;
-      background-color: rgba(0, 0, 0, 0.8); }
+      background-color: rgba(0, 0, 0, 0.5); }
   .sh-experts-topbox .bg-static {
     background: url(../img/bg-circles-static.png?201512011121);
     background-repeat: no-repeat;
@@ -547,7 +547,7 @@ body {
         transform: none; }
         .sh-experts-topbox #title-container p {
           text-align: left;
-          background-color: black; }
+          background-color: rgba(0, 0, 0, 0.5); }
       .sh-experts-topbox .experts-list {
         height: 160px;
         padding: 30px; }
@@ -571,3 +571,11 @@ body {
         width: 18px;
         height: 18px;
         bottom: 0%; } }
+  @media only screen and (max-device-width: 667px) and (orientation: landscape) {
+    .sh-experts-topbox #title-container {
+      padding-top: 10px; }
+    .sh-experts-topbox .experts-list {
+      padding-top: 20px;
+      padding-bottom: 20px; }
+      .sh-experts-topbox .experts-list li:nth-child(even) {
+        margin-top: 0; } }

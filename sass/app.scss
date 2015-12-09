@@ -134,7 +134,7 @@ body {
 			line-height: 1.2em;
 			color: #3b81ff;
 			font-style: italic;
-			background-color: rgba(0, 0, 0, 0.7);
+			background-color: rgba(0, 0, 0, 0.5);
 			padding-right: 3px;
 			/* fix cropped quotes on safari */
 			&:before {
@@ -287,7 +287,7 @@ body {
 			letter-spacing: 1px;
 			font-family: 'OpenSans-Regular', arial, sans-serif;
 			padding: 1px;
-			background-color: rgba(0, 0, 0, 0.8);
+			background-color: rgba(0, 0, 0, 0.5);
 			display: inline-block;
 			@include transition(color 0.3s);
 
@@ -304,7 +304,7 @@ body {
 			width: auto;
 			display: inline-block;
 			padding: 2px;
-			background-color: rgba(0, 0, 0, 0.8);
+			background-color: rgba(0, 0, 0, 0.5);
 		}
 	}
 
@@ -331,37 +331,37 @@ body {
 	.tablet {
 		display: none;
 	}
-																								/*
-																								.mobile {
-																									h3,
-																									p {
-																										display: none;
-																									}
+																													/*
+																													.mobile {
+																														h3,
+																														p {
+																															display: none;
+																														}
 
-																									.clip-photo {
-																										width: 70px;
-																										height: 70px;
-																									}
+																														.clip-photo {
+																															width: 70px;
+																															height: 70px;
+																														}
 
-																									.clip-icon {
-																										width: 18px;
-																										height: 18px;
-																									}
+																														.clip-icon {
+																															width: 18px;
+																															height: 18px;
+																														}
 
-																									.experts-list {
-																										height: 160px;
-																										padding: 30px;
+																														.experts-list {
+																															height: 160px;
+																															padding: 30px;
 
-																										li {
-																											width: 33.3333%;
+																															li {
+																																width: 33.3333%;
 
-																											&:nth-child(even) {
-																												margin-top: 80px;
-																											}
-																										}
-																									}
-																								}
-																								*/
+																																&:nth-child(even) {
+																																	margin-top: 80px;
+																																}
+																															}
+																														}
+																													}
+																													*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;
@@ -505,7 +505,7 @@ body {
 
 			p {
 				text-align: left;
-				background-color: rgba(0, 0, 0, 1);
+				background-color: rgba(0, 0, 0, 0.5);
 			}
 		}
 
@@ -548,6 +548,21 @@ body {
 			width: 18px;
 			height: 18px;
 			bottom: 0%;
+		}
+	}
+
+	@media only screen and (max-device-width: 667px) and (orientation: landscape) {
+		#title-container {
+			padding-top: 10px;
+		}
+
+		.experts-list {
+			padding-top: 20px;
+			padding-bottom: 20px;
+
+			li:nth-child(even) {
+				margin-top: 0;
+			}
 		}
 	}
 }
