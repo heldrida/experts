@@ -760,6 +760,9 @@ var Debugger = {
 		showQuoteTabletAnim: function (index) {
 
 			var element = this.expertsList[index];
+			var quote = element.querySelector('.tablet-quote');
+
+			TweenLite.fromTo(quote, 0.3, { display: 'none', scale: 0, opacity: 0 }, { display: 'block', scale: 1, opacity: 1 });
 
 		}
 

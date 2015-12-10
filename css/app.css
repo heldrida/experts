@@ -139,36 +139,36 @@ body {
   margin: 0 auto;
   max-width: 1500px;
   /*
-																																																				.mobile {
-																																																					h3,
-																																																					p {
-																																																						display: none;
-																																																					}
+																																																					.mobile {
+																																																						h3,
+																																																						p {
+																																																							display: none;
+																																																						}
 
-																																																					.clip-photo {
-																																																						width: 70px;
-																																																						height: 70px;
-																																																					}
+																																																						.clip-photo {
+																																																							width: 70px;
+																																																							height: 70px;
+																																																						}
 
-																																																					.clip-icon {
-																																																						width: 18px;
-																																																						height: 18px;
-																																																					}
+																																																						.clip-icon {
+																																																							width: 18px;
+																																																							height: 18px;
+																																																						}
 
-																																																					.experts-list {
-																																																						height: 160px;
-																																																						padding: 30px;
+																																																						.experts-list {
+																																																							height: 160px;
+																																																							padding: 30px;
 
-																																																						li {
-																																																							width: 33.3333%;
+																																																							li {
+																																																								width: 33.3333%;
 
-																																																							&:nth-child(even) {
-																																																								margin-top: 80px;
+																																																								&:nth-child(even) {
+																																																									margin-top: 80px;
+																																																								}
 																																																							}
 																																																						}
 																																																					}
-																																																				}
-																																																				*/ }
+																																																					*/ }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
@@ -487,8 +487,7 @@ body {
   @media only screen and (min-width: 668px) and (max-width: 1024px), (min-device-width: 668px) and (max-device-width: 1024px) {
     .sh-experts-topbox {
       height: auto; }
-      .sh-experts-topbox canvas,
-      .sh-experts-topbox .experts-down-arrow {
+      .sh-experts-topbox canvas {
         display: none; }
       .sh-experts-topbox .mobile {
         display: none; }
