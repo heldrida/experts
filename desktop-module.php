@@ -13,13 +13,17 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person01.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person01.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-weight-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-weight-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-weight-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-weight-light.png?201511301824" alt="" class="icon light">
-				</div>
+
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">
@@ -46,13 +50,16 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person03.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person03.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-ball-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-ball-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
-				</div>
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">
@@ -79,13 +86,16 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person07.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person07.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-glove-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-glove-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-glove-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-glove-light.png?201511301824" alt="" class="icon light">
-				</div>
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">
@@ -112,13 +122,17 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person10.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person10.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-ball-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-ball-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-ball-light.png?201511301824" alt="" class="icon light">
-				</div>
+
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">
@@ -145,13 +159,17 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person09.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person09.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-football-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-football-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
-				</div>
+
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">
@@ -178,13 +196,17 @@
 
 				?>
 
-				<div class="clip-photo">
-					<img src="data/person05.jpg?201511301834" alt="">
+				<div class="clips">
+					<div class="clip-photo">
+						<img src="data/person05.jpg?201511301834" alt="">
+					</div>
+					<div class="clip-icon">
+						<img src="img/icon-football-dark.png?201511301824" alt="" class="icon dark">
+						<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
+					</div>
 				</div>
-				<div class="clip-icon">
-					<img src="img/icon-football-dark.png?201511301824" alt="" class="icon dark">
-					<img src="img/icon-football-light.png?201511301824" alt="" class="icon light">
-				</div>
+
+				<div class="tablet tablet-quote"><?php echo $quote; ?></div>
 				<h3><?php echo $first_name; ?> <span><?php echo $second_name; ?></span></h3>
 				<div class="pointer-wrp">
 					<div class="pointer">

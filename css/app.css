@@ -139,36 +139,36 @@ body {
   margin: 0 auto;
   max-width: 1500px;
   /*
-																													.mobile {
-																														h3,
-																														p {
-																															display: none;
-																														}
+																																																				.mobile {
+																																																					h3,
+																																																					p {
+																																																						display: none;
+																																																					}
 
-																														.clip-photo {
-																															width: 70px;
-																															height: 70px;
-																														}
+																																																					.clip-photo {
+																																																						width: 70px;
+																																																						height: 70px;
+																																																					}
 
-																														.clip-icon {
-																															width: 18px;
-																															height: 18px;
-																														}
+																																																					.clip-icon {
+																																																						width: 18px;
+																																																						height: 18px;
+																																																					}
 
-																														.experts-list {
-																															height: 160px;
-																															padding: 30px;
+																																																					.experts-list {
+																																																						height: 160px;
+																																																						padding: 30px;
 
-																															li {
-																																width: 33.3333%;
+																																																						li {
+																																																							width: 33.3333%;
 
-																																&:nth-child(even) {
-																																	margin-top: 80px;
-																																}
-																															}
-																														}
-																													}
-																													*/ }
+																																																							&:nth-child(even) {
+																																																								margin-top: 80px;
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																				*/ }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
@@ -281,6 +281,9 @@ body {
     .sh-experts-topbox #quoteWrp p, .sh-experts-topbox #quoteWrp > span {
       position: relative;
       opacity: 0; }
+  .sh-experts-topbox .clips {
+    position: relative;
+    height: 127px; }
   .sh-experts-topbox .clip-photo {
     width: 122px;
     height: 122px;
@@ -315,7 +318,7 @@ body {
     overflow: hidden;
     background: #FFF;
     position: absolute;
-    bottom: 26%;
+    bottom: 0%;
     right: 50%;
     -webkit-transform: translateX(175%);
     -khtml-transform: translateX(175%);
@@ -389,6 +392,24 @@ body {
         width: 182px;
         margin: 0 auto;
         position: relative; }
+        .sh-experts-topbox .experts-list li .expert-wrp .tablet-quote {
+          display: none;
+          font-family: 'OpenSans-Italic', sans-serif;
+          font-size: 20px;
+          letter-spacing: 1px;
+          line-height: 28px;
+          width: 365px;
+          position: relative;
+          left: -92px;
+          color: #3b81ff;
+          text-transform: uppercase;
+          margin: 20px 0 0 0; }
+          .sh-experts-topbox .experts-list li .expert-wrp .tablet-quote:before {
+            content: '\201C';
+            padding-right: 5px; }
+          .sh-experts-topbox .experts-list li .expert-wrp .tablet-quote:after {
+            content: '\201D';
+            padding-left: 5px; }
     .sh-experts-topbox .experts-list h3 {
       color: #3b81ff;
       text-transform: uppercase;
