@@ -118,6 +118,9 @@ var Debugger = {
 
 			this.showQuoteModuleTimeline = [];
 
+			this.mobileWidthBreakpoint = 1024;
+			this.mobileCenterY = 230;
+
 		},
 
 		initAnimations: function () {
@@ -545,6 +548,10 @@ var Debugger = {
 			var x = ((containerClientRect.width) / 2) + containerClientRect.left;
 			var y = (this.expertsWrap.offsetHeight / 2) - (this.quoteModule.offsetHeight / 2);
 
+			if (window.innerWidth < this.mobileWidthBreakpoint) {
+				y = this.mobileCenterY;
+			}
+
 			// offset the positions
 			x = x - (this.defaultExpertSize.width / 2);
 
@@ -745,7 +752,7 @@ var Debugger = {
 		},
 
 		isMobileTablet: function () {
-			return window.innerWidth < 1024 ? true : false;
+			return window.innerWidth < 667 ? true : false;
 		}
 
 	};
