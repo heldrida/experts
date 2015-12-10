@@ -442,7 +442,9 @@ var Debugger = {
 						this.lockExpertClick = false;
 					}.bind(this), this.expertUnlockerTimeoutMs);
 					*/
-					this.showQuotePointerAnim(index);
+
+					window.innerWidth > this.mobileWidthBreakpoint ? this.showQuotePointerAnim(index) : this.showQuoteTabletAnim(index);
+
 				}.bind(this)
 			});
 
@@ -753,6 +755,12 @@ var Debugger = {
 
 		isMobileTablet: function () {
 			return window.innerWidth < 667 ? true : false;
+		},
+
+		showQuoteTabletAnim: function (index) {
+
+			var element = this.expertsList[index];
+
 		}
 
 	};
