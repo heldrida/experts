@@ -379,37 +379,37 @@ body {
 	.tablet {
 		display: none;
 	}
-																																																																																																									/*
-																																																																																																									.mobile {
-																																																																																																										h3,
-																																																																																																										p {
-																																																																																																											display: none;
-																																																																																																										}
+																																																																																																																										/*
+																																																																																																																										.mobile {
+																																																																																																																											h3,
+																																																																																																																											p {
+																																																																																																																												display: none;
+																																																																																																																											}
 
-																																																																																																										.clip-photo {
-																																																																																																											width: 70px;
-																																																																																																											height: 70px;
-																																																																																																										}
+																																																																																																																											.clip-photo {
+																																																																																																																												width: 70px;
+																																																																																																																												height: 70px;
+																																																																																																																											}
 
-																																																																																																										.clip-icon {
-																																																																																																											width: 18px;
-																																																																																																											height: 18px;
-																																																																																																										}
+																																																																																																																											.clip-icon {
+																																																																																																																												width: 18px;
+																																																																																																																												height: 18px;
+																																																																																																																											}
 
-																																																																																																										.experts-list {
-																																																																																																											height: 160px;
-																																																																																																											padding: 30px;
+																																																																																																																											.experts-list {
+																																																																																																																												height: 160px;
+																																																																																																																												padding: 30px;
 
-																																																																																																											li {
-																																																																																																												width: 33.3333%;
+																																																																																																																												li {
+																																																																																																																													width: 33.3333%;
 
-																																																																																																												&:nth-child(even) {
-																																																																																																													margin-top: 80px;
-																																																																																																												}
-																																																																																																											}
-																																																																																																										}
-																																																																																																									}
-																																																																																																									*/
+																																																																																																																													&:nth-child(even) {
+																																																																																																																														margin-top: 80px;
+																																																																																																																													}
+																																																																																																																												}
+																																																																																																																											}
+																																																																																																																										}
+																																																																																																																										*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;
@@ -518,12 +518,12 @@ body {
 
 		&:before {
 			content: "";
-			background: url(../img/bg-circles-mobile-static.png?201512011121);
+			background: url(../img/bg-circles-mobile-static.png?201512111141);
 			background-repeat: no-repeat;
 			background-position: center center;
 			background-size: contain;
 			position: absolute;
-			top: 0;
+			top: 50px;
 			left: 0;
 			width: 100%;
 			height: 100%;
@@ -586,6 +586,7 @@ body {
 
 					h3 {
 						font-size: 14px;
+						line-height: 20px;
 					}
 				}
 			}
@@ -620,17 +621,40 @@ body {
 		}
 	}
 
-	@media only screen and (max-device-width: 667px) and (orientation: landscape) {
-		#title-container {
-			padding-top: 10px;
-		}
-
+	@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 		.experts-list {
-			padding-top: 20px;
-			padding-bottom: 20px;
+			height: 160px;
+			padding: 30px;
 
-			li:nth-child(even) {
-				margin-top: 0;
+			li {
+				&:nth-child(1) {
+					left: 5% !important;
+				}
+
+				&:nth-child(2) {
+					left: -40% !important;
+				}
+
+				&:nth-child(3) {
+					left: 35% !important;
+				}
+
+				&:nth-child(n+4) {
+					display: none;
+				}
+
+				&:nth-child(odd),
+				&:nth-child(even) {
+					margin: 0;
+				}
+
+				.expert-wrp {
+					width: 50%;
+
+					h3 {
+						font-size: 14px;
+					}
+				}
 			}
 		}
 	}
