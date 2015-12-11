@@ -139,36 +139,36 @@ body {
   margin: 0 auto;
   max-width: 1500px;
   /*
-																																																																							.mobile {
-																																																																								h3,
-																																																																								p {
-																																																																									display: none;
-																																																																								}
+																																																																																																									.mobile {
+																																																																																																										h3,
+																																																																																																										p {
+																																																																																																											display: none;
+																																																																																																										}
 
-																																																																								.clip-photo {
-																																																																									width: 70px;
-																																																																									height: 70px;
-																																																																								}
+																																																																																																										.clip-photo {
+																																																																																																											width: 70px;
+																																																																																																											height: 70px;
+																																																																																																										}
 
-																																																																								.clip-icon {
-																																																																									width: 18px;
-																																																																									height: 18px;
-																																																																								}
+																																																																																																										.clip-icon {
+																																																																																																											width: 18px;
+																																																																																																											height: 18px;
+																																																																																																										}
 
-																																																																								.experts-list {
-																																																																									height: 160px;
-																																																																									padding: 30px;
+																																																																																																										.experts-list {
+																																																																																																											height: 160px;
+																																																																																																											padding: 30px;
 
-																																																																									li {
-																																																																										width: 33.3333%;
+																																																																																																											li {
+																																																																																																												width: 33.3333%;
 
-																																																																										&:nth-child(even) {
-																																																																											margin-top: 80px;
-																																																																										}
-																																																																									}
-																																																																								}
-																																																																							}
-																																																																							*/ }
+																																																																																																												&:nth-child(even) {
+																																																																																																													margin-top: 80px;
+																																																																																																												}
+																																																																																																											}
+																																																																																																										}
+																																																																																																									}
+																																																																																																									*/ }
   .sh-experts-topbox canvas {
     position: absolute;
     top: 0;
@@ -555,8 +555,6 @@ body {
   @media only screen and (max-width: 667px), (max-device-width: 667px) {
     .sh-experts-topbox {
       height: 340px !important; }
-      .sh-experts-topbox .experts-wrap {
-        height: auto; }
       .sh-experts-topbox:before {
         content: "";
         background: url(../img/bg-circles-mobile-static.png?201512011121);
@@ -592,25 +590,46 @@ body {
         height: 160px;
         padding: 30px; }
         .sh-experts-topbox .experts-list li {
-          width: 33.3333% !important;
-          height: auto; }
+          width: 100% !important;
+          height: 75px; }
+          .sh-experts-topbox .experts-list li:nth-child(1) {
+            left: 10% !important; }
+          .sh-experts-topbox .experts-list li:nth-child(2) {
+            left: -30% !important; }
+          .sh-experts-topbox .experts-list li:nth-child(3) {
+            left: 30% !important; }
           .sh-experts-topbox .experts-list li:nth-child(n+4) {
             display: none; }
-          .sh-experts-topbox .experts-list li:nth-child(odd) {
-            margin-top: 0; }
+          .sh-experts-topbox .experts-list li:nth-child(odd),
           .sh-experts-topbox .experts-list li:nth-child(even) {
-            margin-top: 80px; }
+            margin: 0; }
           .sh-experts-topbox .experts-list li .expert-wrp {
-            width: 100%; }
+            width: 70%; }
             .sh-experts-topbox .experts-list li .expert-wrp h3 {
-              display: none; }
-      .sh-experts-topbox .clip-photo {
-        width: 70px;
-        height: 70px; }
-      .sh-experts-topbox .clip-icon {
-        width: 18px;
-        height: 18px;
-        bottom: 0%; } }
+              font-size: 14px; }
+      .sh-experts-topbox .experts-wrap {
+        width: 90%;
+        height: auto; }
+      .sh-experts-topbox .clips {
+        margin: 0 auto;
+        width: 90px;
+        height: 90px; }
+        .sh-experts-topbox .clips .clip-photo {
+          width: 82px;
+          height: 82px; }
+        .sh-experts-topbox .clips .clip-icon {
+          width: 34px;
+          height: 34px;
+          bottom: 0;
+          right: 0;
+          -webkit-transform: translateX(0);
+          -khtml-transform: translateX(0);
+          -moz-transform: translateX(0);
+          -ms-transform: translateX(0);
+          -o-transform: translateX(0);
+          transform: translateX(0); }
+          .sh-experts-topbox .clips .clip-icon img {
+            height: 14px; } }
   @media only screen and (max-device-width: 667px) and (orientation: landscape) {
     .sh-experts-topbox #title-container {
       padding-top: 10px; }

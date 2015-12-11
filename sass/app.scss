@@ -379,37 +379,37 @@ body {
 	.tablet {
 		display: none;
 	}
-																																																																							/*
-																																																																							.mobile {
-																																																																								h3,
-																																																																								p {
-																																																																									display: none;
-																																																																								}
+																																																																																																									/*
+																																																																																																									.mobile {
+																																																																																																										h3,
+																																																																																																										p {
+																																																																																																											display: none;
+																																																																																																										}
 
-																																																																								.clip-photo {
-																																																																									width: 70px;
-																																																																									height: 70px;
-																																																																								}
+																																																																																																										.clip-photo {
+																																																																																																											width: 70px;
+																																																																																																											height: 70px;
+																																																																																																										}
 
-																																																																								.clip-icon {
-																																																																									width: 18px;
-																																																																									height: 18px;
-																																																																								}
+																																																																																																										.clip-icon {
+																																																																																																											width: 18px;
+																																																																																																											height: 18px;
+																																																																																																										}
 
-																																																																								.experts-list {
-																																																																									height: 160px;
-																																																																									padding: 30px;
+																																																																																																										.experts-list {
+																																																																																																											height: 160px;
+																																																																																																											padding: 30px;
 
-																																																																									li {
-																																																																										width: 33.3333%;
+																																																																																																											li {
+																																																																																																												width: 33.3333%;
 
-																																																																										&:nth-child(even) {
-																																																																											margin-top: 80px;
-																																																																										}
-																																																																									}
-																																																																								}
-																																																																							}
-																																																																							*/
+																																																																																																												&:nth-child(even) {
+																																																																																																													margin-top: 80px;
+																																																																																																												}
+																																																																																																											}
+																																																																																																										}
+																																																																																																									}
+																																																																																																									*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;
@@ -516,10 +516,6 @@ body {
 	@media only screen and (max-width: 667px), (max-device-width: 667px) {
 		height: 340px !important;
 
-		.experts-wrap {
-			height: auto;
-		}
-
 		&:before {
 			content: "";
 			background: url(../img/bg-circles-mobile-static.png?201512011121);
@@ -561,40 +557,66 @@ body {
 			padding: 30px;
 
 			li {
-				width: 33.3333% !important;
-				height: auto;
+				width: 100% !important;
+				height: 75px;
+
+				&:nth-child(1) {
+					left: 10% !important;
+				}
+
+				&:nth-child(2) {
+					left: -30% !important;
+				}
+
+				&:nth-child(3) {
+					left: 30% !important;
+				}
 
 				&:nth-child(n+4) {
 					display: none;
 				}
 
-				&:nth-child(odd) {
-					margin-top: 0;
-				}
-
+				&:nth-child(odd),
 				&:nth-child(even) {
-					margin-top: 80px;
+					margin: 0;
 				}
 
 				.expert-wrp {
-					width: 100%;
+					width: 70%;
 
 					h3 {
-						display: none;
+						font-size: 14px;
 					}
 				}
 			}
 		}
 
-		.clip-photo {
-			width: 70px;
-			height: 70px;
+		.experts-wrap {
+			width: 90%;
+			height: auto;
 		}
 
-		.clip-icon {
-			width: 18px;
-			height: 18px;
-			bottom: 0%;
+		.clips {
+			margin: 0 auto;
+			width: 90px;
+			height: 90px;
+
+			.clip-photo {
+				width: 82px;
+				height: 82px;
+			}
+
+			.clip-icon {
+				width: 34px;
+				height: 34px;
+				bottom: 0;
+				right: 0;
+				@include transform(translateX(0));
+
+				img {
+					height: 14px;
+				}
+			}
 		}
 	}
 
