@@ -53,7 +53,7 @@ var Debugger = {
 				moveExpertToCenterSecs: 0.6,
 				expertScaleDownMs: 0.3
 			};
-			this.expertUnlockerTimeoutMs = 1200;
+			this.expertUnlockerTimeoutMs = 400;
 
 			// set default expert size
 			this.defaultExpertSize = {
@@ -151,13 +151,17 @@ var Debugger = {
 			}
 
 			// close when clicking outside expert element
-			this.container.addEventListener('click', function (e) {
+			this.container.addEventListener('tap', function (e) {
+
+				console.log('tap!');
 
 				if (this.isMobileTablet()) {
+					console.log('tap case 1');
 					return;
 				}
 
 				if (this.lockExpertClick) {
+					console.log('tap case 2');
 					e.preventDefault();
 					return;
 				}
@@ -769,6 +773,12 @@ var Debugger = {
 
 			TweenLite.fromTo(quote, 0.3, { display: 'none', scale: 0, opacity: 0 }, { display: 'block', scale: 1, opacity: 1, onComplete: function () {
 					closeBtn.style.display = 'block';
+
+					setTimeout(function () {
+						this.lockExpertClick = false;
+						console.log('lockExpertClick set: false after a few Ms @ ln 779 on the fn  resetExperts');
+					}.bind(this), this.expertUnlockerTimeoutMs);
+
 				}.bind(this)
 			});
 
