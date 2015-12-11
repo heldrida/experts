@@ -304,6 +304,25 @@ body {
 						padding-left: 5px;
 					}
 				}
+
+				.btn-close {
+					display: none;
+					position: absolute;
+					top: -30px;
+					right: -10px;
+					width: 34px;
+					height: 34px;
+					background-image: url(../img/icon-tablet-expert-close.png?201512111031);
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: cover;
+					cursor: pointer;
+					@include transition(opacity 0.3);
+
+					&:hover {
+						opacity: 0.7;
+					}
+				}
 			}
 		}
 
@@ -360,37 +379,37 @@ body {
 	.tablet {
 		display: none;
 	}
-																																																					/*
-																																																					.mobile {
-																																																						h3,
-																																																						p {
-																																																							display: none;
-																																																						}
+																																																																							/*
+																																																																							.mobile {
+																																																																								h3,
+																																																																								p {
+																																																																									display: none;
+																																																																								}
 
-																																																						.clip-photo {
-																																																							width: 70px;
-																																																							height: 70px;
-																																																						}
+																																																																								.clip-photo {
+																																																																									width: 70px;
+																																																																									height: 70px;
+																																																																								}
 
-																																																						.clip-icon {
-																																																							width: 18px;
-																																																							height: 18px;
-																																																						}
+																																																																								.clip-icon {
+																																																																									width: 18px;
+																																																																									height: 18px;
+																																																																								}
 
-																																																						.experts-list {
-																																																							height: 160px;
-																																																							padding: 30px;
+																																																																								.experts-list {
+																																																																									height: 160px;
+																																																																									padding: 30px;
 
-																																																							li {
-																																																								width: 33.3333%;
+																																																																									li {
+																																																																										width: 33.3333%;
 
-																																																								&:nth-child(even) {
-																																																									margin-top: 80px;
-																																																								}
-																																																							}
-																																																						}
-																																																					}
-																																																					*/
+																																																																										&:nth-child(even) {
+																																																																											margin-top: 80px;
+																																																																										}
+																																																																									}
+																																																																								}
+																																																																							}
+																																																																							*/
 	.pointer-wrp {
 		position: absolute;
 		z-index: -1;

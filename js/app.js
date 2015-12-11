@@ -761,8 +761,12 @@ var Debugger = {
 
 			var element = this.expertsList[index];
 			var quote = element.querySelector('.tablet-quote');
+			var closeBtn = element.querySelector('.btn-close');
 
-			TweenLite.fromTo(quote, 0.3, { display: 'none', scale: 0, opacity: 0 }, { display: 'block', scale: 1, opacity: 1 });
+			TweenLite.fromTo(quote, 0.3, { display: 'none', scale: 0, opacity: 0 }, { display: 'block', scale: 1, opacity: 1, onComplete: function () {
+					closeBtn.style.display = 'block';
+				}.bind(this)
+			});
 
 		}
 

@@ -4,6 +4,7 @@
 	<ul class="experts-list">
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Pinctio impedit nihia dolores omnis perspiciatis - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis?";
@@ -41,6 +42,7 @@
 
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Sasit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis?";
@@ -77,6 +79,7 @@
 
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Queena uiopo sasit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis caliano posta coolia.";
@@ -113,6 +116,7 @@
 
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Queena uiopo sasit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis caliano posta coolia.";
@@ -150,6 +154,7 @@
 
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Queena uiopo sasit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis caliano posta coolia.";
@@ -187,6 +192,7 @@
 
 		<li>
 			<div class="expert-wrp">
+				<div class="tablet btn-close"></div>
 				<?php
 
 					$quote = "Queena uiopo sasit amet, consectetur adipisicing elit. Distinctio impedit nihia dolores omnis perspiciatis caliano posta coolia.";
