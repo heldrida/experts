@@ -469,7 +469,11 @@ var Debugger = {
 				});
 			};
 
-			this.hideQuotePointerAnim(index, moveToOrigin.bind(this));
+			if (window.innerWidth > this.mobileWidthBreakpoint) {
+				this.hideQuotePointerAnim(index, moveToOrigin.bind(this));
+			} else {
+				this.closeQuoteTabletAnim.call(this, index, moveToOrigin.bind(this));
+			}
 
 		},
 
@@ -670,7 +674,7 @@ var Debugger = {
 			tl.to(tipEl, 0.3, { opacity: 0, scale: 1 });
 			tl.to(lineEl, 0.3, { opacity: 0.7, width: 0 }, "-=0.4");
 
-			this.showQuoteModuleTimeline[index].reverse();
+			window.innerWidth > this.mobileWidthBreakpoint ? this.showQuoteModuleTimeline[index].reverse() : this.closeQuoteTabletAnim(index);
 
 			tl.eventCallback("onComplete", function () {
 
@@ -765,6 +769,26 @@ var Debugger = {
 
 			TweenLite.fromTo(quote, 0.3, { display: 'none', scale: 0, opacity: 0 }, { display: 'block', scale: 1, opacity: 1, onComplete: function () {
 					closeBtn.style.display = 'block';
+				}.bind(this)
+			});
+
+			closeBtn.addEventListener('tap', this.closeExpertInfoClickHandler.bind(this, index));
+
+		},
+
+		closeQuoteTabletAnim: function (index, callback) {
+
+			var element = this.expertsList[index];
+			var quote = element.querySelector('.tablet-quote');
+			var closeBtn = element.querySelector('.btn-close');
+
+			TweenLite.to(quote, 0.3, { display: 'none', scale: 0, opacity: 0, onComplete: function () {
+					closeBtn.style.display = 'none';
+
+					if (typeof callback === 'function') {
+						callback.call(this);
+					}
+
 				}.bind(this)
 			});
 
